@@ -148,7 +148,4 @@ class UnregisteredCommandException(Exception):
     pass
 
 
-'''
-if __name__ == "__main__":
-    Run('Nzg4MDk5OTc1MTM2NTQyNzUw.X9elTA.6W8PMpfjjGN5WoJDC6XuBARXxA4')
-    '''
+
