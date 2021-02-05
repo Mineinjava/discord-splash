@@ -120,6 +120,7 @@ venv.bak/
 # mkdocs documentation
 /site
 
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -129,3 +130,10 @@ dmypy.json
 .pyre/
 .DS_Store
 myBot.py
+.idea/discord-splash.iml
+
+
+# custom
+
+.idea
+
