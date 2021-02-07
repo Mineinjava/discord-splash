@@ -9,12 +9,12 @@ you are required to make the slash commands via the Discord API. ***Currently* t
 ### Examples:
 *Simple bot that responds with "hi"*
 ```python
-from discordSlashCommands import Run
-import discordSlashCommands
+from discordSplash import Run
+import discordSplash
 
-@discordSlashCommands.command(name='hello')
+@discordSplash.command(name='hello')
 async def hello(data):
-    await data.respond(discordSlashCommands.ReactionResponse("hi"))
+    await data.respond(discordSplash.ReactionResponse("hi"))
 
 
 Run('TOKEN')
@@ -22,8 +22,8 @@ Run('TOKEN')
 
 *Presence Example*
 ```python
-from discordSlashCommands import Run, Presence
-import discordSlashCommands
+from discordSplash import Run, Presence
+import discordSplash
 
 x = Presence(text='testing', presenceType=5)
 

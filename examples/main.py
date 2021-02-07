@@ -1,10 +1,10 @@
-from discordSlashCommands import Run, Presence
-import discordSlashCommands
+from discordSplash import Run, Presence
+import discordSplash
 import requests
 x = Presence(text='testing', presenceType=5)
 
 
-@discordSlashCommands.command(name='say')
+@discordSplash.command(name='say')
 async def say(data):
     print('function called', data)
     url = f"https://discord.com/api/v8/interactions/{data['d']['id']}/{data['d']['token']}/callback"
