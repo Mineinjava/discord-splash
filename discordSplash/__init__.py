@@ -11,25 +11,25 @@ commands = {}
 
 class Presence:
     """Presence data used when connecting to Gateway
-    param presenceType (int): type of presence to use. See https://discord.com/developers/docs/topics/gateway#activity-object-activity-types for more info.
-    ```
-    0	Game	Playing {text}
 
-    1	Streaming	Streaming {text}
+    :param int presenceType: type of presence to use. See https://discord.com/developers/docs/topics/gateway#activity-object-activity-types for more info.
+    :param str text: Text of status to use. See {text} below.
 
-    2	Listening	Listening to {text}
+    .. Note ::
+        0	Game	Playing {text}
 
-    4	Custom	{emoji}  {text}
+        1	Streaming	Streaming {text}
 
-    5	Competing	Competing in {text}
-    ```
-        .. Note ::
-            Streaming URL's currently do not work
-            Custom emojis have not been implemented in this API wrapper
+        2	Listening	Listening to {text}
 
-    param text (str):
-        text of status to use
-        see {text} above
+        4	Custom	{emoji}  {text}
+
+        5	Competing	Competing in {text}
+
+    .. Warning ::
+        Streaming URL's currently do not work
+
+        Custom emojis have not been implemented in this API wrapper
 
         """
 
@@ -40,14 +40,17 @@ class Presence:
     def type(self):
         """Returns the type of the activity. Used internally
 
-        Returns:
-            > type (int): Integer from 1-5. See class `discordSplash.`**`Presence`** for more info"""
+        :return: Integer from 1-5. See class `discordSplash.`**`Presence`** for more info
+        :rtype: int
+        """
+
         return self.type
 
     def text(self):
         """Activity Text. Used Internally.
-        Returns:
-            > text (str): The text used in the presence.
+
+        :return: The text used in the presence.
+        :rtype: str
             """
         return self.text
 
@@ -62,19 +65,26 @@ class InvalidTypeException(Exception):
 class ReactionResponse():
     """
     Base class for responding to an interaction.
-    Parameters:
-        content (str): Content of the message. Must not be more than 2000 characters.
-        isEphemeral (bool): Whether or not the message should be ephemeral (only seen by the user who created the interaction
-        responseType (int): InteractionResponseType: https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype
-        ```
+
+    :param str content: Content of the message. Must not be more than 2000 characters.
+    :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction
+    :param int responseType: discord InteractionResponseType
+
+    .. Note ::
+        [Discord InteractionResponseType](https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype)
+
         1	ACK a Ping
+
         2	ACK a command without sending a message, eating the user's input
+
         3	respond with a message, eating the user's input
+
         4	respond with a message, showing the user's input
+
         5	ACK a command without sending a message, showing the user's input
-        ```
+
         "eating" the user's input is recommended for ephemeral commands.
-    """
+        """
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
         if not responseType in [1, 2, 3, 4, 5]:
             raise InvalidTypeException(
@@ -91,18 +101,22 @@ class ReactionResponse():
     @property
     def json(self):
         """
-        returns the JSON for the ReactionResponse. Mainly used internally
+        Mainly used internally
+        :return: JSON content for the reaction
+        :rtype: json
         """
         return self.jsonContent
 
 
 class Member:
     """Represents a discord member. Used internally to parse interaction/member JSON data.
-    Parameters:
-        memberJson (JSON) JSON to parse into this class.
+
+    :param json memberJson: JSON to parse into this class.
 
     TODO:
+
     - add a method to send a DM to the user
+
     - add an `avatar_url` property"""
 
     def __init__(self, memberJson):
@@ -110,71 +124,98 @@ class Member:
 
     @property
     def avatar(self):
-        """returns the member's avatar hash."""
+        """
+        :return: the member's avatar hash
+        :rtype: str
+        """
         return self.memberJson['avatar']
 
     @property
     def id(self):
-        """returns the user's id"""
-        return self.memberJson['id']
+        """
+        :return: the user's id
+        :rtype: int
+        """
+        return int(self.memberJson['id'])
 
     @property
     def username(self):
-        """returns the user's username"""
+        """
+        :return: the user's username
+        :rtype: str
+        """
         return self.memberJson['username']
 
     @property
     def discriminator(self):
-        """**CURRENTLY BROKEN"""
+        """
+        .. Warning ::
+            **CURRENTLY BROKEN**
+            """
         return self.memberJson['id']
 
 
 class ReactionData():
     """reaction data passed in to the handler
+
     TODO:
+
     - make the choices/parameters better."""
     def __init__(self, jsonData):
         self.jsonData = jsonData
 
     @property
     def guild_id(self):
-        """returns the guild id"""
+        """:return: the guild id
+        :rtype: str
+        """
         return int(self.jsonData["guild_id"])
 
     @property
     def id(self):
-        """returns the reaction id"""
+        """:return: the reaction id
+        :rtype: str
+        """
         return self.jsonData['id']
     @property
     def token(self):
-        """returns the reaction token"""
+        """:return: the reaction token
+        :rtype: str
+        """
         return self.jsonData['token']
     @property
     def type(self):
-        """returns the reaction type
+        """:return: the reaction type
+        :rtype: int
         .. Note ::
             Used for future proofing"""
         return int(self.jsonData['type'])
 
     @property
     def user(self):
-        """returns a `discordSplash.`**`Member`** object."""
+        """:return: a `discordSplash.`**`Member`** object.
+        :rtype: discordSplash.Member"""
         return Member(self.jsonData['member']['user'])
 
     @property
     def options(self):
-        """returns the choices/parameters for the SlashCommands."""
+        """:return: the choices/parameters for the SlashCommands.
+        :rtype: json"""
         return self.jsonData['data']['options']
 
     @property
     def json(self):
-        """returns the JSON. Used for a custom parser."""
+        """:return: the JSON. Used for a custom parser.
+        :rtype: json"""
         return self.jsonData
 
     async def respond(self, data: ReactionResponse):
         """Responds to the interaction.
+
         Parameters:
-            data (ReactionResponse): Reaction Response Data
+
+        :param discordSplash.ReactionResponse: Reaction Response Data
+
         .. Note ::
             This can be called multiple times for followup messages
 
@@ -190,14 +231,18 @@ class ReactionData():
 class Run():
     """Runs the bot using the token
 
-    **parameters:**
+    :param str token: token of the bot to run
+    :param splash.Presence presence: Presence of the bot, activated upon connection to gateway
 
-    token (str): token of the bot to run
-    presence: (splash.Presence): Presence of the bot, activated upon connection to gateway
+    :raises: discordSplash.UnregisteredCommandException
 
-    **Example:**
+    .. Tip::
+        `Run('TOKEN', Presence(text='testing', presenceType=5))`
 
-    `Run('TOKEN', Presence(text='testing', presenceType=5))`
+    .. Important::
+        most of the methods here are only used internally.
+
+
 
     """
 
@@ -317,8 +362,12 @@ class Run():
 
 def command(name: str, **options):
     """A decorator that is used to register a command.
-    Parameters:
-        name (str): name of the command"""
+
+    :param str name: name of the command
+
+    .. Tip::
+        see examples for info on usage"""
+
     def decorator(func):
         commands[name] = func
         return func
@@ -329,6 +378,8 @@ def command(name: str, **options):
 class UnregisteredCommandException(Exception):
     """
     Raised when a command is registered on the Discord API but not on discordSplash.
+
     TODO:
+
     - make it a warning"""
     pass
