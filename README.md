@@ -1,5 +1,6 @@
 # discord-splash
 An API wrapper for Discord's slash commands.
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/518e23ddf3bf0b0e065f/maintainability)](https://codeclimate.com/github/Mineinjava/discord-splash/maintainability)
 ### Docs:
 coming soon™—use docstings for now.
