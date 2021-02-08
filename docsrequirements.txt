@@ -1,1 +1,1 @@
-sphinx_press_theme
+furo
