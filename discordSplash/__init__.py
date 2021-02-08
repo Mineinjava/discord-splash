@@ -3,7 +3,7 @@ import websockets
 import json
 import aiohttp
 
-import discordSlashCommands.resources.opcodes as op
+import discordSplash.resources.opcodes as op
 import traceback
 
 commands = {}
