@@ -1,1 +1,3 @@
 furo
+sphinx
+discordSplash
