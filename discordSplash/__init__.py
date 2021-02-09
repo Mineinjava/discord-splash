@@ -22,7 +22,7 @@ class Presence:
 
         2	Listening	Listening to {text}
 
-        4	Custom	{emoji}  {text}
+        4	Custom	{emoji} {text}
 
         5	Competing	Competing in {text}
 
