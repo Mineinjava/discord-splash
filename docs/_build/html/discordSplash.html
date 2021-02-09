@@ -1,0 +1,541 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+
+    <meta name="generator" content="sphinx-3.2.1, furo 2020.12.30.beta24"/>
+        <title>discordSplash package - discord-splash documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=33d2fc4f3f180ec1ffc6524e273e21d7d58cbe49">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=26485485040e7aaf717c13fd0188a5ad2c2deb60">
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script defer="defer" src="_static/jquery.js"></script>
+    <script defer="defer" src="_static/underscore.js"></script>
+    <script defer="defer" src="_static/doctools.js"></script>
+    <script defer="defer" src="_static/language_data.js"></script>
+    <script defer src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">discord-splash  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">discord-splash  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-scroll"><div class="sidebar-tree">
+  
+</div>
+</div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="discordsplash-package">
+<h1>discordSplash package<a class="headerlink" href="#discordsplash-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="discordSplash.resources.html">discordSplash.resources package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#module-discordSplash.resources.opcodes">discordSplash.resources.opcodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#module-discordSplash.resources">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-discordSplash">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-discordSplash" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="discordSplash.InvalidTypeException">
+<em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">InvalidTypeException</code><a class="headerlink" href="#discordSplash.InvalidTypeException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Called when your response is an invalid type.</p>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.Member">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memberJson</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a discord member. Used internally to parse interaction/member JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>memberJson</strong> (<em>json</em>) – JSON to parse into this class.</p>
+</dd>
+</dl>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>add a method to send a DM to the user</p></li>
+<li><p>add an <cite>avatar_url</cite> property</p></li>
+</ul>
+<dl class="py method">
+<dt id="discordSplash.Member.avatar">
+<em class="property">property </em><code class="sig-name descname">avatar</code><a class="headerlink" href="#discordSplash.Member.avatar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the member’s avatar hash</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Member.discriminator">
+<em class="property">property </em><code class="sig-name descname">discriminator</code><a class="headerlink" href="#discordSplash.Member.discriminator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>CURRENTLY BROKEN</strong></p>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Member.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.Member.id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the user’s id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Member.username">
+<em class="property">property </em><code class="sig-name descname">username</code><a class="headerlink" href="#discordSplash.Member.username" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the user’s username</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.Presence">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Presence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">presenceType</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Presence data used when connecting to Gateway</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>presenceType</strong> (<em>int</em>) – type of presence to use. See <a class="reference external" href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">https://discord.com/developers/docs/topics/gateway#activity-object-activity-types</a> for more info.</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – Text of status to use. See {text} below.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>0       Game    Playing {text}</p>
+<p>1       Streaming       Streaming {text}</p>
+<p>2       Listening       Listening to {text}</p>
+<p>4       Custom  {emoji} {text}</p>
+<p>5       Competing       Competing in {text}</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Streaming URL’s currently do not work</p>
+<p>Custom emojis have not been implemented in this API wrapper</p>
+</div>
+<dl class="py method">
+<dt id="discordSplash.Presence.text">
+<code class="sig-name descname">text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activity Text. Used Internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The text used in the presence.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Presence.type">
+<code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type of the activity. Used internally</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Integer from 1-5. See class <a href="#id1"><span class="problematic" id="id2">`</span></a>discordSplash.`**`Presence`** for more info</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.ReactionData">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">ReactionData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsonData</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.ReactionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>reaction data passed in to the handler</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>make the choices/parameters better.</p></li>
+</ul>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.guild_id">
+<em class="property">property </em><code class="sig-name descname">guild_id</code><a class="headerlink" href="#discordSplash.ReactionData.guild_id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the guild id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.ReactionData.id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the reaction id</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.json">
+<em class="property">property </em><code class="sig-name descname">json</code><a class="headerlink" href="#discordSplash.ReactionData.json" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the JSON. Used for a custom parser.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.options">
+<em class="property">property </em><code class="sig-name descname">options</code><a class="headerlink" href="#discordSplash.ReactionData.options" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the choices/parameters for the SlashCommands.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>json</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.respond">
+<em class="property">async </em><code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#discordSplash.ReactionResponse" title="discordSplash.ReactionResponse">discordSplash.ReactionResponse</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.ReactionData.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Responds to the interaction.</p>
+<p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>discordSplash.ReactionResponse</strong> – Reaction Response Data</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This can be called multiple times for followup messages</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This must be called within 3 seconds of recieving the response</p>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.token">
+<em class="property">property </em><code class="sig-name descname">token</code><a class="headerlink" href="#discordSplash.ReactionData.token" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the reaction token</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#discordSplash.ReactionData.type" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the reaction type</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Used for future proofing</p>
+</div>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.ReactionData.user">
+<em class="property">property </em><code class="sig-name descname">user</code><a class="headerlink" href="#discordSplash.ReactionData.user" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a <a href="#id3"><span class="problematic" id="id4">`</span></a>discordSplash.`**`Member`** object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#discordSplash.Member" title="discordSplash.Member">discordSplash.Member</a></p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.ReactionResponse">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">ReactionResponse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">content</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">isEphemeral</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">responseType</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.ReactionResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for responding to an interaction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – Content of the message. Must not be more than 2000 characters.</p></li>
+<li><p><strong>isEphemeral</strong> (<em>bool</em>) – Whether or not the message should be ephemeral (only seen by the user who created the interaction</p></li>
+<li><p><strong>responseType</strong> (<em>int</em>) – discord InteractionResponseType</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[Discord InteractionResponseType](<a class="reference external" href="https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype">https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype</a>)</p>
+<p>1       ACK a Ping</p>
+<p>2       ACK a command without sending a message, eating the user’s input</p>
+<p>3       respond with a message, eating the user’s input</p>
+<p>4       respond with a message, showing the user’s input</p>
+<p>5       ACK a command without sending a message, showing the user’s input</p>
+<p>“eating” the user’s input is recommended for ephemeral commands.</p>
+</div>
+<dl class="py method">
+<dt id="discordSplash.ReactionResponse.json">
+<em class="property">property </em><code class="sig-name descname">json</code><a class="headerlink" href="#discordSplash.ReactionResponse.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mainly used internally
+:return: JSON content for the reaction
+:rtype: json</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.Run">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">presence</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#discordSplash.Presence" title="discordSplash.Presence">discordSplash.Presence</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Runs the bot using the token</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token</strong> (<em>str</em>) – token of the bot to run</p></li>
+<li><p><strong>presence</strong> (<em>splash.Presence</em>) – Presence of the bot, activated upon connection to gateway</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>discordSplash.UnregisteredCommandException</p>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><cite>Run(‘TOKEN’, Presence(text=’testing’, presenceType=5))</cite></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>most of the methods here are only used internally.</p>
+</div>
+<dl class="py method">
+<dt id="discordSplash.Run.heartbeat">
+<em class="property">async </em><code class="sig-name descname">heartbeat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run.heartbeat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Run.hello">
+<em class="property">async </em><code class="sig-name descname">hello</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run.hello" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Run.main">
+<em class="property">async </em><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Run.opcode">
+<code class="sig-name descname">opcode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opcode</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">payload</span></em><span class="sig-paren">)</span> → str<a class="headerlink" href="#discordSplash.Run.opcode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Run.receive">
+<em class="property">async </em><code class="sig-name descname">receive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run.receive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt id="discordSplash.Run.send">
+<em class="property">async </em><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opcode</span></em>, <em class="sig-param"><span class="n">payload</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Run.send" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py exception">
+<dt id="discordSplash.UnregisteredCommandException">
+<em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">UnregisteredCommandException</code><a class="headerlink" href="#discordSplash.UnregisteredCommandException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a command is registered on the Discord API but not on discordSplash.</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>make it a warning</p></li>
+</ul>
+</dd></dl>
+<dl class="py function">
+<dt id="discordSplash.command">
+<code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that is used to register a command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of the command</p>
+</dd>
+</dl>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>see examples for info on usage</p>
+</div>
+</dd></dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, mineinjava
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/discordSplash.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">discordSplash package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-discordSplash">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+  </body>
+</html>
