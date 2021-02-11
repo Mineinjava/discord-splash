@@ -3,6 +3,5 @@ asyncio
 websockets
 aiohttp
 discordSplash
-traceback
 furo
-discordSplash
+
