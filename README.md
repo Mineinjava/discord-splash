@@ -6,7 +6,7 @@ An API wrapper for Discord's slash commands.
 ### Docs:
 [![Documentation Status](https://readthedocs.org/projects/discordsplash/badge/?version=latest)](https://discordsplash.readthedocs.io/en/latest/?badge=latest)
 
-Docs are hosted on [ReadTheDocs.]((https://discordsplash.readthedocs.io/en/latest/)
+Docs are hosted on [ReadTheDocs.](https://discordsplash.readthedocs.io/en/latest/)
 ### **NOTE:**
 you are required to make the slash commands via the Discord API. ***Currently* this is not possible via this API wrapper.**
 ### Examples:
