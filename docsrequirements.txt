@@ -1,1 +1,7 @@
 sphinx_press_theme
+asyncio
+websockets
+json
+aiohttp
+discordSplash
+traceback
