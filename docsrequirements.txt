@@ -5,3 +5,5 @@ json
 aiohttp
 discordSplash
 traceback
+furo
+discordSplash
