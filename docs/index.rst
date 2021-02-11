@@ -9,3 +9,26 @@ Discord: coming soon™
 
 .. Warning ::
    You must make your own slash commands via discord API
+
+DiscordSplash is an easy-to-use api wrapper for the Discord Api (specifically Slash Commands and interactions)
+
+This module was made because the [discord.py](http://github.com/rapptz) does not support Interactions
+
+This project is still in beta.
+
+Installation
+############
+Installation is through pip.
+
+.. code-block::
+
+   pip install discordSplash
+
+Voice Support
+#############
+
+DiscordSplash currently does not support voice. This may change in the future.
+
+Contributions:
+################
+Please contribute to this project on `GitHub <http://github.com/mineinjava/discord-splash>`_
