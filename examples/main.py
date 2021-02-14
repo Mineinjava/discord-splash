@@ -20,4 +20,4 @@ async def say(data):
     r = requests.post(url, json=json)
     print(r)
 
-Run('TOKEN', x) #788160444341944402 or 806673167464136744
+Run('TOKEN', x) 
