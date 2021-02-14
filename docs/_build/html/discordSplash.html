@@ -140,17 +140,122 @@
 </ul>
 </div>
 </div>
-<div class="section" id="module-discordSplash">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-discordSplash" title="Permalink to this headline">¶</a></h2>
-<dl class="py exception">
-<dt id="discordSplash.InvalidTypeException">
-<em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">InvalidTypeException</code><a class="headerlink" href="#discordSplash.InvalidTypeException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Called when your response is an invalid type.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.audit_log">
+<span id="discordsplash-audit-log-module"></span><h2>discordSplash.audit_log module<a class="headerlink" href="#module-discordSplash.audit_log" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="discordSplash.audit_log.Account">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.audit_log.</code><code class="sig-name descname">Account</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsondata</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.audit_log.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Discord Account Object</p>
+<dl class="py method">
+<dt id="discordSplash.audit_log.Account.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.audit_log.Account.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id of the account.
+:rtype: int</p>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.Account.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#discordSplash.audit_log.Account.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the account.
+:rtype: str</p>
+</dd></dl>
 </dd></dl>
 <dl class="py class">
-<dt id="discordSplash.Member">
-<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memberJson</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Member" title="Permalink to this definition">¶</a></dt>
+<dt id="discordSplash.audit_log.AuditLog">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.audit_log.</code><code class="sig-name descname">AuditLog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsondata</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.audit_log.AuditLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="discordSplash.audit_log.AuditLog.integrations">
+<em class="property">property </em><code class="sig-name descname">integrations</code><a class="headerlink" href="#discordSplash.audit_log.AuditLog.integrations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all integrations found in the Audit Log.
+.. warning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>May change from ``PartialIntegration`` to ``Integration``. See ``TODO`` in class PartialIntegration.
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of discordSplash.audit_log.PartialIntegration objects.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.AuditLog.users">
+<em class="property">property </em><code class="sig-name descname">users</code><a class="headerlink" href="#discordSplash.audit_log.AuditLog.users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all users found in the Audit log
+:return: list of discordSplash.member.Member objects
+:rtype: list</p>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.AuditLog.webhooks">
+<em class="property">property </em><code class="sig-name descname">webhooks</code><a class="headerlink" href="#discordSplash.audit_log.AuditLog.webhooks" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of Webhooks found in the Audit Log
+:rtype: list
+:return: list of Webhook objects
+.. Error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">will</span> <span class="n">receive</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">JSON</span> <span class="n">data</span> <span class="n">currently</span><span class="o">.</span>
+</pre></div>
+</div>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.audit_log.Entry">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.audit_log.</code><code class="sig-name descname">Entry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsondata</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.audit_log.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.audit_log.PartialIntegration">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.audit_log.</code><code class="sig-name descname">PartialIntegration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsondata</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.audit_log.PartialIntegration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="discordSplash.audit_log.PartialIntegration.account">
+<em class="property">property </em><code class="sig-name descname">account</code><a class="headerlink" href="#discordSplash.audit_log.PartialIntegration.account" title="Permalink to this definition">¶</a></dt>
+<dd><p>integration account
+:return: Account of the integration
+:rtype: discordSplash.audit_log.Account</p>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.PartialIntegration.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.audit_log.PartialIntegration.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the integration
+:rtype: int</p>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.PartialIntegration.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#discordSplash.audit_log.PartialIntegration.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the integration
+:rtype: str</p>
+</dd></dl>
+<dl class="py method">
+<dt id="discordSplash.audit_log.PartialIntegration.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#discordSplash.audit_log.PartialIntegration.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of the integration.
+:rtype: str</p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-discordSplash.channel">
+<span id="discordsplash-channel-module"></span><h2>discordSplash.channel module<a class="headerlink" href="#module-discordSplash.channel" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.emoji">
+<span id="discordsplash-emoji-module"></span><h2>discordSplash.emoji module<a class="headerlink" href="#module-discordSplash.emoji" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.guild">
+<span id="discordsplash-guild-module"></span><h2>discordSplash.guild module<a class="headerlink" href="#module-discordSplash.guild" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.invite">
+<span id="discordsplash-invite-module"></span><h2>discordSplash.invite module<a class="headerlink" href="#module-discordSplash.invite" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.member">
+<span id="discordsplash-member-module"></span><h2>discordSplash.member module<a class="headerlink" href="#module-discordSplash.member" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="discordSplash.member.Member">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.member.</code><code class="sig-name descname">Member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">memberJson</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.member.Member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a discord member. Used internally to parse interaction/member JSON data.</p>
 <dl class="field-list simple">
@@ -164,8 +269,8 @@
 <li><p>add an <cite>avatar_url</cite> property</p></li>
 </ul>
 <dl class="py method">
-<dt id="discordSplash.Member.avatar">
-<em class="property">property </em><code class="sig-name descname">avatar</code><a class="headerlink" href="#discordSplash.Member.avatar" title="Permalink to this definition">¶</a></dt>
+<dt id="discordSplash.member.Member.avatar">
+<em class="property">property </em><code class="sig-name descname">avatar</code><a class="headerlink" href="#discordSplash.member.Member.avatar" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the member’s avatar hash</p>
@@ -176,16 +281,16 @@
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="discordSplash.Member.discriminator">
-<em class="property">property </em><code class="sig-name descname">discriminator</code><a class="headerlink" href="#discordSplash.Member.discriminator" title="Permalink to this definition">¶</a></dt>
+<dt id="discordSplash.member.Member.discriminator">
+<em class="property">property </em><code class="sig-name descname">discriminator</code><a class="headerlink" href="#discordSplash.member.Member.discriminator" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>CURRENTLY BROKEN</strong></p>
 </div>
 </dd></dl>
 <dl class="py method">
-<dt id="discordSplash.Member.id">
-<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.Member.id" title="Permalink to this definition">¶</a></dt>
+<dt id="discordSplash.member.Member.id">
+<em class="property">property </em><code class="sig-name descname">id</code><a class="headerlink" href="#discordSplash.member.Member.id" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the user’s id</p>
@@ -196,8 +301,8 @@
 </dl>
 </dd></dl>
 <dl class="py method">
-<dt id="discordSplash.Member.username">
-<em class="property">property </em><code class="sig-name descname">username</code><a class="headerlink" href="#discordSplash.Member.username" title="Permalink to this definition">¶</a></dt>
+<dt id="discordSplash.member.Member.username">
+<em class="property">property </em><code class="sig-name descname">username</code><a class="headerlink" href="#discordSplash.member.Member.username" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the user’s username</p>
@@ -207,6 +312,21 @@
 </dd>
 </dl>
 </dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="module-discordSplash.template">
+<span id="discordsplash-template-module"></span><h2>discordSplash.template module<a class="headerlink" href="#module-discordSplash.template" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash.webhook">
+<span id="discordsplash-webhook-module"></span><h2>discordSplash.webhook module<a class="headerlink" href="#module-discordSplash.webhook" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-discordSplash">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-discordSplash" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="discordSplash.InvalidTypeException">
+<em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">InvalidTypeException</code><a class="headerlink" href="#discordSplash.InvalidTypeException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Called when your response is an invalid type.</p>
 </dd></dl>
 <dl class="py class">
 <dt id="discordSplash.Presence">
@@ -221,14 +341,14 @@
 </ul>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>0       Game    Playing {text}</p>
+<dl>
+<dt>::</dt><dd><p>0       Game    Playing {text}</p>
 <p>1       Streaming       Streaming {text}</p>
 <p>2       Listening       Listening to {text}</p>
 <p>4       Custom  {emoji} {text}</p>
 <p>5       Competing       Competing in {text}</p>
-</div>
+</dd>
+</dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Streaming URL’s currently do not work</p>
@@ -253,7 +373,7 @@
 <dd><p>Returns the type of the activity. Used internally</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Integer from 1-5. See class <a href="#id1"><span class="problematic" id="id2">`</span></a>discordSplash.`**`Presence`** for more info</p>
+<dd class="field-odd"><p>Integer from 1-5. See class discordSplash.Presence** for more info</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>int</p>
@@ -370,10 +490,10 @@
 <em class="property">property </em><code class="sig-name descname">user</code><a class="headerlink" href="#discordSplash.ReactionData.user" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a <a href="#id3"><span class="problematic" id="id4">`</span></a>discordSplash.`**`Member`** object.</p>
+<dd class="field-odd"><p>a discordSplash.member.Member** object.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#discordSplash.Member" title="discordSplash.Member">discordSplash.Member</a></p>
+<dd class="field-even"><p><a class="reference internal" href="#discordSplash.member.Member" title="discordSplash.member.Member">discordSplash.member.Member</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -428,11 +548,11 @@
 </dl>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><cite>Run(‘TOKEN’, Presence(text=’testing’, presenceType=5))</cite></p>
+<p><code class="docutils literal notranslate"><span class="pre">Run('TOKEN',</span> <span class="pre">Presence(text='testing',</span> <span class="pre">presenceType=5))</span></code></p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>most of the methods here are only used internally.</p>
+<p>Most of the methods here are only used internally.</p>
 </div>
 <dl class="py method">
 <dt id="discordSplash.Run.heartbeat">
@@ -524,6 +644,15 @@
             <ul>
 <li><a class="reference internal" href="#">discordSplash package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-discordSplash.audit_log">discordSplash.audit_log module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.channel">discordSplash.channel module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.emoji">discordSplash.emoji module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.guild">discordSplash.guild module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.invite">discordSplash.invite module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.member">discordSplash.member module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.template">discordSplash.template module</a></li>
+<li><a class="reference internal" href="#module-discordSplash.webhook">discordSplash.webhook module</a></li>
 <li><a class="reference internal" href="#module-discordSplash">Module contents</a></li>
 </ul>
 </li>

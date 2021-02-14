@@ -35,7 +35,7 @@ class AuditLog:
         :rtype: list
         """
         listIntegrations = []
-        async for integration in self.jsondata['integrations']:
+        for integration in self.jsondata['integrations']:
             listIntegrations.append(PartialIntegration(integration))
         return listIntegrations
 
