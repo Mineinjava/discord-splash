@@ -12,7 +12,7 @@ Discord: coming soon™
 
 DiscordSplash is an easy-to-use api wrapper for the Discord Api (specifically Slash Commands and interactions)
 
-This module was made because the [discord.py](http://github.com/rapptz) does not support Interactions
+This module was made because the `discord.py <http://github.com/rapptz/discord.py>`_ module does not support Interactions.
 
 This project is still in beta.
 
@@ -32,3 +32,11 @@ DiscordSplash currently does not support voice. This may change in the future.
 Contributions:
 ################
 Please contribute to this project on `GitHub <http://github.com/mineinjava/discord-splash>`_
+
+Table Of Contents
+#################
+- API reference
+- FAQ
+- GitHub URL
+- Discord Server
+-

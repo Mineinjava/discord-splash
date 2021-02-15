@@ -5,9 +5,9 @@ import aiohttp
 
 import discordSplash.resources.opcodes as op
 import traceback
+from discordSplash import member
 
 commands = {}
-
 
 class Presence:
     """Presence data used when connecting to Gateway
@@ -15,7 +15,7 @@ class Presence:
     :param int presenceType: type of presence to use. See https://discord.com/developers/docs/topics/gateway#activity-object-activity-types for more info.
     :param str text: Text of status to use. See {text} below.
 
-    .. Note ::
+    ::
         0	Game	Playing {text}
 
         1	Streaming	Streaming {text}
@@ -40,7 +40,7 @@ class Presence:
     def type(self):
         """Returns the type of the activity. Used internally
 
-        :return: Integer from 1-5. See class `discordSplash.`**`Presence`** for more info
+        :return: Integer from 1-5. See class discordSplash.Presence** for more info
         :rtype: int
         """
 
@@ -108,53 +108,6 @@ class ReactionResponse():
         return self.jsonContent
 
 
-class Member:
-    """Represents a discord member. Used internally to parse interaction/member JSON data.
-
-    :param json memberJson: JSON to parse into this class.
-
-    TODO:
-
-    - add a method to send a DM to the user
-
-    - add an `avatar_url` property"""
-
-    def __init__(self, memberJson):
-        self.memberJson = memberJson
-
-    @property
-    def avatar(self):
-        """
-        :return: the member's avatar hash
-        :rtype: str
-        """
-        return self.memberJson['avatar']
-
-    @property
-    def id(self):
-        """
-        :return: the user's id
-        :rtype: int
-        """
-        return int(self.memberJson['id'])
-
-    @property
-    def username(self):
-        """
-        :return: the user's username
-        :rtype: str
-        """
-        return self.memberJson['username']
-
-    @property
-    def discriminator(self):
-        """
-        .. Warning ::
-            **CURRENTLY BROKEN**
-            """
-        return self.memberJson['id']
-
-
 class ReactionData():
     """reaction data passed in to the handler
 
@@ -193,9 +146,9 @@ class ReactionData():
 
     @property
     def user(self):
-        """:return: a `discordSplash.`**`Member`** object.
-        :rtype: discordSplash.Member"""
-        return Member(self.jsonData['member']['user'])
+        """:return: a discordSplash.member.Member** object.
+        :rtype: discordSplash.member.Member"""
+        return member.Member(self.jsonData['member']['user'])
 
     @property
     def options(self):
@@ -237,10 +190,10 @@ class Run():
     :raises: discordSplash.UnregisteredCommandException
 
     .. Tip::
-        `Run('TOKEN', Presence(text='testing', presenceType=5))`
+        ``Run('TOKEN', Presence(text='testing', presenceType=5))``
 
     .. Important::
-        most of the methods here are only used internally.
+        Most of the methods here are only used internally.
 
 
 
