@@ -23,8 +23,10 @@ class Presence:
     """Presence data used when connecting to Gateway
 
     :param PresenceType presenceType: type of presence to use.
-    :param str text: Text of status to use. See {text} below.
+    :param str text: Text of status to use.
 
+    .. Tip ::
+        ``x = Presence``
 
     .. Warning ::
         Streaming URL's currently do not work
@@ -33,7 +35,7 @@ class Presence:
 
         """
 
-    def __init__(self, presenceType: PresenceType, text: str):
+    def __init__(self, text: str, presenceType: PresenceType = PresenceType.Game):
         self.type_ = presenceType
         self.text_ = text
 
@@ -63,7 +65,7 @@ class InvalidTypeException(Exception):
     pass
 
 
-class ReactionResponse():
+class ReactionResponse:
     """
     Base class for responding to an interaction.
 
@@ -85,6 +87,8 @@ class ReactionResponse():
         5	ACK a command without sending a message, showing the user's input
 
         "eating" the user's input is recommended for ephemeral commands.
+
+        TODO: Make it an ENUM
         """
 
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
@@ -110,7 +114,7 @@ class ReactionResponse():
         return self.jsonContent
 
 
-class ReactionData():
+class ReactionData:
     """reaction data passed in to the handler
     TODO: - make the choices/parameters better."""
 
@@ -171,7 +175,7 @@ class ReactionData():
 
         Parameters:
 
-        :param discordSplash.ReactionResponse: Reaction Response Data
+        :param discordSplash.ReactionResponse data: Reaction Response Data
 
         .. Note ::
             This can be called multiple times for followup messages
@@ -187,7 +191,7 @@ class ReactionData():
                 pass
 
 
-class Run():
+class Run:
     """Runs the bot using the token
 
     :param str token: token of the bot to run
@@ -277,10 +281,6 @@ class Run():
                                 'One or more commands on discord are not represented on this api')
                         except UnregisteredCommandException:
                             traceback.print_exc()
-
-                    # await self.send_message("Editing")
-
-    # async def send_message(self, message):
 
     async def send(self, opcode, payload):
         data = self.opcode(opcode, payload)
