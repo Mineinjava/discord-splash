@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import json
 import aiohttp
+from enum import Enum
 
 import discordSplash.resources.opcodes as op
 import traceback
@@ -9,22 +10,21 @@ from discordSplash import member
 
 commands = {}
 
+
+class PresenceType(Enum):
+    Game = 0
+    Streaming = 1
+    Listening = 2
+    Custom = 4
+    Competing = 5
+
+
 class Presence:
     """Presence data used when connecting to Gateway
 
-    :param int presenceType: type of presence to use. See https://discord.com/developers/docs/topics/gateway#activity-object-activity-types for more info.
+    :param PresenceType presenceType: type of presence to use.
     :param str text: Text of status to use. See {text} below.
 
-    ::
-        0	Game	Playing {text}
-
-        1	Streaming	Streaming {text}
-
-        2	Listening	Listening to {text}
-
-        4	Custom	{emoji} {text}
-
-        5	Competing	Competing in {text}
 
     .. Warning ::
         Streaming URL's currently do not work
@@ -33,10 +33,11 @@ class Presence:
 
         """
 
-    def __init__(self, presenceType: int, text: str):
-        self.type = presenceType
-        self.text = text
+    def __init__(self, presenceType: PresenceType, text: str):
+        self.type_ = presenceType
+        self.text_ = text
 
+    @property
     def type(self):
         """Returns the type of the activity. Used internally
 
@@ -44,16 +45,16 @@ class Presence:
         :rtype: int
         """
 
-        return self.type
+        return self.type_.value
 
+    @property
     def text(self):
         """Activity Text. Used Internally.
 
         :return: The text used in the presence.
         :rtype: str
             """
-        return self.text
-
+        return self.text_
 
 
 class InvalidTypeException(Exception):
@@ -85,6 +86,7 @@ class ReactionResponse():
 
         "eating" the user's input is recommended for ephemeral commands.
         """
+
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
         if not responseType in [1, 2, 3, 4, 5]:
             raise InvalidTypeException(
@@ -110,10 +112,8 @@ class ReactionResponse():
 
 class ReactionData():
     """reaction data passed in to the handler
+    TODO: - make the choices/parameters better."""
 
-    TODO:
-
-    - make the choices/parameters better."""
     def __init__(self, jsonData):
         self.jsonData = jsonData
 
@@ -130,12 +130,14 @@ class ReactionData():
         :rtype: str
         """
         return self.jsonData['id']
+
     @property
     def token(self):
         """:return: the reaction token
         :rtype: str
         """
         return self.jsonData['token']
+
     @property
     def type(self):
         """:return: the reaction type
@@ -147,7 +149,9 @@ class ReactionData():
     @property
     def user(self):
         """:return: a discordSplash.member.Member** object.
-        :rtype: discordSplash.member.Member"""
+        :rtype: discordSplash.member.Member
+        .. Info::
+            make it a guild user"""
         return member.Member(self.jsonData['member']['user'])
 
     @property
@@ -177,7 +181,9 @@ class ReactionData():
             """
         async with aiohttp.ClientSession() as session:
             print("jsondata", self.jsonData)
-            async with session.post(f'https://discord.com/api/v8/interactions/{self.jsonData["d"]["id"]}/{self.jsonData["d"]["token"]}/callback', json=data.json) as resp:
+            async with session.post(
+                    f'https://discord.com/api/v8/interactions/{self.jsonData["d"]["id"]}/{self.jsonData["d"]["token"]}/callback',
+                    json=data.json) as resp:
                 pass
 
 
@@ -332,7 +338,6 @@ class UnregisteredCommandException(Exception):
     """
     Raised when a command is registered on the Discord API but not on discordSplash.
 
-    TODO:
-
-    - make it a warning"""
+    TODO: make it a warning
+    """
     pass

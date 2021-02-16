@@ -170,10 +170,10 @@
 <dl class="py method">
 <dt id="discordSplash.audit_log.AuditLog.integrations">
 <em class="property">property </em><code class="sig-name descname">integrations</code><a class="headerlink" href="#discordSplash.audit_log.AuditLog.integrations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of all integrations found in the Audit Log.
-.. warning:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>May change from ``PartialIntegration`` to ``Integration``. See ``TODO`` in class PartialIntegration.
-</pre></div>
+<dd><p>Returns a list of all integrations found in the Audit Log.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>May change from <code class="docutils literal notranslate"><span class="pre">PartialIntegration</span></code> to <code class="docutils literal notranslate"><span class="pre">Integration</span></code>. See <code class="docutils literal notranslate"><span class="pre">TODO</span></code> in class discordSplash.audit_log.PartialIntegration.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -330,23 +330,15 @@
 </dd></dl>
 <dl class="py class">
 <dt id="discordSplash.Presence">
-<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Presence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">presenceType</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Presence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">presenceType</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#discordSplash.PresenceType" title="discordSplash.PresenceType">discordSplash.PresenceType</a></span></em>, <em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Presence data used when connecting to Gateway</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>presenceType</strong> (<em>int</em>) – type of presence to use. See <a class="reference external" href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">https://discord.com/developers/docs/topics/gateway#activity-object-activity-types</a> for more info.</p></li>
+<li><p><strong>presenceType</strong> (<a class="reference internal" href="#discordSplash.PresenceType" title="discordSplash.PresenceType"><em>PresenceType</em></a>) – type of presence to use.</p></li>
 <li><p><strong>text</strong> (<em>str</em>) – Text of status to use. See {text} below.</p></li>
 </ul>
-</dd>
-</dl>
-<dl>
-<dt>::</dt><dd><p>0       Game    Playing {text}</p>
-<p>1       Streaming       Streaming {text}</p>
-<p>2       Listening       Listening to {text}</p>
-<p>4       Custom  {emoji} {text}</p>
-<p>5       Competing       Competing in {text}</p>
 </dd>
 </dl>
 <div class="admonition warning">
@@ -356,7 +348,7 @@
 </div>
 <dl class="py method">
 <dt id="discordSplash.Presence.text">
-<code class="sig-name descname">text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence.text" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">text</code><a class="headerlink" href="#discordSplash.Presence.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activity Text. Used Internally.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -369,7 +361,7 @@
 </dd></dl>
 <dl class="py method">
 <dt id="discordSplash.Presence.type">
-<code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence.type" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#discordSplash.Presence.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the type of the activity. Used internally</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -382,14 +374,37 @@
 </dd></dl>
 </dd></dl>
 <dl class="py class">
+<dt id="discordSplash.PresenceType">
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">PresenceType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.PresenceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt id="discordSplash.PresenceType.Competing">
+<code class="sig-name descname">Competing</code><em class="property"> = 5</em><a class="headerlink" href="#discordSplash.PresenceType.Competing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.PresenceType.Custom">
+<code class="sig-name descname">Custom</code><em class="property"> = 4</em><a class="headerlink" href="#discordSplash.PresenceType.Custom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.PresenceType.Game">
+<code class="sig-name descname">Game</code><em class="property"> = 0</em><a class="headerlink" href="#discordSplash.PresenceType.Game" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.PresenceType.Listening">
+<code class="sig-name descname">Listening</code><em class="property"> = 2</em><a class="headerlink" href="#discordSplash.PresenceType.Listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.PresenceType.Streaming">
+<code class="sig-name descname">Streaming</code><em class="property"> = 1</em><a class="headerlink" href="#discordSplash.PresenceType.Streaming" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
 <dt id="discordSplash.ReactionData">
 <em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">ReactionData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsonData</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.ReactionData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>reaction data passed in to the handler</p>
-<p>TODO:</p>
-<ul class="simple">
-<li><p>make the choices/parameters better.</p></li>
-</ul>
+<p>reaction data passed in to the handler
+TODO: - make the choices/parameters better.</p>
 <dl class="py method">
 <dt id="discordSplash.ReactionData.guild_id">
 <em class="property">property </em><code class="sig-name descname">guild_id</code><a class="headerlink" href="#discordSplash.ReactionData.guild_id" title="Permalink to this definition">¶</a></dt>
@@ -584,10 +599,7 @@
 <em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">UnregisteredCommandException</code><a class="headerlink" href="#discordSplash.UnregisteredCommandException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Raised when a command is registered on the Discord API but not on discordSplash.</p>
-<p>TODO:</p>
-<ul class="simple">
-<li><p>make it a warning</p></li>
-</ul>
+<p>TODO: make it a warning</p>
 </dd></dl>
 <dl class="py function">
 <dt id="discordSplash.command">
