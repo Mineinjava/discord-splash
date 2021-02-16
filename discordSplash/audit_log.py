@@ -29,8 +29,11 @@ class AuditLog:
     def integrations(self):
         """
         Returns a list of all integrations found in the Audit Log.
-        .. warning::
-            May change from ``PartialIntegration`` to ``Integration``. See ``TODO`` in class PartialIntegration.
+
+        .. Warning::
+            May change from ``PartialIntegration`` to ``Integration``. See ``TODO`` in class discordSplash.audit_log.PartialIntegration.
+
+
         :return: list of discordSplash.audit_log.PartialIntegration objects.
         :rtype: list
         """
@@ -48,7 +51,10 @@ class Entry:
 class PartialIntegration:
     def __init__(self, jsondata):
         """Partial integration object. Used mainly in Audit Logs
-        TODO: make it a full integration object."""
+        TODO: make it a full integration object.
+        .. Warning::
+            May move from discordSplash.audit_log.PartialIntegration to discordsplash.guild.PartialIntegration
+"""
         self.jsondata = jsondata
 
     @property
