@@ -3,11 +3,12 @@ class Member:
 
     :param json memberJson: JSON to parse into this class.
 
-    TODO:
+    .. Important::
+        TODO:
 
-    - add a method to send a DM to the user
+        - add a method to send a DM to the user
 
-    - add an `avatar_url` property"""
+        - add an `avatar_url` property"""
 
     def __init__(self, memberJson):
         self.memberJson = memberJson
@@ -17,6 +18,10 @@ class Member:
         """
         :return: the member's avatar hash
         :rtype: str
+        .. Important::
+            TODO:
+
+            - make it an ``avatar_url`` or make that a separate property
         """
         return self.memberJson['avatar']
 
@@ -39,7 +44,13 @@ class Member:
     @property
     def discriminator(self):
         """
-        .. Warning ::
+        .. Error::
             **CURRENTLY BROKEN**
+
+        .. Important::
+            TODO:
+
+            - make it work
             """
+
         return self.memberJson['id']

@@ -40,7 +40,3 @@ Table Of Contents
 - GitHub URL
 - Discord Server
 -
-
-.. Example::
-   .. Code::
-      thingy thing thing

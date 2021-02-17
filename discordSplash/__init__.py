@@ -3,15 +3,23 @@ import websockets
 import json
 import aiohttp
 from enum import Enum
-
-import opcodes as op
+try:
+    import opcodes as op # this will raise an error. Not quite sure why. Please fix. It works fine on PyPi.
+    import member
+except ModuleNotFoundError:
+    from discordSplash import member
+    from discordSplash import opcodes as op
 import traceback
-from discordSplash import member
 
 commands = {}
 
 
 class PresenceType(Enum):
+    """
+    Enumerator for discord PresenceTypes
+
+    Used in the ``presenceType`` parameter for discordSplash.Presence
+    """
     Game = 0
     Streaming = 1
     Listening = 2
@@ -25,10 +33,10 @@ class Presence:
     :param PresenceType presenceType: type of presence to use.
     :param str text: Text of status to use.
 
-    .. Tip ::
-        ``x = Presence``
+    .. Hint::
+        ``x = Presence('a game', discordSplash.PresenceType.Game)``
 
-    .. Warning ::
+    .. Danger::
         Streaming URL's currently do not work
 
         Custom emojis have not been implemented in this API wrapper
@@ -73,7 +81,7 @@ class ReactionResponse:
     :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction
     :param int responseType: discord InteractionResponseType
 
-    .. Note ::
+    .. Note::
         [Discord InteractionResponseType](https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype)
 
         1	ACK a Ping
@@ -88,7 +96,12 @@ class ReactionResponse:
 
         "eating" the user's input is recommended for ephemeral commands.
 
-        TODO: Make it an ENUM
+    .. Important::
+        TODO:
+
+        - Make ``responseType`` an Enumerator
+
+
         """
 
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
@@ -116,7 +129,11 @@ class ReactionResponse:
 
 class ReactionData:
     """reaction data passed in to the handler
-    TODO: - make the choices/parameters better."""
+
+    .. Important::
+        TODO:
+
+        - make the choices/parameters better."""
 
     def __init__(self, jsonData):
         self.jsonData = jsonData
@@ -125,6 +142,14 @@ class ReactionData:
     def guild_id(self):
         """:return: the guild id
         :rtype: str
+
+        .. Important::
+            TODO:
+
+            - Make this return a guild object (discordSplash.guild.Guild)
+
+        .. Warning::
+            Guilds are not implemented yet.
         """
         return int(self.jsonData["guild_id"])
 
@@ -139,6 +164,10 @@ class ReactionData:
     def token(self):
         """:return: the reaction token
         :rtype: str
+        .. Danger::
+            - Be sure **not to send this in chat. Anyone with the token can send messages as your bot**
+
+            - Expires after 15 minutes
         """
         return self.jsonData['token']
 
@@ -146,27 +175,34 @@ class ReactionData:
     def type(self):
         """:return: the reaction type
         :rtype: int
+
         .. Note ::
-            Used for future proofing"""
+            Used for future proofing
+            """
         return int(self.jsonData['type'])
 
     @property
     def user(self):
         """:return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
-        .. Info::
-            make it a guild user"""
+        .. Important::
+            TODO:
+
+            - make it a guild user"""
         return member.Member(self.jsonData['member']['user'])
 
     @property
     def options(self):
         """:return: the choices/parameters for the SlashCommands.
-        :rtype: json"""
+        :rtype: list
+
+        .. Caution::
+            Currently returns a list of options. **Is not parsed yet**"""
         return self.jsonData['data']['options']
 
     @property
     def json(self):
-        """:return: the JSON. Used for a custom parser.
+        """:return: the JSON. Can be used for a custom parser.
         :rtype: json"""
         return self.jsonData
 
@@ -177,11 +213,14 @@ class ReactionData:
 
         :param discordSplash.ReactionResponse data: Reaction Response Data
 
-        .. Note ::
+        .. Note::
             This can be called multiple times for followup messages
 
-        .. Warning ::
-            This must be called within 3 seconds of recieving the response
+        .. Important::
+            This must be called within 3 seconds of receiving the response.
+
+            .. Tip::
+                If you do not want to immediately send a message, call this with reactionResponse ResponseType ``1``
             """
         async with aiohttp.ClientSession() as session:
             print("jsondata", self.jsonData)
@@ -199,14 +238,19 @@ class Run:
 
     :raises: discordSplash.UnregisteredCommandException
 
-    .. Tip::
-        ``Run('TOKEN', Presence(text='testing', presenceType=5))``
+    .. Hint::
+        ``Run('TOKEN', Presence(text='testing', presenceType=discordSplash.PresenceType.Game))``
 
-    .. Important::
+    .. Note::
         Most of the methods here are only used internally.
 
+    .. Important::
+        TODO:
 
+        - Add a ``RESUME``
 
+    .. Danger::
+        **Do not share your token with anyone.** If you want to collaborate on a discord bot, use a development team.
     """
 
     def __init__(self, token: str, presence: Presence = None):
@@ -219,9 +263,9 @@ class Run:
         self.auth = {
             "token": self.TOKEN,
             "properties": {
-                "$os": "windows",
-                "$browser": "disco",
-                "$device": "disco"
+                "$os": "Python",
+                "$browser": "discordSplash",
+                "$device": "discordSplash"
             },
 
         }
@@ -324,8 +368,20 @@ def command(name: str, **options):
 
     :param str name: name of the command
 
-    .. Tip::
-        see examples for info on usage"""
+    .. SeeAlso::
+        See ``examples`` directory on GitHub for info on usage
+
+    .. Hint::
+        Example Code:
+
+        .. code:: python
+
+            @discordSplash.command(name="say-hello")
+            async def say_hello(data):
+                await data.respond('hi')
+
+
+    """
 
     def decorator(func):
         commands[name] = func
@@ -338,6 +394,9 @@ class UnregisteredCommandException(Exception):
     """
     Raised when a command is registered on the Discord API but not on discordSplash.
 
-    TODO: make it a warning
+    .. Important::
+        TODO:
+
+        - make it a warning
     """
     pass
