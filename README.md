@@ -1,7 +1,7 @@
 # discord-splash
 An API wrapper for Discord's slash commands.
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/518e23ddf3bf0b0e065f/maintainability)](https://codeclimate.com/github/Mineinjava/discord-splash/maintainability) [![Documentation Status](https://readthedocs.org/projects/discordsplash/badge/?version=latest)](https://discordsplash.readthedocs.io/en/latest/?badge=latest)
+[![Maintainability](https://api.codeclimate.com/v1/badges/518e23ddf3bf0b0e065f/maintainability)](https://codeclimate.com/github/Mineinjava/discord-splash/maintainability) [![Documentation Status](https://readthedocs.org/projects/discordsplash/badge/?version=latest)](https://discordsplash.readthedocs.io/en/latest/?badge=latest) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Mineinjava/discord-splash)](https://dependabot.com)
 
 ### Docs:
 [![Documentation Status](https://readthedocs.org/projects/discordsplash/badge/?version=latest)](https://discordsplash.readthedocs.io/en/latest/?badge=latest)
