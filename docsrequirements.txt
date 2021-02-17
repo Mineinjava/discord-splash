@@ -1,7 +1,8 @@
-sphinx_press_theme
-asyncio
-websockets
-aiohttp
 discordSplash
 furo
-
+requests~=2.20.0
+setuptools~=41.2.0
+websockets~=8.1
+aiohttp~=3.6.2
+pip install asyncio~=3.4.3
+enum34~=1.1.10
