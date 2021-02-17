@@ -4,7 +4,7 @@ import json
 import aiohttp
 from enum import Enum
 
-import discordSplash.resources.opcodes as op
+import opcodes as op
 import traceback
 from discordSplash import member
 
