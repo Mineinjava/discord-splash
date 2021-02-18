@@ -1,6 +1,6 @@
 import setuptools
 
-with open("README.rst", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -10,7 +10,7 @@ setuptools.setup(
     author_email="Mineinjava@gmail.com",
     description="An API wrapper for Discord's slash commands. Written in Python.",
     long_description=long_description,
-    long_description_content_type="text/x-rst",
+    long_description_content_type="text/markdown",
     url="https://github.com/Mineinjava/discord-splash",
     packages=setuptools.find_packages(),
     classifiers=[
