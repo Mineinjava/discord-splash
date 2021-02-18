@@ -1,4 +1,3 @@
-sphinx_press_theme
 asyncio
 websockets
 aiohttp
