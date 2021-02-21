@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="discordSplash",
-    version="0.6a2",
+    version="0.0.6a2",
     author="Mineinjava",
     author_email="Mineinjava@gmail.com",
     description="An API wrapper for Discord's slash commands. Written in Python.",

@@ -34,3 +34,4 @@ Run('TOKEN', x)
 ```
 ### Installation
 Use `pip install discordSplash`
+
