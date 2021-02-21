@@ -36,7 +36,7 @@ class Presence:
     .. Hint::
         ``x = Presence('a game', discordSplash.PresenceType.Game)``
 
-    .. Danger::
+    .. Warning::
         Streaming URL's currently do not work
 
         Custom emojis have not been implemented in this API wrapper
@@ -164,7 +164,7 @@ class ReactionData:
     def token(self):
         """:return: the reaction token
         :rtype: str
-        .. Danger::
+        .. Caution::
             - Be sure **not to send this in chat. Anyone with the token can send messages as your bot**
 
             - Expires after 15 minutes
@@ -241,7 +241,7 @@ class Run:
     .. Hint::
         ``Run('TOKEN', Presence(text='testing', presenceType=discordSplash.PresenceType.Game))``
 
-    .. Note::
+    .. Caution::
         Most of the methods here are only used internally.
 
     .. Important::
