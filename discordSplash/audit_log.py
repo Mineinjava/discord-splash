@@ -10,7 +10,8 @@ class AuditLog:
         """List of Webhooks found in the Audit Log
         :rtype: list
         :return: list of Webhook objects
-        .. Error::
+
+        .. Warning::
             You will receive a list of JSON data currently.
             """
         return self.jsondata['webhooks']
@@ -33,7 +34,6 @@ class AuditLog:
         .. Warning::
             May change from ``PartialIntegration`` to ``Integration``. See ``TODO`` in class discordSplash.audit_log.PartialIntegration.
 
-
         :return: list of discordSplash.audit_log.PartialIntegration objects.
         :rtype: list
         """
@@ -51,7 +51,12 @@ class Entry:
 class PartialIntegration:
     def __init__(self, jsondata):
         """Partial integration object. Used mainly in Audit Logs
-        TODO: make it a full integration object.
+
+        .. Important::
+            TODO:
+
+            - make it a full integration object.
+
         .. Warning::
             May move from discordSplash.audit_log.PartialIntegration to discordsplash.guild.PartialIntegration
 """

@@ -133,8 +133,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="discordSplash.resources.html">discordSplash.resources package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#module-discordSplash.resources.opcodes">discordSplash.resources.opcodes module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#module-discordSplash.resources">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#discordsplash-resources-opcodes-module">discordSplash.resources.opcodes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="discordSplash.resources.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -196,10 +196,10 @@
 <em class="property">property </em><code class="sig-name descname">webhooks</code><a class="headerlink" href="#discordSplash.audit_log.AuditLog.webhooks" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of Webhooks found in the Audit Log
 :rtype: list
-:return: list of Webhook objects
-.. Error:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">will</span> <span class="n">receive</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">JSON</span> <span class="n">data</span> <span class="n">currently</span><span class="o">.</span>
-</pre></div>
+:return: list of Webhook objects</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You will receive a list of JSON data currently.</p>
 </div>
 </dd></dl>
 </dd></dl>
@@ -263,11 +263,14 @@
 <dd class="field-odd"><p><strong>memberJson</strong> (<em>json</em>) – JSON to parse into this class.</p>
 </dd>
 </dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>TODO:</p>
 <ul class="simple">
 <li><p>add a method to send a DM to the user</p></li>
 <li><p>add an <cite>avatar_url</cite> property</p></li>
 </ul>
+</div>
 <dl class="py method">
 <dt id="discordSplash.member.Member.avatar">
 <em class="property">property </em><code class="sig-name descname">avatar</code><a class="headerlink" href="#discordSplash.member.Member.avatar" title="Permalink to this definition">¶</a></dt>
@@ -283,8 +286,8 @@
 <dl class="py method">
 <dt id="discordSplash.member.Member.discriminator">
 <em class="property">property </em><code class="sig-name descname">discriminator</code><a class="headerlink" href="#discordSplash.member.Member.discriminator" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<dd><div class="admonition error">
+<p class="admonition-title">Error</p>
 <p><strong>CURRENTLY BROKEN</strong></p>
 </div>
 </dd></dl>
@@ -330,19 +333,23 @@
 </dd></dl>
 <dl class="py class">
 <dt id="discordSplash.Presence">
-<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Presence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">presenceType</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#discordSplash.PresenceType" title="discordSplash.PresenceType">discordSplash.PresenceType</a></span></em>, <em class="sig-param"><span class="n">text</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">Presence</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">presenceType: discordSplash.PresenceType = &lt;PresenceType.Game: 0&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.Presence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Presence data used when connecting to Gateway</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>presenceType</strong> (<a class="reference internal" href="#discordSplash.PresenceType" title="discordSplash.PresenceType"><em>PresenceType</em></a>) – type of presence to use.</p></li>
-<li><p><strong>text</strong> (<em>str</em>) – Text of status to use. See {text} below.</p></li>
+<li><p><strong>text</strong> (<em>str</em>) – Text of status to use.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">Presence('a</span> <span class="pre">game',</span> <span class="pre">discordSplash.PresenceType.Game)</span></code></p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
 <p>Streaming URL’s currently do not work</p>
 <p>Custom emojis have not been implemented in this API wrapper</p>
 </div>
@@ -377,7 +384,8 @@
 <dt id="discordSplash.PresenceType">
 <em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">PresenceType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.PresenceType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>An enumeration.</p>
+<p>Enumerator for discord PresenceTypes</p>
+<p>Used in the <code class="docutils literal notranslate"><span class="pre">presenceType</span></code> parameter for discordSplash.Presence</p>
 <dl class="py attribute">
 <dt id="discordSplash.PresenceType.Competing">
 <code class="sig-name descname">Competing</code><em class="property"> = 5</em><a class="headerlink" href="#discordSplash.PresenceType.Competing" title="Permalink to this definition">¶</a></dt>
@@ -403,8 +411,14 @@
 <dt id="discordSplash.ReactionData">
 <em class="property">class </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">ReactionData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">jsonData</span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.ReactionData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>reaction data passed in to the handler
-TODO: - make the choices/parameters better.</p>
+<p>reaction data passed in to the handler</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>make the choices/parameters better.</p></li>
+</ul>
+</div>
 <dl class="py method">
 <dt id="discordSplash.ReactionData.guild_id">
 <em class="property">property </em><code class="sig-name descname">guild_id</code><a class="headerlink" href="#discordSplash.ReactionData.guild_id" title="Permalink to this definition">¶</a></dt>
@@ -416,6 +430,17 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>Make this return a guild object (discordSplash.guild.Guild)</p></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Guilds are not implemented yet.</p>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="discordSplash.ReactionData.id">
@@ -434,7 +459,7 @@ TODO: - make the choices/parameters better.</p>
 <em class="property">property </em><code class="sig-name descname">json</code><a class="headerlink" href="#discordSplash.ReactionData.json" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the JSON. Used for a custom parser.</p>
+<dd class="field-odd"><p>the JSON. Can be used for a custom parser.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>json</p>
@@ -449,9 +474,13 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-odd"><p>the choices/parameters for the SlashCommands.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>json</p>
+<dd class="field-even"><p>list</p>
 </dd>
 </dl>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Currently returns a list of options. <strong>Is not parsed yet</strong></p>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="discordSplash.ReactionData.respond">
@@ -460,16 +489,20 @@ TODO: - make the choices/parameters better.</p>
 <p>Parameters:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>discordSplash.ReactionResponse</strong> – Reaction Response Data</p>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="#discordSplash.ReactionResponse" title="discordSplash.ReactionResponse"><em>discordSplash.ReactionResponse</em></a>) – Reaction Response Data</p>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This can be called multiple times for followup messages</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This must be called within 3 seconds of recieving the response</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This must be called within 3 seconds of receiving the response.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you do not want to immediately send a message, call this with reactionResponse ResponseType <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</div>
 </div>
 </dd></dl>
 <dl class="py method">
@@ -483,6 +516,13 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<ul class="simple">
+<li><p>Be sure <strong>not to send this in chat. Anyone with the token can send messages as your bot</strong></p></li>
+<li><p>Expires after 15 minutes</p></li>
+</ul>
+</div>
 </dd></dl>
 <dl class="py method">
 <dt id="discordSplash.ReactionData.type">
@@ -511,6 +551,13 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-even"><p><a class="reference internal" href="#discordSplash.member.Member" title="discordSplash.member.Member">discordSplash.member.Member</a></p>
 </dd>
 </dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>make it a guild user</p></li>
+</ul>
+</div>
 </dd></dl>
 </dd></dl>
 <dl class="py class">
@@ -537,6 +584,13 @@ TODO: - make the choices/parameters better.</p>
 <p>5       ACK a command without sending a message, showing the user’s input</p>
 <p>“eating” the user’s input is recommended for ephemeral commands.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">responseType</span></code> an Enumerator</p></li>
+</ul>
+</div>
 <dl class="py method">
 <dt id="discordSplash.ReactionResponse.json">
 <em class="property">property </em><code class="sig-name descname">json</code><a class="headerlink" href="#discordSplash.ReactionResponse.json" title="Permalink to this definition">¶</a></dt>
@@ -561,13 +615,24 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-even"><p>discordSplash.UnregisteredCommandException</p>
 </dd>
 </dl>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><code class="docutils literal notranslate"><span class="pre">Run('TOKEN',</span> <span class="pre">Presence(text='testing',</span> <span class="pre">presenceType=5))</span></code></p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><code class="docutils literal notranslate"><span class="pre">Run('TOKEN',</span> <span class="pre">Presence(text='testing',</span> <span class="pre">presenceType=discordSplash.PresenceType.Game))</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of the methods here are only used internally.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Most of the methods here are only used internally.</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">RESUME</span></code></p></li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><strong>Do not share your token with anyone.</strong> If you want to collaborate on a discord bot, use a development team.</p>
 </div>
 <dl class="py method">
 <dt id="discordSplash.Run.heartbeat">
@@ -599,7 +664,13 @@ TODO: - make the choices/parameters better.</p>
 <em class="property">exception </em><code class="sig-prename descclassname">discordSplash.</code><code class="sig-name descname">UnregisteredCommandException</code><a class="headerlink" href="#discordSplash.UnregisteredCommandException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Raised when a command is registered on the Discord API but not on discordSplash.</p>
-<p>TODO: make it a warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>TODO:</p>
+<ul class="simple">
+<li><p>make it a warning</p></li>
+</ul>
+</div>
 </dd></dl>
 <dl class="py function">
 <dt id="discordSplash.command">
@@ -610,9 +681,18 @@ TODO: - make the choices/parameters better.</p>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of the command</p>
 </dd>
 </dl>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>see examples for info on usage</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory on GitHub for info on usage</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Example Code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@discordSplash</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"say-hello"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">data</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="s1">'hi'</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </dd></dl>
 </div>

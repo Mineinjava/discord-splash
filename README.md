@@ -33,4 +33,5 @@ x = Presence(text='testing', presenceType=discordSplash.PresenceType.Game)
 Run('TOKEN', x)
 ```
 ### Installation
-~~Use `pip install discordSplash`~~ **I cannot find out how to upload to PyPi. Use `python3 setup.py install`. Sorry for the inconvenience** 
+Use `pip install discordSplash`
+
