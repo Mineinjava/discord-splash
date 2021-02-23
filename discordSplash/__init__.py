@@ -4,7 +4,7 @@ import json
 import aiohttp
 from enum import Enum
 try:
-    import opcodes as op # this will raise an error. Not quite sure why. Please fix. It works fine on PyPi.
+    import opcodes as op  # this will raise an error. Not quite sure why. Please fix. It works fine on PyPi.
     import member
 except ModuleNotFoundError:
     from discordSplash import member
@@ -12,6 +12,10 @@ except ModuleNotFoundError:
 import traceback
 
 commands = {}
+
+TOKEN = None
+AUTH_HEADER = None
+API_URL = 'https://discord.com/api/v8'
 
 
 class PresenceType(Enum):
@@ -105,7 +109,7 @@ class ReactionResponse:
         """
 
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
-        if not responseType in [1, 2, 3, 4, 5]:
+        if responseType not in [1, 2, 3, 4, 5]:
             raise InvalidTypeException(
                 f"responseType {responseType} is invalid. See https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype for more info.")
         self.jsonContent = {
@@ -136,7 +140,7 @@ class ReactionData:
         - make the choices/parameters better."""
 
     def __init__(self, jsonData):
-        self.jsonData = jsonData
+        self.jsonData = jsonData['d']
 
     @property
     def guild_id(self):
@@ -182,22 +186,27 @@ class ReactionData:
         return int(self.jsonData['type'])
 
     @property
-    def user(self):
-        """:return: a discordSplash.member.Member** object.
+    def member(self):
+        """
+        :return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
-        .. Important::
-            TODO:
-
-            - make it a guild user"""
-        return member.Member(self.jsonData['member']['user'])
+        """
+        return member.Member(self.jsonData['member'])
 
     @property
     def options(self):
-        """:return: the choices/parameters for the SlashCommands.
+        """
+        :return: the choices/parameters for the SlashCommands.
         :rtype: list
 
         .. Caution::
-            Currently returns a list of options. **Is not parsed yet**"""
+            Currently returns a list of options. **Is not parsed yet**
+
+        .. Important::
+            TODO:
+
+            - parse this
+        """
         return self.jsonData['data']['options']
 
     @property
@@ -217,17 +226,23 @@ class ReactionData:
             This can be called multiple times for followup messages
 
         .. Important::
+            TODO:
+
+            - Add a ``followup`` message function
+
+        .. Tip::
             This must be called within 3 seconds of receiving the response.
 
             .. Tip::
                 If you do not want to immediately send a message, call this with reactionResponse ResponseType ``1``
+
             """
         async with aiohttp.ClientSession() as session:
             print("jsondata", self.jsonData)
             async with session.post(
-                    f'https://discord.com/api/v8/interactions/{self.jsonData["d"]["id"]}/{self.jsonData["d"]["token"]}/callback',
+                    f'https://discord.com/api/v8/interactions/{self.jsonData["id"]}/{self.jsonData["token"]}/callback',
                     json=data.json) as resp:
-                pass
+                        pass
 
 
 class Run:
@@ -259,6 +274,9 @@ class Run:
         self.session_id = None
 
         self.TOKEN = token
+        global TOKEN, AUTH_HEADER
+        TOKEN = token
+        AUTH_HEADER = {"Authorization": f"Bot {token}"}
 
         self.auth = {
             "token": self.TOKEN,
@@ -363,7 +381,7 @@ class Run:
         return json.dumps(data)
 
 
-def command(name: str, **options):
+def command(name: str):
     """A decorator that is used to register a command.
 
     :param str name: name of the command

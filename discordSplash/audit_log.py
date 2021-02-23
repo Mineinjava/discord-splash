@@ -64,7 +64,7 @@ class PartialIntegration:
 
     @property
     def id(self):
-        """ID of the integration
+        """id of the integration
         :rtype: int"""
         return str(self.jsondata("id"))
 
@@ -104,6 +104,6 @@ class Account:
 
     @property
     def id(self):
-        """Id of the account.
+        """id of the account.
         :rtype: int"""
         return int(self.jsondata("id"))
