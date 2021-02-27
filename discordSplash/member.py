@@ -216,8 +216,8 @@ class Member:
         except KeyError:
             return None
 
-    async def modify_member(self, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
-                            channel_id: int = None):
+    async def update(self, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
+                     channel_id: int = None):
         """
         modifies the guild member object
 
