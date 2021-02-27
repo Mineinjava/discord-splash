@@ -132,12 +132,15 @@ class ReactionResponse:
 
 
 class ReactionData:
-    """reaction data passed in to the handler
+    """
+    reaction data passed in to the handler
 
     .. Important::
         TODO:
 
-        - make the choices/parameters better."""
+        - make the choices/parameters better.
+
+    """
 
     def __init__(self, jsonData):
         self.jsonData = jsonData['d']

@@ -401,7 +401,7 @@ class Guild:
 
             - ``owner_id`` only works if the bot is the guild owner
             - ``splash`` and ``banner`` only work if the guild has a level 3 boost or is verified/partnered
-            - system_channel_
+            - ``system_channel`` can be disabled
 
         :param str name: new name of the guild
         :param str region: new voice region of the guild
@@ -475,7 +475,7 @@ class Guild:
         """
         Creates a channel in the guild.
 
-        .. Info::
+        .. Tip::
             Some parameters here are only for voice/text channels.
 
             Only Text:

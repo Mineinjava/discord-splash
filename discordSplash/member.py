@@ -1,3 +1,13 @@
+import aiohttp
+
+try:
+    from __init__ import AUTH_HEADER as HEADER
+    from __init__ import API_URL as URL
+except Exception:
+    from discordSplash import API_URL as URL
+    from discordSplash import AUTH_HEADER as HEADER
+
+
 class User:
     """Represents a discord member. Used internally to parse interaction/member JSON data.
 
@@ -22,6 +32,7 @@ class User:
             TODO:
 
             - make it an ``avatar_url`` or make that a separate property
+
         """
         return self.memberJson['avatar']
 
@@ -49,6 +60,7 @@ class User:
         """
 
         return int(self.memberJson['discriminator'])
+
 
 class Member:
     """
@@ -118,6 +130,18 @@ class Member:
         """
         try:
             return self.json['joined_at']
+        except KeyError:
+            return None
+
+    @property
+    def guild_id(self):
+        """
+        ID of the Guild the member is in
+        :return: Guild ID
+        :rtype: int
+        """
+        try:
+            return int(self.json['guild_id'])
         except KeyError:
             return None
 
@@ -192,3 +216,35 @@ class Member:
         except KeyError:
             return None
 
+    async def modify_member(self, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
+                            channel_id: int = None):
+        """
+        modifies the guild member object
+
+        .. Hint::
+            All of these fields require permission.
+
+            All of these fields are optional
+
+        .. Warning::
+            If ``channel_id`` is not set, the user will be disconnected from voice.
+
+        .. SeeAlso::
+            coroutine discordSplash.guild.Guild.modify_member()
+
+        :param str nick: new nickname of the member
+        :param [list] roles: list of roles the member has
+        :param bool mute: whether or not the user is muted
+        :param bool deaf: whether or not the user is deafened
+        :param str channel_id: id of the voice channel to move the member.
+
+        :return: updated Member object
+        :rtype: discordSplash.member.Member
+        """
+        json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
+        g_id = self.json['guild_id']
+        id_ = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, headers=HEADER) as r:
+                member_ = Member(r.json)
+                return member_
