@@ -1,14 +1,6 @@
 discordSplash package
 =====================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   discordSplash.resources
-
 Submodules
 ----------
 
@@ -56,6 +48,14 @@ discordSplash.member module
 ---------------------------
 
 .. automodule:: discordSplash.member
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discordSplash.opcodes module
+----------------------------
+
+.. automodule:: discordSplash.opcodes
    :members:
    :undoc-members:
    :show-inheritance:
