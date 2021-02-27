@@ -60,7 +60,7 @@ class Member:
         - Also known as a Guild Member
         - discordSplash.member.User
     """
-    
+
     def __init__(self, json):
         self.json = json
 

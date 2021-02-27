@@ -1,9 +1,13 @@
 try:
     from __init__ import AUTH_HEADER as HEADER
     from __init__ import API_URL as URL
+    import member
+    import channel
 except ImportError:
     from discordSplash import AUTH_HEADER as HEADER
     from discordSplash import API_URL as URL
+    from discordSplash import member
+    from discordSplash import channel
 import aiohttp
 
 
@@ -371,10 +375,250 @@ class Guild:
         except KeyError:
             return None
 
+    async def get_preview(self):
+        """
+        Gets a Guild Preview Object for the guild.
+
+        :return: guild preview object for the guild
+        :rtype: discordSplash.guild.GuildPreview
+        """
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(f'{URL}/guilds/{g_id}/preview', headers=HEADER) as r:
+                preview = GuildPreview(await r.json())
+                return preview
+
+    async def update(self, name: str = None, region: str = None, verification_level: int = None,
+                     default_message_notifications: int = None, explicit_content_filter: int = None,
+                     afk_channel_id: int = None, afk_timeout: int = None, icon=None, owner_id: str = None,
+                     splash=None, banner=None, system_channel_id: int = None, rules_channel_id: int = None,
+                     public_updates_channel_id: int = None, preferred_locale: str = None):
+        """
+        Edits the guild.
+
+        .. Warning::
+            Some fields here will not work, depending on the guild. For example:
+
+            - ``owner_id`` only works if the bot is the guild owner
+            - ``splash`` and ``banner`` only work if the guild has a level 3 boost or is verified/partnered
+            - system_channel_
+
+        :param str name: new name of the guild
+        :param str region: new voice region of the guild
+        :param int verification_level: required verification level for the guild
+        :param int default_message_notifications: new message notifications level for the guild
+        :param int explicit_content_filter: new explicit content filter for the guild.
+        :param int afk_channel_id: new channel ID for the AFK channel
+        :param int afk_timeout: new number of seconds a member can be AFK before being moved into an AFK channel
+        :param icon: new icon of the guild
+        :param str owner_id: id of the new guild owner (bot must be guild owner for this to work.)
+        :param splash: new splash image of the guild
+        :param banner: new guild banner
+        :param int system_channel_id: Channel ID for the system messages channel ID.
+        :param int rules_channel_id: channel ids for rules.
+        :param int public_updates_channel_id: new channel for moderator info (Discord community updates.)
+        :param str preferred_locale: Where the guild is hosted.
+
+        :return: Updated Guild Object
+        :rtype: discordSplash.guild.Guild
+        """
+        json = {"name": name, "region": region, "verification_level": verification_level,
+                "default_message_notifications": default_message_notifications,
+                "explicit_content_filter": explicit_content_filter, "afk_channel_id": afk_channel_id,
+                "afk_timeout": afk_timeout, "icon": icon, "owner_id": owner_id, "splash": splash, "banner": banner,
+                "system_channel_id": system_channel_id, "rules_channel_id": rules_channel_id,
+                "public_updates_channel_id": public_updates_channel_id, "preferred_locale": preferred_locale}
+        for x in json:
+            if json[x] is None:
+                json.pop(x)
+
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.patch(f'{URL}/guilds/{g_id}', json=json, headers=HEADER) as r:
+                guild_new = Guild(await r.json())
+                return guild_new
+
+    async def delete(self):
+        """
+        deletes the guild
+
+        bot must be guild owner
+
+        .. Danger
+            This Permanently deletes the guild.
+        """
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.delete(f'{URL}/guilds/{g_id}', headers=HEADER) as r:
+                guild_new = Guild(await r.json())
+                return guild_new
+
+    async def get_all_channels(self):
+        """
+        gets all channels in a guild
+
+        :return: list of guild channel objects
+        :rtype: [discordSplash.channel.Channel]
+        """
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(f'{URL}/guilds/{g_id}/channels', headers=HEADER) as r:
+                channels = []
+                for channel_ in await r.json():
+                    channels.append(channel.Channel(channel_))
+
+                return channels
+
+    async def create_channel(self, name: str, type: int, topic: str = None, bitrate: int = None, user_limit: int = None,
+                             rate_limit_per_user: int = 0, position: int = None, permission_overwrites=None,
+                             parent_id: int = None, nsfw: bool = None):
+        """
+        Creates a channel in the guild.
+
+        .. Info::
+            Some parameters here are only for voice/text channels.
+
+            Only Text:
+
+            - ``topic``
+            - ``rate_limit_per_user``
+
+            Only Voice:
+
+            - ``bitrate``
+            - ``user_limit``
+
+        :param str name: name of the channel
+        :param int type: type of the channel
+        :param str topic: Channel topic/description
+        :param int bitrate: bitrate (in bits) of the channel
+        :param int user_limit: limit for number of users that can join the voice channel
+        :param str rate_limit_per_user: cooldown (slowmode) between sending messages
+        :param permission_overwrites: permission overwrites for the channel TODO: Implement this
+        :param int position: channel order position number
+        :param int parent_id: id of the parent channel category
+        :param bool nsfw: whether the channel is nsfw or not
+        """
+        json = {"name": name, "type": type, "bitrate": bitrate,
+                "user_limit": user_limit,
+                "rate_limit_per_user": rate_limit_per_user, "permission_overwrites": permission_overwrites,
+                "position": position, "parent_id": parent_id, "nsfw": nsfw}
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.post(f'{URL}/guilds/{g_id}/channels', json=json, headers=HEADER) as r:
+                return channel.Channel(await r.json())
+
+    async def modify_channel_positions(self, data_list: list):
+        """
+        Adjusts Channel Positions for a guild
+
+        .. Important::
+            TODO:
+
+            - make the ``data_list`` parameter better (python object)
+
+        .. Hint::
+            the ``data_list`` objects should look something like this:
+
+            .. code-block:: json
+
+                [
+                    {
+                        "id": 2349892848243,
+                        "position": 1
+                    },
+                    {
+                        "id": 7182933290482,
+                        "position": 0
+                    }
+                ]
+
+
+        :param list data_list: list of json objects for adjusting channel positions. Must be longer than 2.
+        :raises: discordSplash.guild.ListLengthError if the ``data_list`` parameter is too short.
+        """
+        if len(data_list) < 2:
+            raise ListLengthError(
+                "`data_list` for coroutine discordSplash.guild.modify_channel_positions requires a length of two or more.")
+        else:
+            g_id = self.json['id']
+            async with aiohttp.ClientSession() as cs:
+                async with cs.patch(f'{URL}/guilds/{g_id}/channels', json=data_list, headers=HEADER) as r:
+                    pass
+
+    async def get_member(self, id_):
+        """
+        gets a Member from their id
+
+        .. SeeAlso::
+            discordSplash.member.Member
+
+            discordSplash.guild.get_all_members()
+
+
+        :param int id_: ID of the member you want to fetch
+        :return: Guild member of the id
+        :rtype: discordSplash.member.Member
+        """
+
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(f'{URL}/guilds/{g_id}/members/{id_}', headers=HEADER) as r:
+                member_ = member.Member(await r.json())
+                return member_
+
+    async def get_members(self):
+        """
+        gets all members in a guild
+
+        .. Warning::
+            This may be part of privileged intents in the future.
+
+        :return: list of all members found in the guild
+        :rtype: [discordSplash.member.Member]
+        """
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get(f'{URL}/guilds/{g_id}/members', headers=HEADER) as r:
+                members_ = []
+                for member_ in await r.json():
+                    members_.append(member.Member(member_))
+                return members_
+
+    async def modify_member(self, id_, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
+                            channel_id: int = None):
+        """
+        modifies a member of the guild
+
+        .. Hint::
+            All of these fields require permission.
+
+        .. Warning::
+            If ``channel_id`` is not set, the user will be disconnected from voice.
+
+        :param int id_: id of the member to modify
+        :param str nick: new nickname of the member
+        :param [list] roles: list of roles the member has
+        :param bool mute: whether or not the user is muted
+        :param bool deaf: whether or not the user is deafened
+        :param str channel_id: id of the voice channel to move the member.
+
+        :return: updated Member object
+        :rtype: discordSplash.member.Member
+        """
+        json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
+        g_id = self.json['id']
+        async with aiohttp.ClientSession() as cs:
+            async with cs.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, headers=HEADER) as r:
+                member_ = member.Member(r.json)
+                return member_
+
+
 class GuildPreview:
     """
     Guild Preview Object
     """
+
     def __init__(self, json):
         self.json = json
 
@@ -514,8 +758,8 @@ class GuildPreview:
             return None
 
 
-
-async def create(name: str, region=None, icon=None, verification_level: int = None, default_message_notifications: int = None,
+async def create(name: str, region=None, icon=None, verification_level: int = None,
+                 default_message_notifications: int = None,
                  explicit_content_filter: int = None, roles=None, channels=None, afk_channel_id: int = None,
                  afk_timeout: int = None,
                  system_channel_id=None):
@@ -580,7 +824,7 @@ async def create(name: str, region=None, icon=None, verification_level: int = No
         json['afk_channel_id'] = afk_channel_id
 
     if afk_timeout is not None:
-        json['afk_timout'] = afk_timeout
+        json['afk_timeout'] = afk_timeout
 
     if system_channel_id is not None:
         json['system_channel_id'] = system_channel_id
@@ -590,7 +834,8 @@ async def create(name: str, region=None, icon=None, verification_level: int = No
             guild = Guild(await r.json())
             return guild
 
-async def get(g_id: int, with_counts: bool=False):
+
+async def get(g_id: int, with_counts: bool = False):
     """
     Get a guild from the Guild's id.
 
@@ -599,11 +844,38 @@ async def get(g_id: int, with_counts: bool=False):
 
         - add support for ``with_counts`` in the discordSplash.guild.Guild object
 
+    .. Tip::
+
+        .. SeeAlso::
+            discordSplash.guild.get_preview()
+
+        If you dont need the discordSplash.guild.Guild object, use the coroutine discordSplash.guild.get_preview.
+
+
     :param int g_id: ID of the guild you want to fetch
     :param bool with_counts: If ``True``, ``approximate_presence_count`` and ``approximate_member_count`` will also be returned
-
+    :return: guild object
+    :rtype: discordSplash.guild.Guild
     """
     async with aiohttp.ClientSession() as cs:
         async with cs.get(f'{URL}/guilds/{g_id}?with_counts={str(with_counts).lower()}', headers=HEADER) as r:
             guild = Guild(await r.json())
             return guild
+
+
+async def get_guild_preview(g_id: int):
+    """
+    Gets a Guild Preview Object.
+
+    :param int g_id: id of the guild
+    :return: guild preview object for the guild
+    :rtype: discordSplash.guild.GuildPreview
+    """
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get(f'{URL}/guilds/{g_id}/preview', headers=HEADER) as r:
+            preview = GuildPreview(await r.json())
+            return preview
+
+
+class ListLengthError(Exception):
+    pass
