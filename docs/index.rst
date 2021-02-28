@@ -11,12 +11,7 @@
    Todo
    FAQ
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Examples
 
-   examples/index
 
 
 

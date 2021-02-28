@@ -335,6 +335,7 @@ class Run:
                 event_type = data["t"]
                 if event_type == "READY":
                     print('ready')
+                    self.session_id = data['d']['session_id']
                 elif event_type == "INTERACTION_CREATE":
                     event_name = data['d']['data']['name']
                     try:
@@ -382,6 +383,8 @@ class Run:
             "d": payload
         }
         return json.dumps(data)
+    async def resume(self):
+        pass
 
 
 def command(name: str):
