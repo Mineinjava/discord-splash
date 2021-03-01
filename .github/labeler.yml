@@ -1,0 +1,10 @@
+documentation:
+ - docs/*
+
+example:
+ - examples/*
+ 
+enhancement:
+ - discordSplash/*
+ 
+ 
