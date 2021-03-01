@@ -1,6 +1,6 @@
 try:
-    from __init__ import AUTH_HEADER as HEADER
-    from __init__ import API_URL as URL
+    from main import AUTH_HEADER as HEADER
+    from main import API_URL as URL
     import member
     import channel
 except ImportError:

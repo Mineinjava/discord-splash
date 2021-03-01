@@ -7,8 +7,8 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 
 try:
-    from __init__ import AUTH_HEADER as HEADER
-    from __init__ import API_URL as URL
+    from main import AUTH_HEADER as HEADER
+    from main import API_URL as URL
 except Exception:
     from discordSplash import API_URL as URL
     from discordSplash import AUTH_HEADER as HEADER
