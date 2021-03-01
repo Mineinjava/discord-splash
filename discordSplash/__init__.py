@@ -281,6 +281,7 @@ class Run:
         TOKEN = token
         AUTH_HEADER = {"Authorization": f"Bot {token}"}
 
+
         self.auth = {
             "token": self.TOKEN,
             "properties": {
@@ -309,19 +310,32 @@ class Run:
                 "afk": False
             }
 
-        asyncio.run(self.main())
+        try:
+            asyncio.run(self.main(False))
+        except websockets.exceptions.ConnectionClosedError:
+            while True:
+                try:
+                    asyncio.run(self.main(True))
+                except websockets.exceptions.ConnectionClosedError:
+                    pass
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
 
-    async def main(self):
+    async def main(self, resume=False):
         async with websockets.connect(
                 'wss://gateway.discord.gg/?v=6&encoding=json') \
                 as self.websocket:
-            await self.hello()
-            if self.interval is None:
-                print("Hello failed, exiting")
-                return
-            await asyncio.gather(self.heartbeat(), self.receive())
+            if resume is False:
+                await self.hello()
+                if self.interval is None:
+                    print("Hello failed, exiting")
+                    return
+                await asyncio.gather(self.heartbeat(), self.receive())
+            if resume is True:
+                await self.resume()
+                print('RESUMING------------------------------------------------------------------------------------------------------------------------------------------------')
+                await asyncio.gather(self.heartbeat(), self.receive())
+
             # while self.interval is not None:
             #     pass
 
@@ -383,8 +397,19 @@ class Run:
             "d": payload
         }
         return json.dumps(data)
+
     async def resume(self):
-        pass
+        resume_pkt = await self.create_resume_packet()
+        await self.send(op.RESUME, resume_pkt)
+
+    async def create_resume_packet(self):
+        resume_blk = {
+                "token": self.TOKEN,
+                "session_id": self.session_id,
+                "seq": self.sequence
+            }
+        return resume_blk
+
 
 
 def command(name: str):
