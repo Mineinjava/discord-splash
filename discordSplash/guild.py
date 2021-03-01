@@ -1,6 +1,6 @@
 try:
-    from ..discordSplash import AUTH_HEADER as HEADER
-    from ..discordSplash import API_URL as URL
+    from __init__ import AUTH_HEADER as HEADER
+    from __init__ import API_URL as URL
     import member
     import channel
 except ImportError:

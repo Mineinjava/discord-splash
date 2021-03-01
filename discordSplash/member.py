@@ -1,8 +1,14 @@
 import aiohttp
+import os.path
+import sys
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
 
 try:
-    from ..discordSplash import AUTH_HEADER as HEADER
-    from ..discordSplash import API_URL as URL
+    from __init__ import AUTH_HEADER as HEADER
+    from __init__ import API_URL as URL
 except Exception:
     from discordSplash import API_URL as URL
     from discordSplash import AUTH_HEADER as HEADER

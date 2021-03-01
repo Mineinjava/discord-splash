@@ -1,3 +1,11 @@
+import os.path
+import sys
+PACKAGE_PARENT = '.'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)
+
+
 import asyncio
 import websockets
 import json
@@ -5,9 +13,7 @@ import aiohttp
 from enum import Enum
 try:
     import opcodes as op  # this will raise an error. Not quite sure why. Please fix. It works fine on PyPi.
-    import member
 except ModuleNotFoundError:
-    from discordSplash import member
     from discordSplash import opcodes as op
 import traceback
 
@@ -130,7 +136,7 @@ class ReactionResponse:
         """
         return self.jsonContent
 
-
+    import member # TODO: FIX THIS CIRCULAR IMPORT.
 class ReactionData:
     """
     reaction data passed in to the handler
