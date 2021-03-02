@@ -20,11 +20,9 @@ class User:
     :param json memberJson: JSON to parse into this class.
 
     .. Important::
-        TODO:
+        TODO: support sernding dms to user - add a method to send a DM to the user on the user object
 
-        - add a method to send a DM to the user
-
-        - add an `avatar_url` property"""
+        TODO: Support avatar urls for Users - add an `avatar_url` property in the User class"""
 
     def __init__(self, memberJson):
         self.memberJson = memberJson
