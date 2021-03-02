@@ -43,9 +43,7 @@ class Guild:
         Icon hash for the guild
 
         .. Important::
-            TODO:
-
-            - Make an ``icon_url`` property
+            TODO: Make an ``icon_url`` property - this `icon_url` property will have the actual icon for the guild instead of just the hash.
 
         :return: Icon hash for the guild
         :rtype: str
@@ -130,9 +128,8 @@ class Guild:
         Permissions for the bot in the guild
 
         .. Important::
-            TODO:
+            TODO: make bot guild permissions an ENUM - having this as an enum will make it easier to understand permissions. | eg. ``guild.permissions.BAN_MEMBERS`` instead of something like ``0x39408``
 
-            - make this an ENUM
 
         :return: Total permissions for the current bot in the guild
         :rtype: str
@@ -219,9 +216,8 @@ class Guild:
         Verification level required for the guild
 
         .. Important::
-            TODO:
+            TODO: Make guild verification_level an ENUM - make the guild verification level an enum | eg. ``guilds.verification_level.phone`` instead of ``4``
 
-            - Make it an ENUM
 
         :return: Verification level required to talk in the guild
         :rtype: int
@@ -250,7 +246,7 @@ class Guild:
         Default message notification level
 
         .. Important::
-            TODO:
+            TODO: make default_message_notifications an enum -  make default_message_notifications an enum | eg. ``...notifications.all`` instead of ``0``
 
             - Make it an ENUM
 
@@ -269,9 +265,9 @@ class Guild:
         List of roles found in the guild
 
         .. Important::
-            TODO:
+            TODO: add discordSplash.guild.role object - add discordSplash.guild.role object | this would turn the json of the roles into an object.
 
-            - add the discordSplash.guild.role object
+
 
         .. Danger::
             This does not work.
@@ -290,11 +286,6 @@ class Guild:
     def features(self):
         """
         All features found in the guild
-
-        .. Important::
-            TODO:
-
-            - Make it an enum
 
         :return: a list of guild feature strings
         :rtype: list
@@ -494,7 +485,7 @@ class Guild:
         :param int bitrate: bitrate (in bits) of the channel
         :param int user_limit: limit for number of users that can join the voice channel
         :param str rate_limit_per_user: cooldown (slowmode) between sending messages
-        :param permission_overwrites: permission overwrites for the channel TODO: Implement this
+        :param permission_overwrites: permission overwrites for the channel TODO: Implement permission overwrites - implement the permission overwrites for creating channels | this will be a bit more complicated than some other feaatures | find out how this works
         :param int position: channel order position number
         :param int parent_id: id of the parent channel category
         :param bool nsfw: whether the channel is nsfw or not
@@ -513,9 +504,7 @@ class Guild:
         Adjusts Channel Positions for a guild
 
         .. Important::
-            TODO:
-
-            - make the ``data_list`` parameter better (python object)
+            TODO: improve the guild.modify_channel_positions parameter - make the ``data_list`` parameter better | make it a  python object
 
         .. Hint::
             the ``data_list`` objects should look something like this:
@@ -693,9 +682,7 @@ class GuildPreview:
         Emojis found in the Guild
 
         .. Important::
-            TODO:
-
-            - Implement the discordSplash.emoji.Emoji object
+            TODO: Implement the discordSplash.emoji.Emoji object - add an object to represent discord Emojis. | stop sending json for emojis.
 
         :return: list of discordSplash.emoji.Emoji objects
         :rtype: [discordSplash.emoji.Emoji]
@@ -770,17 +757,9 @@ async def create(name: str, region=None, icon=None, verification_level: int = No
         many parameters here are also explained in the discordSplash.guild.Guild
 
     .. Important::
-        TODO:
-
-        - make these fields Enums:
-            - ``verification_level``
-            - ``default_message_notifications``
-            - ``explicit_content_filter``
-        - add these objects:
-            - ``channel``
-            - ``role``
-        - add an exception if bot is in over 10 guilds
-        - add ratelimit handling
+        TODO: make some guild creation fields enumerators - make these fields Enums: | ``verification_level`` | ``default_message_notifications`` | ``explicit_content_filter``
+        TODO: add some more guild objects - add the ``channel`` and ``role`` objects
+        TODO: create_guild exception - add an exception if bot is in over 10 guilds
 
     .. Warning::
         this can only be used by bots in less than 10 guilds.
@@ -840,9 +819,7 @@ async def get(g_id: int, with_counts: bool = False):
     Get a guild from the Guild's id.
 
     .. Important::
-        TODO:
-
-        - add support for ``with_counts`` in the discordSplash.guild.Guild object
+        TODO: add support for ``with_counts`` in the discordSplash.guild.Guild object - allow users to choose an amount of stuff to get
 
     .. Tip::
 

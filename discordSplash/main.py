@@ -9,8 +9,8 @@ import json
 import aiohttp
 from enum import Enum
 try:
-    import member # TODO: FIX THIS CIRCULAR IMPORT.
-    import opcodes as op  # this will raise an error. Not quite sure why. Please fix. It works fine on PyPi.
+    import member
+    import opcodes as op
 except ModuleNotFoundError:
     from discordSplash import opcodes as op
 import traceback
@@ -105,9 +105,7 @@ class ReactionResponse:
         "eating" the user's input is recommended for ephemeral commands.
 
     .. Important::
-        TODO:
-
-        - Make ``responseType`` an Enumerator
+        TODO: add an enumerator to ReactionResponse - Make ``responseType`` an Enumerator
 
 
         """
@@ -139,9 +137,7 @@ class ReactionData:
     reaction data passed in to the handler
 
     .. Important::
-        TODO:
-
-        - make the choices/parameters better.
+        TODO: improve ReactionData - make the choices/parameters better.
 
     """
 
@@ -154,9 +150,7 @@ class ReactionData:
         :rtype: str
 
         .. Important::
-            TODO:
-
-            - Make this return a guild object (discordSplash.guild.Guild)
+            TODO: make guild_id for reactiondata return better - Make this return a guild object (discordSplash.guild.Guild)
 
         .. Warning::
             Guilds are not implemented yet.

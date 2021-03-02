@@ -53,9 +53,7 @@ class PartialIntegration:
         """Partial integration object. Used mainly in Audit Logs
 
         .. Important::
-            TODO:
-
-            - make it a full integration object.
+            TODO: make PartialIntegration a full integration object - ### make discordSplaash.audit_log.PartialIntegration a full integration object | this will add more features on the integration object for guilds
 
         .. Warning::
             May move from discordSplash.audit_log.PartialIntegration to discordsplash.guild.PartialIntegration
