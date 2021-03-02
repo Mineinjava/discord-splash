@@ -10,7 +10,7 @@ py_files = ["__init__.py", "audit_log.py", "channel.py", "emoji.py", "guild.py",
 abs_py_files = []
 data = ""
 for file in py_files:
-    with open(f"/home/runner/work/discord-splash/discord-splash/{file}", 'r') as r_file:
+    with open(f"/home/runner/work/discord-splash/discordSplash/{file}", 'r') as r_file:
         data = data + r_file.read()
 
 
