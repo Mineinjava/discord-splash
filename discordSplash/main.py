@@ -289,7 +289,6 @@ class Run:
 
         }
         if not presence:
-            print('no')
             self.auth['presence'] = {
                 "status": "online",
                 "afk": False
