@@ -1,23 +1,11 @@
 from discordSplash import Run, Presence
 import discordSplash
-import requests
-x = Presence(text='testing', presenceType=5)
+x = Presence(text='testing', presenceType=discordSplash.PresenceType.Competing)  # set the presence
 
 
 @discordSplash.command(name='say')
 async def say(data):
-    print('function called', data)
-    url = f"https://discord.com/api/v8/interactions/{data['d']['id']}/{data['d']['token']}/callback"
-
-    json = {
-        "type": 3,
-        "ephemeral": True,
-        "data": {
-            "flags": 64,
-            "content": "Congrats on sending your command!"
-        }
-    }
-    r = requests.post(url, json=json)
-    print(r)
+    arg1 = data.options[0]['value']  # set arg1 to the value of the first argument
+    await data.respond(arg1) # respond to the command
 
 Run('TOKEN', x) 
