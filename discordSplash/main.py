@@ -1,15 +1,11 @@
-import os.path
-import sys
-
-
-
 import asyncio
 import websockets
 import json
 import aiohttp
+import cfg
 from enum import Enum
+
 try:
-    import member
     import opcodes as op
 except ModuleNotFoundError:
     from discordSplash import opcodes as op
@@ -17,8 +13,6 @@ import traceback
 
 commands = {}
 
-TOKEN = None
-AUTH_HEADER = None
 API_URL = 'https://discord.com/api/v8'
 
 
@@ -132,6 +126,7 @@ class ReactionResponse:
         """
         return self.jsonContent
 
+
 class ReactionData:
     """
     reaction data passed in to the handler
@@ -191,6 +186,7 @@ class ReactionData:
         :return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
         """
+        import member
         return member.Member(self.jsonData['member'])
 
     @property
@@ -242,7 +238,8 @@ class ReactionData:
             async with session.post(
                     f'https://discord.com/api/v8/interactions/{self.jsonData["id"]}/{self.jsonData["token"]}/callback',
                     json=data.json) as resp:
-                        pass
+                pass
+
 
 
 class Run:
@@ -274,10 +271,10 @@ class Run:
         self.session_id = None
 
         self.TOKEN = token
-        global TOKEN, AUTH_HEADER
-        TOKEN = token
-        AUTH_HEADER = {"Authorization": f"Bot {token}"}
-
+        cfg.TOKEN = token
+        cfg.AUTH_HEADER = {"Authorization": f"Bot {token}"}
+        TOKEN = self.TOKEN
+        print('header 1', cfg.AUTH_HEADER)
 
         self.auth = {
             "token": self.TOKEN,
@@ -318,6 +315,7 @@ class Run:
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
 
+
     async def main(self, resume=False):
         async with websockets.connect(
                 'wss://gateway.discord.gg/?v=6&encoding=json') \
@@ -330,7 +328,9 @@ class Run:
                 await asyncio.gather(self.heartbeat(), self.receive())
             if resume is True:
                 await self.resume()
-                print('RESUMING------------------------------------------------------------------------------------------------------------------------------------------------')
+                print \
+                        (
+                        'RESUMING------------------------------------------------------------------------------------------------------------------------------------------------')
                 await asyncio.gather(self.heartbeat(), self.receive())
 
             # while self.interval is not None:
@@ -401,12 +401,11 @@ class Run:
 
     async def create_resume_packet(self):
         resume_blk = {
-                "token": self.TOKEN,
-                "session_id": self.session_id,
-                "seq": self.sequence
-            }
+            "token": self.TOKEN,
+            "session_id": self.session_id,
+            "seq": self.sequence
+        }
         return resume_blk
-
 
 
 def command(name: str):

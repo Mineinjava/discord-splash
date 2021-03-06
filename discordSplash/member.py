@@ -5,13 +5,9 @@ PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
+from cfg import AUTH_HEADER as HEADER
+from main import API_URL as URL
 
-try:
-    from main import AUTH_HEADER as HEADER
-    from main import API_URL as URL
-except Exception:
-    from discordSplash import API_URL as URL
-    from discordSplash import AUTH_HEADER as HEADER
 
 
 class User:
@@ -220,7 +216,7 @@ class Member:
         except KeyError:
             return None
 
-    async def update(self, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
+    async def update(self, guild_id, nick: str = None, roles: list = None, mute: bool = None, deaf: bool = None,
                      channel_id: int = None):
         """
         modifies the guild member object
@@ -246,9 +242,11 @@ class Member:
         :rtype: discordSplash.member.Member
         """
         json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
-        g_id = self.json['guild_id']
-        id_ = self.json['id']
+        g_id = guild_id
+        id_ = self.json['user']['id']
         async with aiohttp.ClientSession() as cs:
             async with cs.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, headers=HEADER) as r:
                 member_ = Member(r.json)
+                print(HEADER)
+                print(r)
                 return member_

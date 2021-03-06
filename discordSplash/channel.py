@@ -1,5 +1,5 @@
 
-class Channel():
+class Channel:
     """
     Represents a Discord Channel Object.
     """
