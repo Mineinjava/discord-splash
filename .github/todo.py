@@ -19,7 +19,7 @@ todos = {}
 for todo in x:
     new_x = todo.replace("TODO:", "")
     new_x_t = new_x.replace("|", "\n")
-    a,b = new_x_t.split('-', 1)
+    a, b = new_x_t.split('-', 1)
     todos[a] = b
 
 for todo_post in todos:
