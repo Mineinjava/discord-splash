@@ -344,6 +344,7 @@ class Run:
                 event_type = data["t"]
                 if event_type == "READY":
                     print('ready')
+                    cfg.CLIENT_ID = data['d']['user']['id']
                     self.session_id = data['d']['session_id']
                 elif event_type == "INTERACTION_CREATE":
                     event_name = data['d']['data']['name']
