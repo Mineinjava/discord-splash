@@ -79,7 +79,7 @@ discordSplash.webhook module
 Module contents
 ---------------
 
-.. automodule:: discordSplash
+.. automodule:: discordSplash.main
    :members:
    :undoc-members:
    :show-inheritance:
