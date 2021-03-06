@@ -129,7 +129,7 @@ class ReactionResponse:
 
 class ReactionData:
     """
-    reaction data passed in to the handler
+    Data passed into all command functions
 
     .. Important::
         TODO: improve ReactionData - make the choices/parameters better.
@@ -218,13 +218,6 @@ class ReactionData:
 
         :param discordSplash.ReactionResponse data: Reaction Response Data
 
-        .. Note::
-            This can be called multiple times for followup messages
-
-        .. Important::
-            TODO:
-
-            - Add a ``followup`` message function
 
         .. Tip::
             This must be called within 3 seconds of receiving the response.
@@ -240,7 +233,39 @@ class ReactionData:
                     json=data.json) as resp:
                 pass
 
+    async def edit(self, content: ReactionResponse):
+        """
+        Edits the original reaction response sent.
+        :param discordSplash.ReactionResponse content: New content of the reaction response.
+        """
+        async with aiohttp.ClientSession as session:
+            async with session.patch(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original', json=content.json) as r:
+                pass
 
+    async def send_followup_message(self, data: ReactionResponse):
+        """
+        send a followup message for that interaction
+
+        :param discordSplash.ReactionResponse data: Content of the followup message.
+
+        .. Important::
+            this needs testing.
+
+            - To Test:
+                - Ephemeral Messages
+        """
+        async with aiohttp.ClientSession as session:
+            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/', json=data.json) as r:
+                pass
+
+    async def delete_original_response(self):
+        """
+        delete the original reaction
+        """
+        async with aiohttp.ClientSession as session:
+            async with session.delete(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
+                pass
+    #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
 
 class Run:
     """Runs the bot using the token
