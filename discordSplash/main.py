@@ -256,10 +256,6 @@ class Run:
     .. Caution::
         Most of the methods here are only used internally.
 
-    .. Important::
-        TODO:
-
-        - Add a ``RESUME``
 
     .. Danger::
         **Do not share your token with anyone.** If you want to collaborate on a discord bot, use a development team.
@@ -311,6 +307,8 @@ class Run:
                 try:
                     asyncio.run(self.main(True))
                 except websockets.exceptions.ConnectionClosedError:
+                    pass
+                except websockets.exceptions.ConnectionClosedOK:
                     pass
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
