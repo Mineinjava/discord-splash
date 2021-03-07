@@ -79,24 +79,34 @@ class ReactionResponse:
     """
     Base class for responding to an interaction.
 
+    .. |ss| raw:: html
+
+        <strike>
+
+    .. |se| raw:: html
+
+        </strike>
+
     :param str content: Content of the message. Must not be more than 2000 characters.
-    :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction
-    :param int responseType: discord InteractionResponseType
+    :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction)
+    :param int responseType: discord InteractionResponseType (1-5), 2 and 3 are depreciated.
 
     .. Note::
         [Discord InteractionResponseType](https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype)
 
         1	ACK a Ping
 
-        2	ACK a command without sending a message, eating the user's input
+        [ss]2	ACK a command without sending a message, eating the user's input[se] **DEPRECIATED**
 
-        3	respond with a message, eating the user's input
+        [ss]3	respond with a message, eating the user's input[se] **DEPRECIATED**
 
-        4	respond with a message, showing the user's input
+        4	respond to an interaction with a message
 
         5	ACK a command without sending a message, showing the user's input
 
-        "eating" the user's input is recommended for ephemeral commands.
+
+        The user's input will be shown on all of the above types unless you set ``isEphemeral`` to ``True``.
+
 
     .. Important::
         TODO: add an enumerator to ReactionResponse - Make ``responseType`` an Enumerator
@@ -193,17 +203,20 @@ class ReactionData:
     def options(self):
         """
         :return: the choices/parameters for the SlashCommands.
-        :rtype: list
+        :rtype: Union([discordSplash.main.InteractionOption],None])
 
-        .. Caution::
-            Currently returns a list of options. **Is not parsed yet**
+        .. SeeAlso::
+            discordSplash.main.InteractionOption
 
-        .. Important::
-            TODO:
-
-            - parse this
         """
-        return self.jsonData['data']['options']
+        options_ = []
+        try:
+            for x in self.jsonData['data']['options']:
+                options_.append(InteractionOption(x))
+        except KeyError:
+            return None
+
+
 
     @property
     def json(self):
@@ -239,7 +252,9 @@ class ReactionData:
         :param discordSplash.ReactionResponse content: New content of the reaction response.
         """
         async with aiohttp.ClientSession as session:
-            async with session.patch(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original', json=content.json) as r:
+            async with session.patch(
+                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original',
+                    json=content.json) as r:
                 pass
 
     async def send_followup_message(self, data: ReactionResponse):
@@ -255,7 +270,8 @@ class ReactionData:
                 - Ephemeral Messages
         """
         async with aiohttp.ClientSession as session:
-            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/', json=data.json) as r:
+            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/',
+                                    json=data.json) as r:
                 pass
 
     async def delete_original_response(self):
@@ -263,9 +279,11 @@ class ReactionData:
         delete the original reaction
         """
         async with aiohttp.ClientSession as session:
-            async with session.delete(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
+            async with session.delete(
+                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
                 pass
     #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
+
 
 class Run:
     """Runs the bot using the token
@@ -337,7 +355,6 @@ class Run:
                     pass
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
-
 
     async def main(self, resume=False):
         async with websockets.connect(
@@ -457,6 +474,67 @@ def command(name: str):
         return func
 
     return decorator
+
+
+class InteractionOption:
+    """
+    Represents the options ('parameters') sent for the command
+
+    .. Tip::
+        You **should** check if this is a parameter using InteractionOptions.is_not_subcommand
+    """
+    def __init__(self, json_):
+        self.json = json_
+
+    @property
+    def name(self):
+        """
+        Name of the interaction option
+        :return: name of the interaction parameter or subcommand
+        :rtype: str
+        """
+        return self.json['name']
+
+    @property
+    def value(self):
+        """
+        Value of the parameter
+        :return: None if it is a subcommand group, or the value of the parameter
+        :rtype: Union[int,str,None]
+        """
+        try:
+            return self.json['value']
+        except KeyError:
+            return None
+
+    @property
+    def is_not_subcommand(self):
+        """
+        Is the option a parameter (not a subcommand)?
+        :return: True if this is a parameter, false if this is a subcommand or subcommand group.
+        :rtype: bool
+        """
+        if not self.json['options']:
+            return True
+        else:
+            return False
+
+    @property
+    def options(self):
+        """
+        list of options if this option is a subcommand or subcommand group.
+        :return: array of discordSplash.main.InteractionOption (this class)
+        :rtype: [discordSplash.main.InteractionOption]
+        """
+        options__ = []
+        try:
+            for option in self.json['options']:
+                options__.append(InteractionOption(option))
+        except KeyError:
+            return None
+
+
+
 
 
 class UnregisteredCommandException(Exception):
