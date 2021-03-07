@@ -193,17 +193,20 @@ class ReactionData:
     def options(self):
         """
         :return: the choices/parameters for the SlashCommands.
-        :rtype: list
+        :rtype: Union([discordSplash.main.InteractionOption],None])
 
-        .. Caution::
-            Currently returns a list of options. **Is not parsed yet**
+        .. SeeAlso::
+            discordSplash.main.InteractionOption
 
-        .. Important::
-            TODO:
-
-            - parse this
         """
-        return self.jsonData['data']['options']
+        options_ = []
+        try:
+            for x in self.jsonData['data']['options']:
+                options_.append(InteractionOption(x))
+        except KeyError:
+            return None
+
+
 
     @property
     def json(self):
