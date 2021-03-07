@@ -79,24 +79,34 @@ class ReactionResponse:
     """
     Base class for responding to an interaction.
 
+    .. |ss| raw:: html
+
+        <strike>
+
+    .. |se| raw:: html
+
+        </strike>
+
     :param str content: Content of the message. Must not be more than 2000 characters.
-    :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction
-    :param int responseType: discord InteractionResponseType
+    :param bool isEphemeral: Whether or not the message should be ephemeral (only seen by the user who created the interaction)
+    :param int responseType: discord InteractionResponseType (1-5), 2 and 3 are depreciated.
 
     .. Note::
         [Discord InteractionResponseType](https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype)
 
         1	ACK a Ping
 
-        2	ACK a command without sending a message, eating the user's input
+        [ss]2	ACK a command without sending a message, eating the user's input[se] **DEPRECIATED**
 
-        3	respond with a message, eating the user's input
+        [ss]3	respond with a message, eating the user's input[se] **DEPRECIATED**
 
-        4	respond with a message, showing the user's input
+        4	respond to an interaction with a message
 
         5	ACK a command without sending a message, showing the user's input
 
-        "eating" the user's input is recommended for ephemeral commands.
+
+        The user's input will be shown on all of the above types unless you set ``isEphemeral`` to ``True``.
+
 
     .. Important::
         TODO: add an enumerator to ReactionResponse - Make ``responseType`` an Enumerator
@@ -193,17 +203,20 @@ class ReactionData:
     def options(self):
         """
         :return: the choices/parameters for the SlashCommands.
-        :rtype: list
+        :rtype: Union([discordSplash.main.InteractionOption],None])
 
-        .. Caution::
-            Currently returns a list of options. **Is not parsed yet**
+        .. SeeAlso::
+            discordSplash.main.InteractionOption
 
-        .. Important::
-            TODO:
-
-            - parse this
         """
-        return self.jsonData['data']['options']
+        options_ = []
+        try:
+            for x in self.jsonData['data']['options']:
+                options_.append(InteractionOption(x))
+        except KeyError:
+            return None
+
+
 
     @property
     def json(self):
