@@ -1,4 +1,5 @@
 from .main import *
+from . import ratelimit
 import os
 import sys
 PACKAGE_PARENT = '.'

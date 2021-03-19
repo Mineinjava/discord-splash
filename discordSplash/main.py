@@ -2,7 +2,8 @@ import asyncio
 import websockets
 import json
 import aiohttp
-import cfg
+import sys
+from . import cfg
 from enum import Enum
 
 try:
