@@ -1,19 +1,21 @@
 import asyncio
-import websockets
 import json
-import aiohttp
-import cfg
 from enum import Enum
 
-try:
-    import opcodes as op
-except ModuleNotFoundError:
-    from discordSplash import opcodes as op
+import aiohttp
+import websockets
 import traceback
 
-commands = {}
+PACKAGE_PARENT = '.'
+try:
+    from . import cfg, member
+    from . import opcodes as op
+except (ImportError, ModuleNotFoundError):
+    import cfg
+    import member
+    import opcodes as op
 
-API_URL = 'https://discord.com/api/v8'
+commands = {}
 
 
 class PresenceType(Enum):
@@ -196,7 +198,6 @@ class ReactionData:
         :return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
         """
-        import member
         return member.Member(self.jsonData['member'])
 
     @property
@@ -208,14 +209,14 @@ class ReactionData:
         .. Caution::
             Currently returns a list of options. **Is not parsed yet**
 
-        .. Important::
-            TODO:
-
-            - parse this
         """
-        return self.jsonData['data']['options']
-
-    @property
+        options_ = []
+         try:
+             for x in self.jsonData['data']['options']:
+                 options_.append(InteractionOption(x))
+         except KeyError:
+             return None
+          
     def json(self):
         """:return: the JSON. Can be used for a custom parser.
         :rtype: json"""
@@ -467,6 +468,64 @@ def command(name: str):
 
     return decorator
 
+
+class InteractionOption:
+    """
+    Represents the options ('parameters') sent for the command
+
+    .. Tip::
+        You **should** check if this is a parameter using InteractionOptions.is_not_subcommand
+    """
+
+    def __init__(self, json_):
+        self.json = json_
+
+    @property
+    def name(self):
+        """
+        Name of the interaction option
+        :return: name of the interaction parameter or subcommand
+        :rtype: str
+        """
+        return self.json['name']
+
+    @property
+    def value(self):
+        """
+        Value of the parameter
+        :return: None if it is a subcommand group, or the value of the parameter
+        :rtype: Union[int,str,None]
+        """
+        try:
+            return self.json['value']
+        except KeyError:
+            return None
+
+    @property
+    def is_not_subcommand(self):
+        """
+        Is the option a parameter (not a subcommand)?
+        :return: True if this is a parameter, false if this is a subcommand or subcommand group.
+        :rtype: bool
+        """
+        if not self.json['options']:
+            return True
+        else:
+            return False
+
+    @property
+    def options(self):
+        """
+        list of options if this option is a subcommand or subcommand group.
+        :return: array of discordSplash.main.InteractionOption (this class)
+        :rtype: [discordSplash.main.InteractionOption]
+        """
+        options__ = []
+        try:
+            for option in self.json['options']:
+                options__.append(InteractionOption(option))
+        except KeyError:
+            return None
 
 class UnregisteredCommandException(Exception):
     """

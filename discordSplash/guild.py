@@ -1,13 +1,12 @@
 try:
-    from main import AUTH_HEADER as HEADER
-    from main import API_URL as URL
+    from .cfg import AUTH_HEADER as HEADER
+    from .cfg import API_URL as URL
+    from . import member, channel
+except (ImportError, ModuleNotFoundError):
+    from cfg import AUTH_HEADER as HEADER
+    from cfg import API_URL as URL
     import member
     import channel
-except ImportError:
-    from discordSplash import AUTH_HEADER as HEADER
-    from discordSplash import API_URL as URL
-    from discordSplash import member
-    from discordSplash import channel
 import aiohttp
 
 
