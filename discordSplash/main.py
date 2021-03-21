@@ -1,19 +1,21 @@
 import asyncio
-import websockets
 import json
-import aiohttp
-import cfg
 from enum import Enum
 
-try:
-    import opcodes as op
-except ModuleNotFoundError:
-    from discordSplash import opcodes as op
+import aiohttp
+import websockets
 import traceback
 
-commands = {}
+PACKAGE_PARENT = '.'
+try:
+    from . import cfg, member
+    from . import opcodes as op
+except (ImportError, ModuleNotFoundError):
+    import cfg
+    import member
+    import opcodes as op
 
-API_URL = 'https://discord.com/api/v8'
+commands = {}
 
 
 class PresenceType(Enum):
@@ -196,7 +198,6 @@ class ReactionData:
         :return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
         """
-        import member
         return member.Member(self.jsonData['member'])
 
     @property
@@ -215,8 +216,6 @@ class ReactionData:
                 options_.append(InteractionOption(x))
         except KeyError:
             return None
-
-
 
     @property
     def json(self):
@@ -483,6 +482,7 @@ class InteractionOption:
     .. Tip::
         You **should** check if this is a parameter using InteractionOptions.is_not_subcommand
     """
+
     def __init__(self, json_):
         self.json = json_
 
@@ -532,9 +532,6 @@ class InteractionOption:
                 options__.append(InteractionOption(option))
         except KeyError:
             return None
-
-
-
 
 
 class UnregisteredCommandException(Exception):

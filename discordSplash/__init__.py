@@ -1,4 +1,5 @@
 from .main import *
+from . import *
 import os
 import sys
 PACKAGE_PARENT = '.'
