@@ -1,20 +1,24 @@
 import asyncio
-import websockets
 import json
 import aiohttp
 import sys
 from . import cfg
 from enum import Enum
 
-try:
-    import opcodes as op
-except ModuleNotFoundError:
-    from discordSplash import opcodes as op
+import aiohttp
+import websockets
 import traceback
 
-commands = {}
+PACKAGE_PARENT = '.'
+try:
+    from . import cfg, member
+    from . import opcodes as op
+except (ImportError, ModuleNotFoundError):
+    import cfg
+    import member
+    import opcodes as op
 
-API_URL = 'https://discord.com/api/v8'
+commands = {}
 
 
 class PresenceType(Enum):
@@ -197,29 +201,25 @@ class ReactionData:
         :return: a discordSplash.member.Member** object.
         :rtype: discordSplash.member.Member
         """
-        import member
         return member.Member(self.jsonData['member'])
 
     @property
     def options(self):
         """
         :return: the choices/parameters for the SlashCommands.
-        :rtype: Union([discordSplash.main.InteractionOption],None])
+        :rtype: list
 
-        .. SeeAlso::
-            discordSplash.main.InteractionOption
+        .. Caution::
+            Currently returns a list of options. **Is not parsed yet**
 
         """
         options_ = []
-        try:
-            for x in self.jsonData['data']['options']:
-                options_.append(InteractionOption(x))
-        except KeyError:
-            return None
-
-
-
-    @property
+         try:
+             for x in self.jsonData['data']['options']:
+                 options_.append(InteractionOption(x))
+         except KeyError:
+             return None
+          
     def json(self):
         """:return: the JSON. Can be used for a custom parser.
         :rtype: json"""
@@ -253,9 +253,7 @@ class ReactionData:
         :param discordSplash.ReactionResponse content: New content of the reaction response.
         """
         async with aiohttp.ClientSession as session:
-            async with session.patch(
-                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original',
-                    json=content.json) as r:
+            async with session.patch(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original', json=content.json) as r:
                 pass
 
     async def send_followup_message(self, data: ReactionResponse):
@@ -271,8 +269,7 @@ class ReactionData:
                 - Ephemeral Messages
         """
         async with aiohttp.ClientSession as session:
-            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/',
-                                    json=data.json) as r:
+            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/', json=data.json) as r:
                 pass
 
     async def delete_original_response(self):
@@ -280,11 +277,9 @@ class ReactionData:
         delete the original reaction
         """
         async with aiohttp.ClientSession as session:
-            async with session.delete(
-                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
+            async with session.delete(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
                 pass
     #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
-
 
 class Run:
     """Runs the bot using the token
@@ -326,7 +321,6 @@ class Run:
 
         }
         if not presence:
-            print('no')
             self.auth['presence'] = {
                 "status": "online",
                 "afk": False
@@ -356,6 +350,7 @@ class Run:
                     pass
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
+
 
     async def main(self, resume=False):
         async with websockets.connect(
@@ -484,6 +479,7 @@ class InteractionOption:
     .. Tip::
         You **should** check if this is a parameter using InteractionOptions.is_not_subcommand
     """
+
     def __init__(self, json_):
         self.json = json_
 
@@ -533,10 +529,6 @@ class InteractionOption:
                 options__.append(InteractionOption(option))
         except KeyError:
             return None
-
-
-
-
 
 class UnregisteredCommandException(Exception):
     """

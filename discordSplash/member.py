@@ -1,13 +1,13 @@
-import aiohttp
-import os.path
-import sys
-PACKAGE_PARENT = '..'
-SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+PACKAGE_PARENT = '.'
 
-from cfg import AUTH_HEADER as HEADER
-from main import API_URL as URL
-
+try:
+    from . import ratelimit
+    from .cfg import AUTH_HEADER as HEADER
+    from .cfg import API_URL as URL
+except (ImportError, ModuleNotFoundError):
+    import ratelimit
+    from cfg import AUTH_HEADER as HEADER
+    from cfg import API_URL as URL
 
 
 class User:
@@ -244,9 +244,8 @@ class Member:
         json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
         g_id = guild_id
         id_ = self.json['user']['id']
-        async with aiohttp.ClientSession() as cs:
-            async with cs.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, headers=HEADER) as r:
-                member_ = Member(r.json)
-                print(HEADER)
-                print(r)
-                return member_
+
+        r = await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, guild_id=g_id)
+        member_ = Member(r)
+        print(r)
+        return member_
