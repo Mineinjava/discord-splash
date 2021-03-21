@@ -211,6 +211,7 @@ class ReactionData:
 
         """
         options_ = []
+
         try:
             for x in self.jsonData['data']['options']:
                 options_.append(InteractionOption(x))
