@@ -214,7 +214,6 @@ class ReactionData:
 
         """
         options_ = []
-<<<<<<< HEAD
 
         try:
             for x in self.jsonData['data']['options']:
@@ -222,17 +221,7 @@ class ReactionData:
         except KeyError:
             return None
 
-
-
-    @property
-=======
-         try:
-             for x in self.jsonData['data']['options']:
-                 options_.append(InteractionOption(x))
-         except KeyError:
-             return None
           
->>>>>>> bf0ff4534c11e7bdf15887830bda4d5b98c55372
     def json(self):
         """:return: the JSON. Can be used for a custom parser.
         :rtype: json"""
