@@ -166,12 +166,12 @@ class ReactionData:
         return int(self.jsonData["guild_id"])
 
     @property
-    def guild(self):
+    async def guild(self):
         """
         :return: Guild object that the slashcommand was executed in
         :rtype: discordSplash.guild.Guild
         """
-        guildtoreturn = guild.get(self.jsonData["guild_id"])
+        guildtoreturn = await guild.get(self.jsonData["guild_id"])
         f_guild = guild.Guild(guildtoreturn)
         return f_guild
 
