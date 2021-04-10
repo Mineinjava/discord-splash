@@ -157,7 +157,8 @@ class ReactionData:
 
     @property
     def guild_id(self):
-        """:return: the guild id
+        """
+        :return: the guild id
         :rtype: str
 
         .. Warning::
@@ -231,14 +232,14 @@ class ReactionData:
         return options_
 
     def json(self):
-        """:return: the JSON. Can be used for a custom parser.
+        """
+        :return: the JSON. Can be used for a custom parser.
         :rtype: json"""
         return self.jsonData
 
     async def respond(self, data: ReactionResponse):
         """Responds to the interaction.
 
-        Parameters:
 
         :param discordSplash.ReactionResponse data: Reaction Response Data
 
@@ -379,6 +380,7 @@ class Run:
             if resume is True:
                 await self.resume()
                 print('RESUMING--------------------------------')
+
                 await asyncio.gather(self.heartbeat(), self.receive())
 
             # while self.interval is not None:
@@ -499,6 +501,7 @@ class InteractionOption:
     def name(self):
         """
         Name of the interaction option
+
         :return: name of the interaction parameter or subcommand
         :rtype: str
         """
@@ -508,6 +511,7 @@ class InteractionOption:
     def value(self):
         """
         Value of the parameter
+
         :return: None if it is a subcommand group, or the value of the parameter
         :rtype: Union[int,str,None]
         """
@@ -520,6 +524,7 @@ class InteractionOption:
     def is_not_subcommand(self):
         """
         Is the option a parameter (not a subcommand)?
+
         :return: True if this is a parameter, false if this is a subcommand or subcommand group.
         :rtype: bool
         """
@@ -532,6 +537,7 @@ class InteractionOption:
     def options(self):
         """
         list of options if this option is a subcommand or subcommand group.
+        
         :return: array of discordSplash.main.InteractionOption (this class)
         :rtype: [discordSplash.main.InteractionOption]
         """
