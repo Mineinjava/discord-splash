@@ -9,6 +9,15 @@ except (ImportError, ModuleNotFoundError):
     import channel
 import aiohttp
 
+ratelimitJS = {}
+# format should look like:
+# {
+# <guild_id>: {
+#       "remaining": 2,
+#        "reset": 234877482
+#   }
+# }
+
 
 class Guild:
     """Class for a Discord Guild"""
