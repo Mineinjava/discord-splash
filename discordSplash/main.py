@@ -1,5 +1,8 @@
 import asyncio
 import json
+import aiohttp
+import sys
+from . import cfg
 from enum import Enum
 
 import aiohttp
@@ -211,11 +214,13 @@ class ReactionData:
 
         """
         options_ = []
-         try:
-             for x in self.jsonData['data']['options']:
-                 options_.append(InteractionOption(x))
-         except KeyError:
-             return None
+
+        try:
+            for x in self.jsonData['data']['options']:
+                options_.append(InteractionOption(x))
+        except KeyError:
+            return None
+
           
     def json(self):
         """:return: the JSON. Can be used for a custom parser.
