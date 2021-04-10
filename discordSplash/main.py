@@ -11,11 +11,12 @@ import traceback
 
 PACKAGE_PARENT = '.'
 try:
-    from . import cfg, member
+    from . import cfg, member, guild
     from . import opcodes as op
 except (ImportError, ModuleNotFoundError):
     import cfg
     import member
+    import guild
     import opcodes as op
 
 commands = {}
@@ -160,13 +161,21 @@ class ReactionData:
         :return: the guild id
         :rtype: str
 
-        .. Important::
-            TODO: make guild_id for reactiondata return better - Make this return a guild object (discordSplash.guild.Guild)
-
         .. Warning::
             Guilds are not implemented yet.
         """
         return int(self.jsonData["guild_id"])
+
+    @property
+    def guild(self):
+        """
+        :return: Guild object that the slashcommand was executed in
+        :rtype: discordSplash.guild.Guild
+        """
+        guildtoreturn = guild.get(self.jsonData["guild_id"])
+        f_guild = guild.Guild(guildtoreturn)
+        return f_guild
+
 
     @property
     def id(self):
@@ -222,7 +231,6 @@ class ReactionData:
         except KeyError:
             return None
 
-          
     def json(self):
         """
         :return: the JSON. Can be used for a custom parser.
@@ -371,7 +379,8 @@ class Run:
                 await asyncio.gather(self.heartbeat(), self.receive())
             if resume is True:
                 await self.resume()
-                print ('RESUMING-------------------------------------------------------------------------------------')
+                print('RESUMING--------------------------------')
+
                 await asyncio.gather(self.heartbeat(), self.receive())
 
             # while self.interval is not None:
