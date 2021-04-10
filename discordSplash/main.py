@@ -153,7 +153,8 @@ class ReactionData:
 
     @property
     def guild_id(self):
-        """:return: the guild id
+        """
+        :return: the guild id
         :rtype: str
 
         .. Important::
@@ -211,21 +212,31 @@ class ReactionData:
 
         """
         options_ = []
+<<<<<<< Updated upstream
          try:
              for x in self.jsonData['data']['options']:
                  options_.append(InteractionOption(x))
          except KeyError:
              return None
           
+=======
+
+        try:
+            for x in self.jsonData['data']['options']:
+                options_.append(InteractionOption(x))
+        except KeyError:
+            return None
+
+>>>>>>> Stashed changes
     def json(self):
-        """:return: the JSON. Can be used for a custom parser.
+        """
+        :return: the JSON. Can be used for a custom parser.
         :rtype: json"""
         return self.jsonData
 
     async def respond(self, data: ReactionResponse):
         """Responds to the interaction.
 
-        Parameters:
 
         :param discordSplash.ReactionResponse data: Reaction Response Data
 
@@ -250,7 +261,9 @@ class ReactionData:
         :param discordSplash.ReactionResponse content: New content of the reaction response.
         """
         async with aiohttp.ClientSession as session:
-            async with session.patch(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original', json=content.json) as r:
+            async with session.patch(
+                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original',
+                    json=content.json) as r:
                 pass
 
     async def send_followup_message(self, data: ReactionResponse):
@@ -266,7 +279,8 @@ class ReactionData:
                 - Ephemeral Messages
         """
         async with aiohttp.ClientSession as session:
-            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/', json=data.json) as r:
+            async with session.post(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/',
+                                    json=data.json) as r:
                 pass
 
     async def delete_original_response(self):
@@ -274,9 +288,11 @@ class ReactionData:
         delete the original reaction
         """
         async with aiohttp.ClientSession as session:
-            async with session.delete(f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
+            async with session.delete(
+                    f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
                 pass
     #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
+
 
 class Run:
     """Runs the bot using the token
@@ -348,7 +364,6 @@ class Run:
         # asyncio.get_event_loop().run_until_complete(self.hello())
         # print(self.opcode(1, self.sequence))
 
-
     async def main(self, resume=False):
         async with websockets.connect(
                 'wss://gateway.discord.gg/?v=6&encoding=json') \
@@ -361,9 +376,7 @@ class Run:
                 await asyncio.gather(self.heartbeat(), self.receive())
             if resume is True:
                 await self.resume()
-                print \
-                        (
-                        'RESUMING------------------------------------------------------------------------------------------------------------------------------------------------')
+                print ('RESUMING-------------------------------------------------------------------------------------')
                 await asyncio.gather(self.heartbeat(), self.receive())
 
             # while self.interval is not None:
@@ -484,6 +497,7 @@ class InteractionOption:
     def name(self):
         """
         Name of the interaction option
+
         :return: name of the interaction parameter or subcommand
         :rtype: str
         """
@@ -493,6 +507,7 @@ class InteractionOption:
     def value(self):
         """
         Value of the parameter
+
         :return: None if it is a subcommand group, or the value of the parameter
         :rtype: Union[int,str,None]
         """
@@ -505,6 +520,7 @@ class InteractionOption:
     def is_not_subcommand(self):
         """
         Is the option a parameter (not a subcommand)?
+
         :return: True if this is a parameter, false if this is a subcommand or subcommand group.
         :rtype: bool
         """
@@ -517,6 +533,7 @@ class InteractionOption:
     def options(self):
         """
         list of options if this option is a subcommand or subcommand group.
+        
         :return: array of discordSplash.main.InteractionOption (this class)
         :rtype: [discordSplash.main.InteractionOption]
         """
@@ -526,6 +543,7 @@ class InteractionOption:
                 options__.append(InteractionOption(option))
         except KeyError:
             return None
+
 
 class UnregisteredCommandException(Exception):
     """
