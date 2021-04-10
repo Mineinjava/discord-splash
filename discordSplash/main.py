@@ -175,7 +175,6 @@ class ReactionData:
         f_guild = guild.Guild(guildtoreturn)
         return f_guild
 
-
     @property
     def id(self):
         """:return: the reaction id
@@ -229,6 +228,7 @@ class ReactionData:
                 options_.append(InteractionOption(x))
         except KeyError:
             return None
+        return options_
 
     def json(self):
         """:return: the JSON. Can be used for a custom parser.
