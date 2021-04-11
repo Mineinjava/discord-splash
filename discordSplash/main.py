@@ -228,6 +228,7 @@ class ReactionData:
                 return options_
         except KeyError:
             return None
+        return options_
 
     def json(self):
         """

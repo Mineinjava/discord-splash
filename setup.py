@@ -7,6 +7,7 @@ setuptools.setup(
     name="discordSplash",
     version="0.0.9a10",
 
+
     author="Mineinjava",
     author_email="Mineinjava@minein.me",
     description="An API wrapper for Discord's slash commands. Written in Python.",
