@@ -237,12 +237,14 @@ class Member:
         :param bool mute: whether or not the user is muted
         :param bool deaf: whether or not the user is deafened
         :param str channel_id: id of the voice channel to move the member.
+        :param int guild_id: id of the guild to update the member in
 
         :return: updated Member object
         :rtype: discordSplash.member.Member
         """
         json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
         g_id = guild_id
+        print("json:", self.json)
         id_ = self.json['user']['id']
 
         r = await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, guild_id=g_id)

@@ -1,22 +1,14 @@
 try:
     from .cfg import AUTH_HEADER as HEADER
     from .cfg import API_URL as URL
-    from . import member, channel
+    from . import member, channel, ratelimit
 except (ImportError, ModuleNotFoundError):
     from cfg import AUTH_HEADER as HEADER
     from cfg import API_URL as URL
     import member
     import channel
+    import ratelimit
 import aiohttp
-
-ratelimitJS = {}
-# format should look like:
-# {
-# <guild_id>: {
-#       "remaining": 2,
-#        "reset": 234877482
-#   }
-# }
 
 
 class Guild:
@@ -543,7 +535,7 @@ class Guild:
                 async with cs.patch(f'{URL}/guilds/{g_id}/channels', json=data_list, headers=HEADER) as r:
                     pass
 
-    async def get_member(self, id_):
+    async def get_member(self, id_, g_id):
         """
         gets a Member from their id
 
@@ -554,11 +546,11 @@ class Guild:
 
 
         :param int id_: ID of the member you want to fetch
+        :param int g_id: id of the guild
         :return: Guild member of the id
         :rtype: discordSplash.member.Member
         """
 
-        g_id = self.json['id']
         async with aiohttp.ClientSession() as cs:
             async with cs.get(f'{URL}/guilds/{g_id}/members/{id_}', headers=HEADER) as r:
                 member_ = member.Member(await r.json())
@@ -605,11 +597,51 @@ class Guild:
         """
         json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
         g_id = self.json['id']
-        async with aiohttp.ClientSession() as cs:
-            async with cs.patch(f'{URL}/guilds/{g_id}/members/{id_}', json=json, headers=HEADER) as r:
-                member_ = member.Member(r.json)
-                return member_
+        print(await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', guild_id=g_id, json=json), "patched guild member")
 
+    async def modify_non_vc_member(self, id_, nick: str = None, roles: list = None):
+        """
+        modifies a member of the guild (not in vc)
+
+        .. Hint::
+            All of these fields require permission.
+
+        .. Warning::
+            If ``channel_id`` is not set, the user will be disconnected from voice.
+
+        :param int id_: id of the member to modify
+        :param str nick: new nickname of the member
+        :param [list] roles: list of roles the member has
+
+
+        :return: updated Member object
+        :rtype: discordSplash.member.Member
+        """
+        json = {"nick": nick, "roles": roles}
+        g_id = self.json['id']
+        print(await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', guild_id=g_id, json=json), "patched guild member")
+
+    async def modify_vc_member(self, id_, nick: str = None, roles: list = None):
+        """
+        modifies a member of the guild (in vc)
+
+        .. Hint::
+            All of these fields require permission.
+
+        .. Warning::
+            If ``channel_id`` is not set, the user will be disconnected from voice.
+
+        :param int id_: id of the member to modify
+        :param str nick: new nickname of the member
+        :param [list] roles: list of roles the member has
+
+
+        :return: updated Member object
+        :rtype: discordSplash.member.Member
+        """
+        json = {"nick": nick, "roles": roles}
+        g_id = self.json['id']
+        print(await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', guild_id=g_id, json=json), "patched guild member")
 
 class GuildPreview:
     """
@@ -842,10 +874,10 @@ async def get(g_id: int, with_counts: bool = False):
     :return: guild object
     :rtype: discordSplash.guild.Guild
     """
-    async with aiohttp.ClientSession() as cs:
-        async with cs.get(f'{URL}/guilds/{g_id}?with_counts={str(with_counts).lower()}', headers=HEADER) as r:
-            guild = Guild(await r.json())
-            return guild
+
+    r = await ratelimit.get(f'{URL}/guilds/{g_id}?with_counts={str(with_counts).lower()}')
+    guild = Guild(r)
+    return guild
 
 
 async def get_guild_preview(g_id: int):

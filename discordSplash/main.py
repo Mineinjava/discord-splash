@@ -1,8 +1,5 @@
 import asyncio
 import json
-import aiohttp
-import sys
-from . import cfg
 from enum import Enum
 
 import aiohttp
@@ -11,12 +8,12 @@ import traceback
 
 PACKAGE_PARENT = '.'
 try:
-    from . import cfg, member, guild
+    from . import cfg, member, ratelimit
     from . import opcodes as op
 except (ImportError, ModuleNotFoundError):
     import cfg
     import member
-    import guild
+    import ratelimit
     import opcodes as op
 
 commands = {}
@@ -166,16 +163,16 @@ class ReactionData:
         """
         return int(self.jsonData["guild_id"])
 
+    """
     @property
     async def guild(self):
-        """
+        \"""
         :return: Guild object that the slashcommand was executed in
         :rtype: discordSplash.guild.Guild
-        """
+        \"""
         guildtoreturn = await guild.get(self.jsonData["guild_id"])
-        f_guild = guild.Guild(guildtoreturn)
-        return f_guild
-
+        return guildtoreturn
+    """
 
     @property
     def id(self):
@@ -228,6 +225,7 @@ class ReactionData:
         try:
             for x in self.jsonData['data']['options']:
                 options_.append(InteractionOption(x))
+                return options_
         except KeyError:
             return None
 
@@ -324,6 +322,7 @@ class Run:
         self.TOKEN = token
         cfg.TOKEN = token
         cfg.AUTH_HEADER = {"Authorization": f"Bot {token}"}
+        ratelimit.HEADER = {"Authorization": f"Bot {token}"}
         TOKEN = self.TOKEN
         print('header 1', cfg.AUTH_HEADER)
 
@@ -537,7 +536,7 @@ class InteractionOption:
     def options(self):
         """
         list of options if this option is a subcommand or subcommand group.
-        
+
         :return: array of discordSplash.main.InteractionOption (this class)
         :rtype: [discordSplash.main.InteractionOption]
         """
@@ -547,6 +546,7 @@ class InteractionOption:
                 options__.append(InteractionOption(option))
         except KeyError:
             return None
+        return options__
 
 
 class UnregisteredCommandException(Exception):

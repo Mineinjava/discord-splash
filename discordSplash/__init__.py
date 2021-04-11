@@ -1,6 +1,6 @@
 from .main import *
 from . import ratelimit
-from . import *
+from . import guild, audit_log, channel, guild, invite, main, member, opcodes, ratelimit, template, webhook
 import os
 import sys
 PACKAGE_PARENT = '.'

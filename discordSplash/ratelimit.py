@@ -23,7 +23,8 @@
 import asyncio
 import time
 import aiohttp
-from .cfg import AUTH_HEADER as HEADER
+
+HEADER = None
 
 routes = {}
 guild_ids = {}
@@ -38,8 +39,12 @@ async def ratelimit_sleeper(route: str, channel_id: int = None, guild_id: int = 
     """
     if not channel_id:
         if not guild_id:
-            if routes[route]['remaining'] == 0:
+            try:
+                if routes[route]['remaining'] == 0:
+                    pass
+            except KeyError:
                 pass
+
             else:
                 await asyncio.sleep(routes[route]['epoch'] - int(time.time()))
 
@@ -70,14 +75,17 @@ async def ratelimit_cleanup(epoch, remaining, channel_id, guild_id, route):
     """
     if not channel_id:
         if not guild_id:
+            routes[route] = {}
             routes[route]['remaining'] = int(remaining)
-            routes[route]['epoch'] = int(epoch)
+            routes[route]['epoch'] = float(epoch)
         else:
+            guild_ids[guild_id] = {}
             guild_ids[guild_id]['remaining'] = int(remaining)
-            guild_ids[guild_id]['epoch'] = int(epoch)
+            guild_ids[guild_id]['epoch'] = float(epoch)
     else:
+        channel_ids[channel_id] = {}
         channel_ids[channel_id]['remaining'] = int(remaining)
-        channel_ids[channel_id]['epoch'] = int(epoch)
+        channel_ids[channel_id]['epoch'] = float(epoch)
 
 
 # all json formats above take into account the requests_remaining as "remaining" and epoch reset seconds as "epoch"
@@ -95,12 +103,15 @@ async def get(route: str, channel_id: int = None, guild_id: int = None):
         use either ``channel_id`` or ``guild_id``. **Not Both**
 
     """
+    print("header", HEADER)
     await ratelimit_sleeper(route, channel_id, guild_id)
     async with aiohttp.ClientSession() as session:
         async with session.get(route, headers=HEADER) as response:
             head = response.headers
-            ech = head['X-RateLimit-Reset']
-            rm = head['X-RateLimit-Remaining']
+            print(head)
+
+            ech = head.get('X-RateLimit-Reset', 0)
+            rm = head.get('X-RateLimit-Remaining', 1)
             await asyncio.create_task(
                 ratelimit_cleanup(epoch=ech, remaining=rm, channel_id=channel_id, route=route, guild_id=guild_id))
             return await response.json()
@@ -153,6 +164,7 @@ async def patch(route, channel_id=None, guild_id=None, json=None):
         use either ``channel_id`` or ``guild_id``. **Not Both**
 
     """
+    print("auth:", HEADER)
     await ratelimit_sleeper(route, channel_id, guild_id)
     if not json:
         async with aiohttp.ClientSession() as session:
