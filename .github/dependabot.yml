@@ -1,0 +1,18 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: setuptools
+    versions:
+    - 54.1.1
+    - 54.2.0
+  - dependency-name: aiohttp
+    versions:
+    - 3.7.3
+  - dependency-name: requests
+    versions:
+    - 2.25.1
