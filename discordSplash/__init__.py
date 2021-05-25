@@ -1,9 +1,12 @@
-from .main import *
-from . import ratelimit
-from . import guild, audit_log, channel, guild, invite, main, member, opcodes, ratelimit, template, webhook
-import os
-import sys
-PACKAGE_PARENT = '.'
-SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
-__path__ = __import__('pkgutil').extend_path(__path__, __name__)
+"""
+DiscordSplash
+~~~~~~~~~~~~~
+
+A wrapper for Discord's Interactions and Slash Commands
+
+"""
+
+__version__ = '1.0.0a0'
+__author__ = 'Mineinjava'
+__copyright__ = "Copyright © 2021-Present Mineinjava"
+__license__ = "GNU GPLv3"
