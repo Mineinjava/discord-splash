@@ -12,10 +12,9 @@
 #
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append('../discordSplash')
-
-
 
 # -- Project information -----------------------------------------------------
 
@@ -23,15 +22,15 @@ project = 'discord-splash'
 copyright = '2021, mineinjava'
 author = 'mineinjava'
 
-
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.todo'
-]
+              'sphinx.ext.todo',
+              'numpydoc'
+              ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -40,7 +39,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -54,3 +52,14 @@ html_theme = "furo"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+docopt_string = ""
+
+
+def remove_module_docstring(app, what, name, obj, options, lines):
+    if what == "module" and name == "discord-splash":
+        del lines[:]
+
+
+def setup(app):
+    app.connect("autodoc-process-docstring", remove_module_docstring)

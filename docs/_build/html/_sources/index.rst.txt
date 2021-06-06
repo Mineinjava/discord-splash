@@ -8,8 +8,6 @@
    :hidden:
 
    discordSplash
-   Todo
-   FAQ
 
 
 
@@ -51,4 +49,3 @@ Table Of Contents
 - FAQ
 - GitHub URL
 - Discord Server
--

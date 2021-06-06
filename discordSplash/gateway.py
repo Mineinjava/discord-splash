@@ -1,44 +1,59 @@
-"""
-Copyright (C) 2021-Present Mineinjava
+# Copyright (C) 2021-Present Mineinjava
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-"""
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
+import websockets
 from . import request
 
-
+class GatewayBot:
+    pass
+'''
 class GatewayBot:
     """
     Bot that connects to Discord's Gateway (Websocket)
+
+    Parameters
+    ----------
+    token : str
+        The bot's token
+
+    Methods
+    -------
+    run
+
+    Attributes
+    ----------
+    TOKEN : str
+        The bot's token (keep this safe)
+
+
+
     """
 
     def __init__(self, token: str, presence: Presence = None):
         # stuff for dealing with the gateway
-        self.interval = None
-        self.sequence = None
-        self.session_id = None
+        self._interval = None
+        self._sequence = None
+        self._session_id = None
 
         self.TOKEN = token
-        request.auth_header ['']
+        request.auth_header['Authorization'] = f"Bot {token}"
 
-        cfg.AUTH_HEADER = {"Authorization": f"Bot {token}"}
-        ratelimit.HEADER = {"Authorization": f"Bot {token}"}
         TOKEN = self.TOKEN
-        print('header 1', cfg.AUTH_HEADER)
 
-        self.auth = {
+        self._auth = {
             "token": self.TOKEN,
             "properties": {
                 "$os": "Python",
@@ -48,14 +63,14 @@ class GatewayBot:
 
         }
         if not presence:
-            self.auth['presence'] = {
+            self._auth['presence'] = {
                 "status": "online",
                 "afk": False
             }
         else:
             print('has presence ', presence.type, presence.text)
 
-            self.auth['presence'] = {
+            self._auth['presence'] = {
                 "activities": [{
                     "name": presence.text,
                     "type": presence.type
@@ -64,6 +79,11 @@ class GatewayBot:
                 "status": "online",
                 "afk": False
             }
+
+    async def run(self):
+        """
+        Run the bot.
+        """
 
         try:
             asyncio.run(self.main(False))
@@ -168,3 +188,4 @@ class GatewayBot:
             "seq": self.sequence
         }
         return resume_blk
+'''

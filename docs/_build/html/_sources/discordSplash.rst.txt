@@ -4,74 +4,67 @@ discordSplash package
 Submodules
 ----------
 
-discordSplash.audit\_log module
--------------------------------
+discordSplash.abstractbaseclass module
+--------------------------------------
 
-.. automodule:: discordSplash.audit_log
+.. automodule:: discordSplash.abstractbaseclass
    :members:
    :undoc-members:
    :show-inheritance:
 
-discordSplash.channel module
-----------------------------
-
-.. automodule:: discordSplash.channel
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-discordSplash.emoji module
+discordSplash.enums module
 --------------------------
 
-.. automodule:: discordSplash.emoji
+.. automodule:: discordSplash.enums
    :members:
    :undoc-members:
    :show-inheritance:
 
-discordSplash.guild module
---------------------------
+discordSplash.exception module
+------------------------------
 
-.. automodule:: discordSplash.guild
+.. automodule:: discordSplash.exception
    :members:
    :undoc-members:
    :show-inheritance:
 
-discordSplash.invite module
----------------------------
-
-.. automodule:: discordSplash.invite
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-discordSplash.member module
----------------------------
-
-.. automodule:: discordSplash.member
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-discordSplash.opcodes module
+discordSplash.gateway module
 ----------------------------
 
-.. automodule:: discordSplash.opcodes
+.. automodule:: discordSplash.gateway
    :members:
    :undoc-members:
    :show-inheritance:
 
-discordSplash.template module
+
+discordSplash.presence module
 -----------------------------
 
-.. automodule:: discordSplash.template
+.. automodule:: discordSplash.presence
    :members:
    :undoc-members:
    :show-inheritance:
 
-discordSplash.webhook module
+discordSplash.request module
 ----------------------------
 
-.. automodule:: discordSplash.webhook
+.. automodule:: discordSplash.request
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discordSplash.user module
+-------------------------
+
+.. automodule:: discordSplash.user
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+discordSplash.util module
+-------------------------
+
+.. automodule:: discordSplash.util
    :members:
    :undoc-members:
    :show-inheritance:
@@ -79,7 +72,7 @@ discordSplash.webhook module
 Module contents
 ---------------
 
-.. automodule:: discordSplash.main
+.. automodule:: discordSplash
    :members:
    :undoc-members:
    :show-inheritance:
