@@ -22,7 +22,6 @@ import warnings
 from . import exception, util
 from .exception import HTTPexceptionStatusPairing
 
-
 # will be (hopefully) set when bot connects
 # token for the bot.
 auth_header: dict = dict()
@@ -50,10 +49,10 @@ def get_ratelimit_bucket(**kwargs) -> str:  # channel_id: int = 0, guild_id: int
 
     Parameters
     ----------
-    channel_id : int
+    channel_id : :class:`int`
         id of the channel from the ratelimit bucket
 
-    guild_id : int
+    guild_id : :class:`int`
         id of the guild from the ratelimit bucket
 
     Returns
@@ -68,6 +67,20 @@ def get_ratelimit_bucket(**kwargs) -> str:  # channel_id: int = 0, guild_id: int
 
 
 async def cleanup_ratelimit(ratelimit_bucket: str, request: aiohttp.ClientResponse) -> None:
+    """
+    cleans up the request, including raising errors and caching the headers
+
+    Parameters
+    ----------
+    ratelimit_bucket : :py:class:`str`
+        bucket of the ratelimit. output of :func:`get_ratelimit_bucket`
+
+    request : :class:`aiohttp.ClientResponse`
+        request made that needs to be cleaned up.
+
+        :aiohttp:class:`aiohttp.ClientResponse`
+
+    """
     json = {
         "reset": float(request.headers.get('X-RateLimit-Reset', '0')),
         "remaining": int(request.headers.get('X-RateLimit-Remaining', '1'))
@@ -86,8 +99,11 @@ async def cleanup_ratelimit(ratelimit_bucket: str, request: aiohttp.ClientRespon
 
 async def sleep_ratelimit(bucket):
     """sleeps for the ratelimit based on a certain bucket
-    .. SeeAlso
-        :func:`get_ratelimit_bucket`"""
+
+    .. seealso::
+        :func:`get_ratelimit_bucket`
+
+    """
     if bucket not in request_ratelimit_cache:
         return
 
@@ -114,9 +130,9 @@ async def make_request(method, route, json=None, guild_id=0, channel_id=0) -> di
 
         .. Warning::
 
-            should **not** include the ``https://discord.com/api/v``. *
+            should **not** include the ``https://discord.com/api/v``.
 
-            *Only include what comes after the ``/`` (including the ``/``)
+            *Only include what comes after the ``/`` (including the ``/``)*
 
 
     json : Optional[:class:`dict`]

@@ -12,3 +12,5 @@ __copyright__ = "Copyright © 2021-Present Mineinjava"
 __license__ = "GNU GPLv3"
 
 from .gateway import GatewayBot
+from .enums import ActivityType, ApplicationCommandOptionType
+from .presence import Activity, UpdatePresence

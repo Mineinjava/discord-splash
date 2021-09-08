@@ -16,10 +16,11 @@
 import asyncio
 import websockets
 from . import request
+from .presence import UpdatePresence, EmptyUpdatePresence
+from .enums import Opcodes
+import json
 
-class GatewayBot:
-    pass
-'''
+
 class GatewayBot:
     """
     Bot that connects to Discord's Gateway (Websocket)
@@ -28,6 +29,7 @@ class GatewayBot:
     ----------
     token : str
         The bot's token
+
 
     Methods
     -------
@@ -38,15 +40,21 @@ class GatewayBot:
     TOKEN : str
         The bot's token (keep this safe)
 
-
-
     """
+    pass
 
-    def __init__(self, token: str, presence: Presence = None):
+    def __init__(self, token: str, presence: UpdatePresence = EmptyUpdatePresence):
+
         # stuff for dealing with the gateway
         self._interval = None
         self._sequence = None
         self._session_id = None
+
+        self.CLIENT_ID = None
+
+        self._websocket = None
+
+        self.commands = None
 
         self.TOKEN = token
         request.auth_header['Authorization'] = f"Bot {token}"
@@ -60,57 +68,37 @@ class GatewayBot:
                 "$browser": "discordSplash",
                 "$device": "discordSplash"
             },
+            'presence': presence.to_dict,
+            'intents': 29185
 
         }
-        if not presence:
-            self._auth['presence'] = {
-                "status": "online",
-                "afk": False
-            }
-        else:
-            print('has presence ', presence.type, presence.text)
 
-            self._auth['presence'] = {
-                "activities": [{
-                    "name": presence.text,
-                    "type": presence.type
-                }],
-                "since": 91879201,
-                "status": "online",
-                "afk": False
-            }
-
-    async def run(self):
+    def run(self, update_commands: bool = True):
         """
         Run the bot.
         """
 
         try:
-            asyncio.run(self.main(False))
+            asyncio.run(self.connect(resume=False, update_commands=update_commands))
         except websockets.exceptions.ConnectionClosedError:
             while True:
                 try:
-                    asyncio.run(self.main(True))
-                except websockets.exceptions.ConnectionClosedError:
+                    asyncio.run(self.connect(resume=True, update_commands=False))
+                except (websockets.exceptions.ConnectionClosedError, websockets.exceptions.ConnectionClosedOK):
                     pass
-                except websockets.exceptions.ConnectionClosedOK:
-                    pass
-        # asyncio.get_event_loop().run_until_complete(self.hello())
-        # print(self.opcode(1, self.sequence))
 
-    async def main(self, resume=False):
+    async def connect(self, update_commands: bool, resume=False):
         async with websockets.connect(
-                'wss://gateway.discord.gg/?v=6&encoding=json') \
-                as self.websocket:
+                'wss://gateway.discord.gg/?v=9&encoding=json') \
+                as self._websocket:
             if resume is False:
                 await self.hello()
-                if self.interval is None:
-                    print("Hello failed, exiting")
+                if self._interval is None:
                     return
                 await asyncio.gather(self.heartbeat(), self.receive())
             if resume is True:
                 await self.resume()
-                print('RESUMING--------------------------------')
+                print('Reconnecting to discord websocket.')
 
                 await asyncio.gather(self.heartbeat(), self.receive())
 
@@ -119,45 +107,41 @@ class GatewayBot:
 
     async def receive(self):
         print("Entering receive")
-        async for message in self.websocket:
+        async for message in self._websocket:
             print("<", message)
             data = json.loads(message)
-            if data["op"] == op.DISPATCH:
-                self.sequence = int(data["s"])
+            if data["op"] == Opcodes.DISPATCH:
+                self._sequence = int(data["s"])
                 event_type = data["t"]
                 if event_type == "READY":
                     print('ready')
-                    cfg.CLIENT_ID = data['d']['user']['id']
-                    self.session_id = data['d']['session_id']
+                    self.CLIENT_ID = data['d']['user']['id']
+                    self._session_id = data['d']['session_id']
                 elif event_type == "INTERACTION_CREATE":
                     event_name = data['d']['data']['name']
                     try:
-                        function = commands[event_name]
-                        await function(ReactionData(data))
-                    except KeyError:
-                        try:
-                            raise UnregisteredCommandException(
-                                'One or more commands on discord are not represented on this api')
-                        except UnregisteredCommandException:
-                            traceback.print_exc()
+                        function = self.commands[event_name]
+                       # await function(ReactionData(data))
+                    except:
+                        pass
 
     async def send(self, opcode, payload):
         data = self.opcode(opcode, payload)
         print(">", data)
-        await self.websocket.send(data)
+        await self._websocket.send(data)
 
     async def heartbeat(self):
         print("Entering heartbeat")
-        while self.interval is not None:
+        while self._interval is not None:
             print("Sending a heartbeat")
-            await self.send(op.HEARTBEAT, self.sequence)
-            await asyncio.sleep(self.interval)
+            await self.send(Opcodes.HEARTBEAT, self._sequence)
+            await asyncio.sleep(self._interval)
 
     async def hello(self):
-        await self.send(op.IDENTIFY, self.auth)
+        await self.send(Opcodes.IDENTIFY, self._auth)
         print(f"hello > auth")
 
-        ret = await self.websocket.recv()
+        ret = await self._websocket.recv()
         print(f"hello < {ret}")
 
         data = json.loads(ret)
@@ -166,9 +150,9 @@ class GatewayBot:
             print("Unexpected reply")
             print(ret)
             return
-        self.interval = (data["d"]["heartbeat_interval"] - 2000) / 1000
+        self._interval = (data["d"]["heartbeat_interval"] - 2000) / 1000
         # self.interval = 5
-        print("interval:", self.interval)
+        print("interval:", self._interval)
 
     def opcode(self, opcode: int, payload) -> str:
         data = {
@@ -179,13 +163,12 @@ class GatewayBot:
 
     async def resume(self):
         resume_pkt = await self.create_resume_packet()
-        await self.send(op.RESUME, resume_pkt)
+        await self.send(Opcodes.RESUME, resume_pkt)
 
     async def create_resume_packet(self):
         resume_blk = {
             "token": self.TOKEN,
-            "session_id": self.session_id,
-            "seq": self.sequence
+            "session_id": self._session_id,
+            "seq": self._sequence
         }
         return resume_blk
-'''

@@ -144,3 +144,5 @@ myBot.py
 
 /create-command.py
 /docs/_build/
+usrtests/
+usrtests/*

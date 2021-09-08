@@ -12,7 +12,6 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 import datetime
 
 
@@ -48,7 +47,8 @@ class Object:
     timestamp : :class:`datetime.datetime`
         timestamp of when the object was created.
     """
-    def __init__(self, id):
+
+    def __init__(self, id: int):
         self.id = id
         # bit of math that gets the timestamp
         epochts = (int(bin(id).replace("0b", ''), 2) >> 22) + 1420070400000
@@ -64,11 +64,25 @@ class Object:
         return self.id != other.id
 
 
-
-
-
-
-class BaseChannel:
+class BaseChannel(Object):
     """
     base ABC that channels should inherit from
+
+    .. Admonition:: Operations
+
+        **x == y**
+
+        checks if two objects are equal
+
+        **x != y**
+
+        checks if two objects are not equal
+
+        **int(x)**
+
+        returns the object's discord id
     """
+
+    def __init__(self, json: dict):
+        self.id = json.get('id')
+        super().__init__(self.id)

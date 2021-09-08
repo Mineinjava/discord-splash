@@ -142,7 +142,7 @@
 </dd></dl>
 <dl class="py class">
 <dt id="discordSplash.abstractbaseclass.Object">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.abstractbaseclass.</span></code><code class="sig-name descname"><span class="pre">Object</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.abstractbaseclass.Object" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.abstractbaseclass.</span></code><code class="sig-name descname"><span class="pre">Object</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.abstractbaseclass.Object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>base ABC that all objects should inherit from</p>
 <div class="admonition-operations admonition">
@@ -174,6 +174,109 @@
 </div>
 <div class="section" id="module-discordSplash.enums">
 <span id="discordsplash-enums-module"></span><h2>discordSplash.enums module<a class="headerlink" href="#module-discordSplash.enums" title="Permalink to this headline">¶</a></h2>
+<p>DiscordSplash Enumterators.</p>
+<dl class="py class">
+<dt id="discordSplash.enums.ActivityType">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.enums.</span></code><code class="sig-name descname"><span class="pre">ActivityType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.enums.ActivityType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumerator for discord Activity Types</p>
+<dl class="py attribute">
+<dt id="discordSplash.enums.ActivityType.Competing">
+<code class="sig-name descname"><span class="pre">Competing</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#discordSplash.enums.ActivityType.Competing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.ActivityType.Custom">
+<code class="sig-name descname"><span class="pre">Custom</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#discordSplash.enums.ActivityType.Custom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.ActivityType.Game">
+<code class="sig-name descname"><span class="pre">Game</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#discordSplash.enums.ActivityType.Game" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.ActivityType.Listening">
+<code class="sig-name descname"><span class="pre">Listening</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#discordSplash.enums.ActivityType.Listening" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.ActivityType.Streaming">
+<code class="sig-name descname"><span class="pre">Streaming</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#discordSplash.enums.ActivityType.Streaming" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.enums.Opcodes">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.enums.</span></code><code class="sig-name descname"><span class="pre">Opcodes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.enums.Opcodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Discord gateway opcodes</p>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.DISPATCH">
+<code class="sig-name descname"><span class="pre">DISPATCH</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.DISPATCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.HEARTBEAT">
+<code class="sig-name descname"><span class="pre">HEARTBEAT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.HEARTBEAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.HEARTBEAT_ACK">
+<code class="sig-name descname"><span class="pre">HEARTBEAT_ACK</span></code><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.HEARTBEAT_ACK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.HELLO">
+<code class="sig-name descname"><span class="pre">HELLO</span></code><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.HELLO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.IDENTIFY">
+<code class="sig-name descname"><span class="pre">IDENTIFY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.IDENTIFY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.INVALID_SESSION">
+<code class="sig-name descname"><span class="pre">INVALID_SESSION</span></code><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.INVALID_SESSION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.RECONNECT">
+<code class="sig-name descname"><span class="pre">RECONNECT</span></code><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.RECONNECT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.REQUEST_MEMBERS">
+<code class="sig-name descname"><span class="pre">REQUEST_MEMBERS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.REQUEST_MEMBERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.RESUME">
+<code class="sig-name descname"><span class="pre">RESUME</span></code><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.RESUME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.STATUS_UPDATE">
+<code class="sig-name descname"><span class="pre">STATUS_UPDATE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.STATUS_UPDATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.Opcodes.VOICE_UPDATE">
+<code class="sig-name descname"><span class="pre">VOICE_UPDATE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#discordSplash.enums.Opcodes.VOICE_UPDATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.enums.StatusType">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.enums.</span></code><code class="sig-name descname"><span class="pre">StatusType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.enums.StatusType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumerator for Discord status types</p>
+<dl class="py attribute">
+<dt id="discordSplash.enums.StatusType.afk">
+<code class="sig-name descname"><span class="pre">afk</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'idle'</span></em><a class="headerlink" href="#discordSplash.enums.StatusType.afk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.StatusType.dnd">
+<code class="sig-name descname"><span class="pre">dnd</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'dnd'</span></em><a class="headerlink" href="#discordSplash.enums.StatusType.dnd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.StatusType.invisible">
+<code class="sig-name descname"><span class="pre">invisible</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'invisible'</span></em><a class="headerlink" href="#discordSplash.enums.StatusType.invisible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.StatusType.offline">
+<code class="sig-name descname"><span class="pre">offline</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'offline'</span></em><a class="headerlink" href="#discordSplash.enums.StatusType.offline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt id="discordSplash.enums.StatusType.online">
+<code class="sig-name descname"><span class="pre">online</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'online'</span></em><a class="headerlink" href="#discordSplash.enums.StatusType.online" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+</dd></dl>
 </div>
 <div class="section" id="module-discordSplash.exception">
 <span id="discordsplash-exception-module"></span><h2>discordSplash.exception module<a class="headerlink" href="#module-discordSplash.exception" title="Permalink to this headline">¶</a></h2>
@@ -242,35 +345,122 @@ used when we do not want to stop execution of the program</p>
 <dt id="discordSplash.gateway.GatewayBot">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.gateway.</span></code><code class="sig-name descname"><span class="pre">GatewayBot</span></code><a class="headerlink" href="#discordSplash.gateway.GatewayBot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Bot that connects to Discord’s Gateway (Websocket)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>token</strong><span class="classifier">str</span></dt><dd><p>The bot’s token</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>TOKEN</strong><span class="classifier">str</span></dt><dd><p>The bot’s token (keep this safe)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="table-wrapper"><table class="docutils align-default">
+<colgroup>
+<col style="width: 41%"/>
+<col style="width: 59%"/>
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>run</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
 </dd></dl>
 </div>
 <div class="section" id="module-discordSplash.presence">
 <span id="discordsplash-presence-module"></span><h2>discordSplash.presence module<a class="headerlink" href="#module-discordSplash.presence" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="discordSplash.presence.PresenceType">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.presence.</span></code><code class="sig-name descname"><span class="pre">PresenceType</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.presence.PresenceType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>Enumerator for discord PresenceTypes</p>
-<dl class="py attribute">
-<dt id="discordSplash.presence.PresenceType.Competing">
-<code class="sig-name descname"><span class="pre">Competing</span></code><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#discordSplash.presence.PresenceType.Competing" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py attribute">
-<dt id="discordSplash.presence.PresenceType.Custom">
-<code class="sig-name descname"><span class="pre">Custom</span></code><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#discordSplash.presence.PresenceType.Custom" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py attribute">
-<dt id="discordSplash.presence.PresenceType.Game">
-<code class="sig-name descname"><span class="pre">Game</span></code><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#discordSplash.presence.PresenceType.Game" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py attribute">
-<dt id="discordSplash.presence.PresenceType.Listening">
-<code class="sig-name descname"><span class="pre">Listening</span></code><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#discordSplash.presence.PresenceType.Listening" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-<dl class="py attribute">
-<dt id="discordSplash.presence.PresenceType.Streaming">
-<code class="sig-name descname"><span class="pre">Streaming</span></code><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#discordSplash.presence.PresenceType.Streaming" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="discordSplash.presence.Activity">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.presence.</span></code><code class="sig-name descname"><span class="pre">Activity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.presence.Activity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Discord Activity object</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>name</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>Name of the activity</p>
+</dd>
+<dt><strong>type</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">discord.ActivityType</span></code>]</span></dt><dd><p>type of activity. Defaults to <code class="docutils literal notranslate"><span class="pre">Game</span></code>.</p>
+</dd>
+<dt><strong>url</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></dt><dd><p>the stream url. Only used if <code class="docutils literal notranslate"><span class="pre">type</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">Streaming</span></code></p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl>
+<dt><a class="reference internal" href="#discordSplash.presence.Activity.to_dict" title="discordSplash.presence.Activity.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a></dt><dd><p>converts the activity object to JSON</p>
+</dd>
+<dt><strong>name</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>Name of the activity</p>
+</dd>
+<dt><strong>type ::class:`discord.ActivityType`</strong></dt><dd><p>type of activity.</p>
+</dd>
+<dt><strong>url</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></dt><dd><p>the stream url.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="discordSplash.presence.Activity.to_dict">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">to_dict</span></code><a class="headerlink" href="#discordSplash.presence.Activity.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts the activity object to JSON</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>json</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt id="discordSplash.presence.UpdatePresence">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.presence.</span></code><code class="sig-name descname"><span class="pre">UpdatePresence</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activities</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#discordSplash.presence.Activity" title="discordSplash.presence.Activity"><span class="pre">discordSplash.presence.Activity</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#discordSplash.enums.StatusType" title="discordSplash.enums.StatusType"><span class="pre">discordSplash.enums.StatusType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">since</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">afk</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.presence.UpdatePresence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Sent by the client to indicate a presence or status update.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an UpdatePresence object and <strong>does not actually update the client’s presence when instantiated.</strong></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Leave the <code class="docutils literal notranslate"><span class="pre">afk</span></code> and <code class="docutils literal notranslate"><span class="pre">since</span></code> parameters blank most of the time.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>activities</strong><span class="classifier">List[<code class="xref py py-class docutils literal notranslate"><span class="pre">discordSplash.Activity</span></code>]</span></dt><dd><p>list of activities</p>
+</dd>
+<dt><strong>status</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">discordSplash.StatusType</span></code></span></dt><dd><p>the bot’s new status type</p>
+</dd>
+<dt><strong>since: Optional[:class:`int`]</strong></dt><dd><p>unix time (in milliseconds) of when the client went idle.</p>
+<p>Optional if the client is not idle</p>
+</dd>
+<dt><strong>afk</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</span></dt><dd><p>whether or not the client is idle.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl>
+<dt><strong>activities</strong><span class="classifier">List[<code class="xref py py-class docutils literal notranslate"><span class="pre">discordSplash.Activity</span></code>]</span></dt><dd><p>list of activities</p>
+</dd>
+<dt><strong>status</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">discordSplash.StatusType</span></code></span></dt><dd><p>the bot’s new status type</p>
+</dd>
+<dt><strong>since: Optional[:class:`int`]</strong></dt><dd><p>unix time (in milliseconds) of when the client went idle.</p>
+<p>Optional if the client is not idle</p>
+</dd>
+<dt><strong>afk</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</span></dt><dd><p>whether or not the client is idle.</p>
+</dd>
+<dt><strong>json</strong><span class="classifier">dict</span></dt><dd><p>the json of the object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 </div>
 <div class="section" id="module-discordSplash.request">
@@ -278,7 +468,19 @@ used when we do not want to stop execution of the program</p>
 <dl class="py function">
 <dt id="discordSplash.request.cleanup_ratelimit">
 <em class="property"><span class="pre">async</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.request.</span></code><code class="sig-name descname"><span class="pre">cleanup_ratelimit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ratelimit_bucket</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">aiohttp.client_reqrep.ClientResponse</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="headerlink" href="#discordSplash.request.cleanup_ratelimit" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>cleans up the request, including raising errors and caching the headers</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ratelimit_bucket</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>bucket of the ratelimit. output of <a class="reference internal" href="#discordSplash.request.get_ratelimit_bucket" title="discordSplash.request.get_ratelimit_bucket"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_ratelimit_bucket()</span></code></a></p>
+</dd>
+<dt><strong>request</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">aiohttp.ClientResponse</span></code></span></dt><dd><p>request made that needs to be cleaned up.</p>
+<p><a href="#id1"><span class="problematic" id="id2">:aiohttp:class:`aiohttp.ClientResponse`</span></a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 <dl class="py function">
 <dt id="discordSplash.request.get_error_messages">
 <code class="sig-prename descclassname"><span class="pre">discordSplash.request.</span></code><code class="sig-name descname"><span class="pre">get_error_messages</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> → <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#discordSplash.request.get_error_messages" title="Permalink to this definition">¶</a></dt>
@@ -288,22 +490,64 @@ used when we do not want to stop execution of the program</p>
 <dt id="discordSplash.request.get_ratelimit_bucket">
 <code class="sig-prename descclassname"><span class="pre">discordSplash.request.</span></code><code class="sig-name descname"><span class="pre">get_ratelimit_bucket</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> → <span class="pre">str</span><a class="headerlink" href="#discordSplash.request.get_ratelimit_bucket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a ratelimit bucket including major parameters</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>channel_id</strong><span class="classifier">int</span></dt><dd><p>id of the channel from the ratelimit bucket</p>
+<dd class="field-odd"><dl>
+<dt><strong>channel_id</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>id of the channel from the ratelimit bucket</p>
 </dd>
-<dt><strong>guild_id</strong><span class="classifier">int</span></dt><dd><p>id of the guild from the ratelimit bucket</p>
+<dt><strong>guild_id</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span></dt><dd><p>id of the guild from the ratelimit bucket</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>bucket</strong><span class="classifier">str</span></dt><dd><p>the ratelimit bucket from the selected guild and channel ids.</p>
+<dt><strong>bucket</strong><span class="classifier">str</span></dt><dd><p>the ratelimit bucket from the selected route, channel id, and guild id.</p>
 </dd>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+<dl class="py function">
+<dt id="discordSplash.request.make_request">
+<em class="property"><span class="pre">async</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.request.</span></code><code class="sig-name descname"><span class="pre">make_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> → <span class="pre">dict</span><a class="headerlink" href="#discordSplash.request.make_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a HTTP request to discord api.</p>
+<p>Generally this will not be used as this package wraps the discord api</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>method</strong><span class="classifier">:class`str`</span></dt><dd><p>HTTP method for the request (<code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code>, <code class="docutils literal notranslate"><span class="pre">PATCH</span></code> etc…)</p>
+</dd>
+<dt><strong>route</strong><span class="classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></dt><dd><p>route to make the api request to</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>should <strong>not</strong> include the <code class="docutils literal notranslate"><span class="pre">https://discord.com/api/v</span></code>.</p>
+<p><em>Only include what comes after the ``/`` (including the ``/``)</em></p>
+</div>
+</dd>
+<dt><strong>json</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>]</span></dt><dd><p>JSON object for the request</p>
+</dd>
+<dt><strong>guild_id</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span></dt><dd><p>guild id of the request. Used for ratelimit handling</p>
+</dd>
+<dt><strong>channel_id</strong><span class="classifier">Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span></dt><dd><p>channel id of the request. Used for ratelimit handling</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>json response body of the request.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="discordSplash.request.sleep_ratelimit">
+<em class="property"><span class="pre">async</span> </em><code class="sig-prename descclassname"><span class="pre">discordSplash.request.</span></code><code class="sig-name descname"><span class="pre">sleep_ratelimit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bucket</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#discordSplash.request.sleep_ratelimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>sleeps for the ratelimit based on a certain bucket</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#discordSplash.request.get_ratelimit_bucket" title="discordSplash.request.get_ratelimit_bucket"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_ratelimit_bucket()</span></code></a></p>
+</div>
 </dd></dl>
 </div>
 <div class="section" id="module-discordSplash.user">
@@ -322,6 +566,8 @@ used when we do not want to stop execution of the program</p>
 <p>checks if two users are not equal</p>
 <p><strong>int(x)</strong></p>
 <p>returns the user’s discord id</p>
+<p><strong>str(x)</strong></p>
+<p>returns the user’s username and discriminator</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>

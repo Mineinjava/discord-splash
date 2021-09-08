@@ -29,8 +29,14 @@ author = 'mineinjava'
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo',
-              'numpydoc'
+              'numpydoc',
+              'sphinx.ext.extlinks'
               ]
+
+intersphinx_mapping = {
+  'py': ('https://docs.python.org/3', None),
+  'aiohttp': ('https://docs.aiohttp.org/en/v3.7.4/', None)
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
