@@ -18,6 +18,7 @@ import websockets
 from . import request
 from .presence import UpdatePresence, EmptyUpdatePresence
 from .enums import Opcodes
+from .events import eventDict
 import json
 
 
@@ -53,8 +54,6 @@ class GatewayBot:
         self.CLIENT_ID = None
 
         self._websocket = None
-
-        self.commands = None
 
         self.TOKEN = token
         request.auth_header['Authorization'] = f"Bot {token}"
@@ -105,7 +104,7 @@ class GatewayBot:
             # while self.interval is not None:
             #     pass
 
-    async def receive(self):
+    async def receive(self): #TODO: filter opcodes later
         print("Entering receive")
         async for message in self._websocket:
             print("<", message)
@@ -117,13 +116,20 @@ class GatewayBot:
                     print('ready')
                     self.CLIENT_ID = data['d']['user']['id']
                     self._session_id = data['d']['session_id']
+                else: 
+                    coro = eventDict.get(event_type)
+                    await coro(data["d"])
+                
+                """
                 elif event_type == "INTERACTION_CREATE":
+
                     event_name = data['d']['data']['name']
                     try:
                         function = self.commands[event_name]
                        # await function(ReactionData(data))
                     except:
                         pass
+                """
 
     async def send(self, opcode, payload):
         data = self.opcode(opcode, payload)
