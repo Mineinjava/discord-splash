@@ -98,18 +98,18 @@ class User(Object):
 
     def __init__(self, json):
         super().__init__(json.get('id'))
-        self._json = json
-        self.username = json.get("username")
-        self.discriminator = json.get("discriminator")
-        self.avatar = json.get('avatar')
-        self.bot = json.get('bot', False)
-        self.mfa_enabled = json.get('mfa_enabled')
-        self.system = json.get('system', False)
-        self.locale = json.get('locale')
-        self.verified = json.get('verified')
-        self.flags = json.get('flags')
-        self.premium_type = json.get('premium_type')
-        self.public_flags = json.get('public_flags')
+        self._json          = json
+        self.username       = json.get("username")
+        self.discriminator  = json.get("discriminator")
+        self.avatar         = json.get('avatar')
+        self.bot            = json.get('bot', False)
+        self.mfa_enabled    = json.get('mfa_enabled')
+        self.system         = json.get('system', False)
+        self.locale         = json.get('locale')
+        self.verified       = json.get('verified')
+        self.flags          = json.get('flags')
+        self.premium_type   = json.get('premium_type')
+        self.public_flags   = json.get('public_flags')
 
     def __str__(self):
         return f"{self.username}#{self.discriminator}"

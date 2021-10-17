@@ -20,42 +20,42 @@ from enum import Enum
 
 class Opcodes:
     """Discord gateway opcodes"""
-    DISPATCH = 0
-    HEARTBEAT = 1
-    IDENTIFY = 2
-    STATUS_UPDATE = 3
-    VOICE_UPDATE = 4
-    RESUME = 6
-    RECONNECT = 7
+    DISPATCH        = 0
+    HEARTBEAT       = 1
+    IDENTIFY        = 2
+    STATUS_UPDATE   = 3
+    VOICE_UPDATE    = 4
+    RESUME          = 6
+    RECONNECT       = 7
     REQUEST_MEMBERS = 8
     INVALID_SESSION = 9
-    HELLO = 10
-    HEARTBEAT_ACK = 11
+    HELLO           = 10
+    HEARTBEAT_ACK   = 11
 
 
 class ApplicationCommandOptionType(Enum):
     """
     Enumerator for discord Slash command option types.
     """
-    SUB_COMMAND = 1
+    SUB_COMMAND       = 1
     SUB_COMMAND_GROUP = 2
-    STRING = 3
-    INTEGER = 4
-    BOOLEAN = 5
-    USER = 6
-    CHANNEL = 7
-    ROLE = 8
-    MENTIONABLE = 9
+    STRING            = 3
+    INTEGER           = 4
+    BOOLEAN           = 5
+    USER              = 6
+    CHANNEL           = 7
+    ROLE              = 8
+    MENTIONABLE       = 9
 
 
 class ActivityType(Enum):
     """
     Enumerator for discord Activity Types
     """
-    Game = 0
+    Game      = 0
     Streaming = 1
     Listening = 2
-    Custom = 4
+    Custom    = 4
     Competing = 5
 
 
@@ -63,8 +63,30 @@ class StatusType(Enum):
     """
     Enumerator for Discord status types
     """
-    online = 'online'
-    dnd = 'dnd'
-    afk = 'idle'
+    online    = 'online'
+    dnd       = 'dnd'
+    afk       = 'idle'
     invisible = 'invisible'
-    offline = 'offline'
+    offline   = 'offline'
+
+
+class InteractionResponseType(Enum):
+    """Enumerator for Discord interaction response types.
+
+    Notes
+    -----
+    ``DeferredUpdateMessage`` and ``UpdateMessage`` are only valid for component-based interactions.
+    """
+    Pong                             = 1
+    ChannelMessageWithSource         = 4
+    DeferredChannelMessageWithSource = 5
+    DeferredUpdateMessage            = 6
+    UpdateMessage                    = 7
+
+class InteractionType(Enum):
+    """Enumerator for discord Interaction types.
+    """
+    Ping               = 1
+    ApplicationCommand = 2
+    MessageComponent   = 3
+

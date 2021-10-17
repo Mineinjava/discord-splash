@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+#MARK: HTTP Exceptions
 class BaseSplashException(Exception):
     """exception that all exceptions in this module inherit from"""
     pass
@@ -71,3 +71,8 @@ HTTPexceptionStatusPairing = {
     405: MethodNotAllowed,
     429: TooManyRequests
 }
+#MARK: interaction exceptions
+
+class SlashCommandNotFound(BaseSplashWarning):
+    """Raised when a slash command on Discord's API is not bound to a DiscordSplash function"""
+    pass
