@@ -156,5 +156,5 @@ async def make_request(method, route, json=None, guild_id=0, channel_id=0) -> di
         async with cs.request(method=method, url=f"{api_url}{route}", json=json) as r:
             await cleanup_ratelimit(ratelimit_bucket=bucket, request=r)
 
-            return await r.json()
+            return await r.json(content_type=None)
 

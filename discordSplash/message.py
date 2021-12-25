@@ -2,7 +2,7 @@ from . import user
 from dataclasses import dataclass
 
 from datetime import datetime
-
+from .request import make_request
 @dataclass(init=False, eq=False)
 class Message():
     """
@@ -125,11 +125,11 @@ class Message():
         self.attachments        = self.messageData.get("attachments")                                   # TODO: Add an Attachment object - https://discord.com/developers/docs/resources/channel#attachment-object
         self.embeds             = self.messageData.get("embeds")                                        # TODO: Add an Embed object - https://discord.com/developers/docs/resources/channel#embed-object
         self.reactions          = self.messageData.get("reactions")                                    # TODO: Add a Reaction object - https://discord.com/developers/docs/resources/channel#reaction-object
-        self.nonce              = self.messageData.get("nonce?")
+        self.nonce              = self.messageData.get("nonce")
         self.pinned             = self.messageData.get("pinned")
         self.webhook_id         = self.messageData.get("webhook_id")
         self.type               = self.messageData.get("type")
-        self.activity           = self.messageData.get("activity?")                                     # TODO: Add a Message Activity oject - https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
+        self.activity           = self.messageData.get("activity")                                     # TODO: Add a Message Activity oject - https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
         self.application        = self.messageData.get("application")                                   # TODO: Add an Application object - https://discord.com/developers/docs/resources/application#application-object
         self.application_id     = int(self.messageData.get("application_id")) if self.messageData.get("application_id") is not None else None
         self.message_reference  = self.messageData.get("message_reference")                            # TODO: Add a Message Reference object - https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
@@ -139,4 +139,7 @@ class Message():
         self.thread             = self.messageData.get("thread")
         self.components         = self.messageData.get("components")
         self.sticker_items      = self.messageData.get("sticker_items")                                # TODO: Add a Sticker Item object - https://discord.com/developers/docs/resources/sticker#sticker-item-object
+
+    async def delete(self):
+        await make_request("DELETE", f"/channels/{self.channed_id}/messages/{self.id}")
 

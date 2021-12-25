@@ -20,7 +20,6 @@ from .message import Message
 slashCommandListenerDict: Mapping[str, Awaitable[Any]] = {}
 
 
-
 # InteractionCreateHandler
 async def InteractionCreateHandler(data: dict):
     """
@@ -41,7 +40,6 @@ messageListenerDict = []
 # MessageCreateHandler
 async def MessageCreateHandler(data: dict):
     messageListener(data)
-    # dont do this, just wrap the message object
     message = Message(data)
     for ls in messageListenerDict:
         print(messageListenerDict)
@@ -49,9 +47,11 @@ async def MessageCreateHandler(data: dict):
 
 
 def messageListener(func):
+    """Decorator that adds a messageListener to an object."""
     print("func", func)
     if not isinstance(func, dict):
         messageListenerDict.append(func)
+
     def wrapper():
         pass
 
