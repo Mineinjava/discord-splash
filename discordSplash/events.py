@@ -13,18 +13,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Mapping, Coroutine, Any, Callable
+from typing import Mapping, Awaitable, Any, Callable
 from . import exception
-slashCommandListenerDict: Mapping[str, Coroutine[Any]] = {}
+from .message import Message
 
-
+slashCommandListenerDict: Mapping[str, Awaitable[Any]] = {}
 
 
 
 # InteractionCreateHandler
 async def InteractionCreateHandler(data: dict):
+    """
+    Handles an Interaction_Create event
+    """
     event_name = data['name']
-        
+
     function = slashCommandListenerDict.get(event_name)
     if not function:
         raise exception.SlashCommandNotFound(f"Could not find the slash command named {event_name}")
@@ -32,26 +35,28 @@ async def InteractionCreateHandler(data: dict):
         await function()
 
 
+messageListenerDict = []
+
 
 # MessageCreateHandler
 async def MessageCreateHandler(data: dict):
-    message = None
-    channel = None
-    guild   = None
+    messageListener(data)
     # dont do this, just wrap the message object
-    
-    message.id         = data["id"]
-    message.author     = data["author"]
-    message.timestamp  = data["timestamp"]
-    message.content    = data["content"]
-    
-    channel.id         = data["channel_id"]
-    guild.id           = data["guild_id?"]
-   
+    message = Message(data)
+    for ls in messageListenerDict:
+        print(messageListenerDict)
+        await ls(message)
 
 
-eventDict: Mapping[str, Coroutine[None]] = {
+def messageListener(func):
+    print("func", func)
+    if not isinstance(func, dict):
+        messageListenerDict.append(func)
+    def wrapper():
+        pass
+
+
+eventDict = {
     "INTERACTION_CREATE": InteractionCreateHandler,
-    "MESSAGE_CREATE" : MessageCreateHandler
+    "MESSAGE_CREATE": MessageCreateHandler
 }
-

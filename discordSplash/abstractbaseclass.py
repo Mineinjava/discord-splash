@@ -49,10 +49,11 @@ class Object:
     """
 
     def __init__(self, id: int):
+        id = int(id)
         self.id = id
         # bit of math that gets the timestamp
-        epochts = (int(bin(id).replace("0b", ''), 2) >> 22) + 1420070400000
-        self.timestamp = datetime.datetime.fromtimestamp(epochts)
+        epochs = (int(bin(id).replace("0b", ''), 2) >> 22) + 1420070400000
+        self.timestamp = datetime.datetime.fromtimestamp(epochs/1000)
 
     def __int__(self):
         return self.id

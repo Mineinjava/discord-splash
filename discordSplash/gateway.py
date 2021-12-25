@@ -116,8 +116,11 @@ class GatewayBot:
                     print('ready')
                     self.CLIENT_ID = data['d']['user']['id']
                     self._session_id = data['d']['session_id']
-                else: 
-                    coro = eventDict.get(event_type)
+
+                coro = eventDict.get(event_type)
+                print("type",data["t"])
+                print("coro", coro)
+                if coro is not None:
                     await coro(data["d"])
                 
                 """

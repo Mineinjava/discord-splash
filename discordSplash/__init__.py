@@ -14,3 +14,5 @@ __license__ = "GNU GPLv3"
 from .gateway import GatewayBot
 from .enums import ActivityType, ApplicationCommandOptionType
 from .presence import Activity, UpdatePresence
+from .request import make_request
+from . import message, events
