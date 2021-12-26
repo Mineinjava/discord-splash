@@ -107,13 +107,13 @@ class Message():
     """
     def __init__(self, jsonData : dict):
         self.messageData = jsonData
-        
+        print("msgdata", self.messageData)
         # Message data variables
         self.id                 = int(self.messageData.get("id"))
-        self.channed_id         = int(self.messageData.get("channel_id"))
-        self.guild_id           = int(self.messageData.get("guild_id"))
+        self.channel_id         = int(self.messageData.get("channel_id"))
+        self.guild_id           = int(self.messageData.get("guild_id")) if self.messageData.get("guild_id") is not None else None
         self.author             = user.User(self.messageData.get("author"))
-        self.member             = self.messageData.get("member?")                                       # TODO: Add a Member object - https://discord.com/developers/docs/resources/guild#guild-member-object
+        self.member             = self.messageData.get("member") if self.messageData.get("member") is not None else None                                       # TODO: Add a Member object - https://discord.com/developers/docs/resources/guild#guild-member-object
         self.content            = self.messageData.get("content")
         self.timestamp          = datetime.fromisoformat(self.messageData.get("timestamp"))
         self.edited_timestamp   = datetime.fromisoformat(str(self.messageData.get("edited_timestamp"))) if self.messageData.get("edited_timestamp") is not None else None
@@ -141,5 +141,25 @@ class Message():
         self.sticker_items      = self.messageData.get("sticker_items")                                # TODO: Add a Sticker Item object - https://discord.com/developers/docs/resources/sticker#sticker-item-object
 
     async def delete(self):
-        await make_request("DELETE", f"/channels/{self.channed_id}/messages/{self.id}")
+        """Deletes the message"""
+        await make_request("DELETE", f"/channels/{self.channel_id}/messages/{self.id}", guild_id=self.guild_id, channel_id= self.channel_id)
+
+    async def reply(self, content, **kwargs):
+        """replies to the message
+        Parameters
+        ----------
+            content : str
+                the message content
+            #TODO: doc more args in message.Message.reply:
+        """
+
+        jsondata = kwargs
+        if not not jsondata.get("embeds"): # if embed parameter exists, call function. **NOT SUPPORTED YET**
+            raise NotImplementedError("Sending an embed is not implemented")
+        jsondata["message_reference"] = {"message_id": self.id}
+        jsondata["content"] = content
+        return Message(await make_request("POST", f"/channels/{self.channel_id}/messages", json=jsondata))
+
+
+
 

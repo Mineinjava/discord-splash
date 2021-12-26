@@ -66,7 +66,7 @@ def get_ratelimit_bucket(**kwargs) -> str:  # channel_id: int = 0, guild_id: int
     return f"{route}:{channel_id}:{guild_id}"
 
 
-async def cleanup_ratelimit(ratelimit_bucket: str, request: aiohttp.ClientResponse) -> None:
+async def cleanup_ratelimit(ratelimit_bucket: str, request: aiohttp.ClientResponse, requestjson) -> None:
     """
     cleans up the request, including raising errors and caching the headers
 
@@ -87,7 +87,6 @@ async def cleanup_ratelimit(ratelimit_bucket: str, request: aiohttp.ClientRespon
     }
     request_ratelimit_cache[ratelimit_bucket] = json
     if not request.ok:
-        requestjson = await request.json()
         error_messages = get_error_messages(d=requestjson)
 
         message = requestjson.get('message', 'no message provided by Discord API')
@@ -130,7 +129,7 @@ async def make_request(method, route, json=None, guild_id=0, channel_id=0) -> di
 
         .. Warning::
 
-            should **not** include the ``https://discord.com/api/v``.
+            should **not** include the ``https://discord.com/api/v#``.
 
             *Only include what comes after the ``/`` (including the ``/``)*
 
@@ -154,7 +153,7 @@ async def make_request(method, route, json=None, guild_id=0, channel_id=0) -> di
     await sleep_ratelimit(bucket)
     async with aiohttp.ClientSession(headers=auth_header) as cs:
         async with cs.request(method=method, url=f"{api_url}{route}", json=json) as r:
-            await cleanup_ratelimit(ratelimit_bucket=bucket, request=r)
+            await cleanup_ratelimit(ratelimit_bucket=bucket, request=r, requestjson= await r.json())
 
             return await r.json(content_type=None)
 
