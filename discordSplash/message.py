@@ -1,8 +1,9 @@
 from . import user
-from dataclasses import dataclass
-
-from datetime import datetime
 from .request import make_request
+
+from dataclasses import dataclass
+from datetime import datetime
+
 
 
 @dataclass(init=False, eq=False)

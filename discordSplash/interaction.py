@@ -14,8 +14,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from .abstractbaseclass import Object
 from enum import Enum
+
+from .abstractbaseclass import Object
 from .channel import Channel
 from .user import User
 from .member import Member

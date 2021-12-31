@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from typing import Awaitable, List, Optional
+
 from .enums import ApplicationCommandOptionType
 
 
@@ -84,7 +85,6 @@ class ApplicationCommandOption:
 
         return dict
 
-class BaseApplicationCommand
 
 class Command:
     """class that represents a slash command.
