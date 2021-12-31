@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-
 from datetime import datetime
+
 from .abstractbaseclass import Object
+
 
 @dataclass(init=False, eq=False)
 class Channel(Object):
