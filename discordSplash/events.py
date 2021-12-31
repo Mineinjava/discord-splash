@@ -14,6 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from typing import Mapping, Awaitable, Any, Callable
+
 from . import exception
 from .message import Message
 

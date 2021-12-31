@@ -15,14 +15,13 @@
 
 
 import json
-
+from dataclasses import dataclass
 import traceback
+from typing import Optional
 
 from .abstractbaseclass import Object
 from . import enums
-from typing import Optional
 from .user import User
-from dataclasses import dataclass
 
 
 @dataclass(init=False, eq=False)

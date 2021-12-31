@@ -15,11 +15,13 @@
 
 import asyncio
 import websockets
+import json
+
 from . import request
 from .presence import UpdatePresence, EmptyUpdatePresence
 from .enums import Opcodes
 from .events import eventDict
-import json
+
 
 
 class GatewayBot:
