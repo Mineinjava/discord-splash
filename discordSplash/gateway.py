@@ -104,7 +104,7 @@ class GatewayBot:
             # while self.interval is not None:
             #     pass
 
-    async def receive(self): #TODO: filter opcodes later
+    async def receive(self):
         print("Entering receive")
         async for message in self._websocket:
             print("<", message)
