@@ -1,10 +1,11 @@
 from dataclasses import dataclass
-
 from datetime import datetime
+
+from .abstractbaseclass import Object
 
 
 @dataclass(init=False, eq=False)
-class Channel():
+class Channel(Object):
     """
     Represents a Discord channel
 
@@ -91,7 +92,7 @@ class Channel():
 
     def __init__(self, jsonData: dict):
         self.channelData = jsonData
-
+        super.__init__(jsonData.get("id"))
         # Channel data variables
         self.id = int(self.channelData.get("id"))
         self.type = self.channelData.get("type")

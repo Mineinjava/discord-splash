@@ -3,8 +3,10 @@ from dataclasses import dataclass
 
 from datetime import datetime
 from .request import make_request
+
+
 @dataclass(init=False, eq=False)
-class Message():
+class Message:
     """
     Represents a Discord message
 
@@ -105,44 +107,60 @@ class Message():
     -------
 
     """
-    def __init__(self, jsonData : dict):
+
+    def __init__(self, jsonData: dict):
         self.messageData = jsonData
         print("msgdata", self.messageData)
         # Message data variables
-        self.id                 = int(self.messageData.get("id"))
-        self.channel_id         = int(self.messageData.get("channel_id"))
-        self.guild_id           = int(self.messageData.get("guild_id")) if self.messageData.get("guild_id") is not None else None
-        self.author             = user.User(self.messageData.get("author"))
-        self.member             = self.messageData.get("member") if self.messageData.get("member") is not None else None                                       # TODO: Add a Member object - https://discord.com/developers/docs/resources/guild#guild-member-object
-        self.content            = self.messageData.get("content")
-        self.timestamp          = datetime.fromisoformat(self.messageData.get("timestamp"))
-        self.edited_timestamp   = datetime.fromisoformat(str(self.messageData.get("edited_timestamp"))) if self.messageData.get("edited_timestamp") is not None else None
-        self.tts                = self.messageData.get("tts")
-        self.mention_everyone   = self.messageData.get("mention_everyone")
-        self.mentions           = self.messageData.get("mentions")                                      
-        self.mention_roles      = self.messageData.get("mention_roles")                                 # TODO: Add a Role object - https://discord.com/developers/docs/topics/permissions#role-object
-        self.mention_channels   = self.messageData.get("mention_channels")                              # TODO: Add a Channel Mention object - https://discord.com/developers/docs/resources/channel#channel-mention-object
-        self.attachments        = self.messageData.get("attachments")                                   # TODO: Add an Attachment object - https://discord.com/developers/docs/resources/channel#attachment-object
-        self.embeds             = self.messageData.get("embeds")                                        # TODO: Add an Embed object - https://discord.com/developers/docs/resources/channel#embed-object
-        self.reactions          = self.messageData.get("reactions")                                    # TODO: Add a Reaction object - https://discord.com/developers/docs/resources/channel#reaction-object
-        self.nonce              = self.messageData.get("nonce")
-        self.pinned             = self.messageData.get("pinned")
-        self.webhook_id         = self.messageData.get("webhook_id")
-        self.type               = self.messageData.get("type")
-        self.activity           = self.messageData.get("activity")                                     # TODO: Add a Message Activity oject - https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
-        self.application        = self.messageData.get("application")                                   # TODO: Add an Application object - https://discord.com/developers/docs/resources/application#application-object
-        self.application_id     = int(self.messageData.get("application_id")) if self.messageData.get("application_id") is not None else None
-        self.message_reference  = self.messageData.get("message_reference")                            # TODO: Add a Message Reference object - https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
-        self.flags              = self.messageData.get("flags")
+        self.id = int(self.messageData.get("id"))
+        self.channel_id = int(self.messageData.get("channel_id"))
+        self.guild_id = int(self.messageData.get("guild_id")) if self.messageData.get("guild_id") is not None else None
+        self.author = user.User(self.messageData.get("author"))
+        self.member = self.messageData.get("member") if self.messageData.get(
+            "member") is not None else None  # TODO: Add a Member object - https://discord.com/developers/docs/resources/guild#guild-member-object
+        self.content = self.messageData.get("content")
+        self.timestamp = datetime.fromisoformat(self.messageData.get("timestamp"))
+        self.edited_timestamp = datetime.fromisoformat(
+            str(self.messageData.get("edited_timestamp"))) if self.messageData.get(
+            "edited_timestamp") is not None else None
+        self.tts = self.messageData.get("tts")
+        self.mention_everyone = self.messageData.get("mention_everyone")
+        self.mentions = self.messageData.get("mentions")
+        self.mention_roles = self.messageData.get(
+            "mention_roles")  # TODO: Add a Role object - https://discord.com/developers/docs/topics/permissions#role-object
+        self.mention_channels = self.messageData.get(
+            "mention_channels")  # TODO: Add a Channel Mention object - https://discord.com/developers/docs/resources/channel#channel-mention-object
+        self.attachments = self.messageData.get(
+            "attachments")  # TODO: Add an Attachment object - https://discord.com/developers/docs/resources/channel#attachment-object
+        self.embeds = self.messageData.get(
+            "embeds")  # TODO: Add an Embed object - https://discord.com/developers/docs/resources/channel#embed-object
+        self.reactions = self.messageData.get(
+            "reactions")  # TODO: Add a Reaction object - https://discord.com/developers/docs/resources/channel#reaction-object
+        self.nonce = self.messageData.get("nonce")
+        self.pinned = self.messageData.get("pinned")
+        self.webhook_id = self.messageData.get("webhook_id")
+        self.type = self.messageData.get("type")
+        self.activity = self.messageData.get(
+            "activity")  # TODO: Add a Message Activity oject - https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure
+        self.application = self.messageData.get(
+            "application")  # TODO: Add an Application object - https://discord.com/developers/docs/resources/application#application-object
+        self.application_id = int(self.messageData.get("application_id")) if self.messageData.get(
+            "application_id") is not None else None
+        self.message_reference = self.messageData.get(
+            "message_reference")  # TODO: Add a Message Reference object - https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
+        self.flags = self.messageData.get("flags")
         self.referenced_message = self.messageData.get("referenced_message")
-        self.interaction        = self.messageData.get("interaction")                                  # TODO: Add a Message Interaction object - https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
-        self.thread             = self.messageData.get("thread")
-        self.components         = self.messageData.get("components")
-        self.sticker_items      = self.messageData.get("sticker_items")                                # TODO: Add a Sticker Item object - https://discord.com/developers/docs/resources/sticker#sticker-item-object
+        self.interaction = self.messageData.get(
+            "interaction")  # TODO: Add a Message Interaction object - https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
+        self.thread = self.messageData.get("thread")
+        self.components = self.messageData.get("components")
+        self.sticker_items = self.messageData.get(
+            "sticker_items")  # TODO: Add a Sticker Item object - https://discord.com/developers/docs/resources/sticker#sticker-item-object
 
     async def delete(self):
         """Deletes the message"""
-        await make_request("DELETE", f"/channels/{self.channel_id}/messages/{self.id}", guild_id=self.guild_id, channel_id= self.channel_id)
+        await make_request("DELETE", f"/channels/{self.channel_id}/messages/{self.id}", guild_id=self.guild_id,
+                           channel_id=self.channel_id)
 
     async def reply(self, content, **kwargs):
         """replies to the message
@@ -154,12 +172,8 @@ class Message():
         """
 
         jsondata = kwargs
-        if not not jsondata.get("embeds"): # if embed parameter exists, call function. **NOT SUPPORTED YET**
+        if not not jsondata.get("embeds"):  # if embed parameter exists, call function. **NOT SUPPORTED YET**
             raise NotImplementedError("Sending an embed is not implemented")
         jsondata["message_reference"] = {"message_id": self.id}
         jsondata["content"] = content
         return Message(await make_request("POST", f"/channels/{self.channel_id}/messages", json=jsondata))
-
-
-
-

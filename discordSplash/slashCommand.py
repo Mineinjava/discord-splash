@@ -25,8 +25,6 @@ from .user import User
 from dataclasses import dataclass
 
 
-
-
 @dataclass(init=False, eq=False)
 class ReactionResponse:
     """
@@ -59,7 +57,6 @@ class ReactionResponse:
         """
 
     def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
-
         self.jsonContent = {
             "type": responseType.value,
             "data": {
@@ -70,7 +67,6 @@ class ReactionResponse:
             self.jsonContent['data']['flags'] = 64
 
 
-
 @dataclass(init=False, eq=False)
 class InteractionData():
     """Discord interaction data structure"""
@@ -78,6 +74,7 @@ class InteractionData():
     def __init__(self, type: enums.InteractionType, data: dict):
         self.type: enums.InteractionType = type
         self.data: dict = data
+
 
 @dataclass(init=False, eq=False)
 class Interaction(Object):
@@ -119,16 +116,15 @@ class Interaction(Object):
     def __init__(self, jsonData):
         super.__init__(id=jsonData.get("id"))
         self.jsonData: dict = jsonData
-        self.application_id:int = int()
+        self.application_id: int = int()
         self.type: enums.InteractionType = enums.InteractionType(
             jsonData.get("type"))
 
         self.guild_id: Optional[int] = int(jsonData.get("guild_id"))
-       
+
         # self.guild = (get the guild object)
         self.token: str = jsonData.get("token")
         self.channel_id
-
 
         # self.member = (Get Member Somehow)
         self.user: Optional[User] = User(jsonData.get('user'))
@@ -222,7 +218,6 @@ class Interaction(Object):
     #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
 
 
-
 def command(name: str):
     """A decorator that is used to register a command.
 
@@ -248,6 +243,7 @@ def command(name: str):
         return func
 
     return decorator
+
 
 @dataclass(init=False, eq=False)
 class InteractionOption:
