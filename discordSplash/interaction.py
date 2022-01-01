@@ -37,7 +37,7 @@ class Interaction(Object):
 
         self.application_id = json.get("application_id")
         self.type = InteractionType(json.get("type"))
-        self.data = self.json.get("data")  # TODO: Create Data Object
+        self.data = self.json.get("data")
         self.guild_id = self.json.get("guild_id")
         self.channel_id = self.json.get("guild_id")
         self.is_dm = not not not self.guild_id  # whether or not it was sent in a dm
@@ -61,3 +61,15 @@ class InteractionData(Object):
         self.component_type = self.json.get("component_type")  # TODO: ADD COMPONENT TYPE ENUM
         self.values = self.json.get("values")  # TODO: ADD SELECT OPTION VALUES ENUM/CLASS
         self.target_id = int(self.json.get("target_id")) if self.json.get("target_id") is not None else None
+
+
+@dataclass(init=False)
+class InteractionDataOptions:
+    def __init__(self, json):
+        self.json = json
+        self.name = self.json.get("name")
+        self.type = self.json.get("type")
+        self.value = self.json.get("value")
+        self.options = InteractionDataOptions(self.json.get("options")) if self.json.get(
+            "options") is not None else None
+        self.focused = self.json.get("focused")
