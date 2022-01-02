@@ -29,6 +29,12 @@ class InteractionType(Enum):
     APPLICATION_COMMAND_AUTOCOMPLETE = 4
 
 
+class ComponentType(Enum):
+    ACTION_ROW = 1
+    BUTTON = 2
+    SELECT_MENU = 3
+
+
 @dataclass(init=False, eq=False)
 class Interaction(Object):
     def __init__(self, json):
