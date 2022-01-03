@@ -9,5 +9,5 @@ jobs:
     - uses: actions/first-interaction@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: 'Hello and welcome to discord-splash. Thank you for contributing and adding an issue. If you want support with the library, please go to the Discussions tab.'
+        issue-message: 'Hello and welcome to discord-splash. Thank you for contributing and adding an issue. If you want support with the library, please go to the Discussions tab. You may also find it useful to join our [discord server](https://discord.gg/y2eNeqbRYr)'
         pr-message: 'Hello. Welcome to discord-splash. Thank you for contributing via PR.'
