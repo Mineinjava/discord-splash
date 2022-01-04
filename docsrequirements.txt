@@ -1,6 +1,6 @@
 discordSplash
 furo
-requests~=2.26.0
+requests~=2.27.0
 setuptools~=60.2.0
 websockets~=10.1
 aiohttp~=3.8.1
