@@ -96,30 +96,30 @@ class Channel(Object):
         # Channel data variables
         self.id = int(self.channelData.get("id"))
         self.type = self.channelData.get("type")
-        self.guild_id = int(self.channelData.get("guild_id?"))
-        self.position = self.channelData.get("position?")
+        self.guild_id = int(self.channelData.get("guild_id"))
+        self.position = self.channelData.get("position")
         self.permission_overwrites = self.channelData.get(
-            "permission_overwrites?")  # TODO: Add an Overwrite object - https://discord.com/developers/docs/resources/channel#overwrite-object
-        self.name = self.channelData.get("name?")
-        self.topic = self.channelData.get("topic?")
-        self.nsfw = self.channelData.get("nsfw?")
-        self.last_message_id = int(self.channelData.get("last_message_id?"))
-        self.bitrate = self.channelData.get("bitrate?")
-        self.user_limit = self.channelData.get("user_limit?")
-        self.rate_limit_per_user = self.channelData.get("rate_limit_per_user?")
-        self.recipients = self.channelData.get("recipients?")
-        self.icon = self.channelData.get("icon?")
-        self.owner_id = int(self.channelData.get("owner_id?"))
-        self.application_id = int(self.channelData.get("application_id?"))
-        self.parent_id = int(self.channelData.get("parent_id?"))
-        self.last_pin_timestamp = datetime.fromisoformat(self.channelData.get("last_pin_timestamp?"))
-        self.rtc_region = self.channelData.get("rtc_region?")
-        self.video_quality_mode = self.channelData.get("video_quality_mode?")
+            "permission_overwrites")  # TODO: Add an Overwrite object - https://discord.com/developers/docs/resources/channel#overwrite-object
+        self.name = self.channelData.get("name")
+        self.topic = self.channelData.get("topic")
+        self.nsfw = self.channelData.get("nsfw")
+        self.last_message_id = int(self.channelData.get("last_message_id"))
+        self.bitrate = self.channelData.get("bitrate")
+        self.user_limit = self.channelData.get("user_limit")
+        self.rate_limit_per_user = self.channelData.get("rate_limit_per_user")
+        self.recipients = self.channelData.get("recipients")
+        self.icon = self.channelData.get("icon")
+        self.owner_id = int(self.channelData.get("owner_id"))
+        self.application_id = int(self.channelData.get("application_id"))
+        self.parent_id = int(self.channelData.get("parent_id"))
+        self.last_pin_timestamp = datetime.fromisoformat(self.channelData.get("last_pin_timestamp"))
+        self.rtc_region = self.channelData.get("rtc_region")
+        self.video_quality_mode = self.channelData.get("video_quality_mode")
         self.message_count = self.channelData.get("message_count")
-        self.member_count = self.channelData.get("member_count?")
+        self.member_count = self.channelData.get("member_count")
         self.thread_metadate = self.channelData.get(
-            "thread_metadata?")  # TODO: Add a Thread Metadata object - https://discord.com/developers/docs/resources/channel#thread-metadata-object
+            "thread_metadata")  # TODO: Add a Thread Metadata object - https://discord.com/developers/docs/resources/channel#thread-metadata-object
         self.member = self.channelData.get(
-            "member?")  # TODO: Add a Thread Member object - https://discord.com/developers/docs/resources/channel#thread-member-object
-        self.default_auto_archive_duration = self.channelData.get("default_auto_archive_duration?")
-        self.permissions = self.channelData.get("permissions?")
+            "member")  # TODO: Add a Thread Member object - https://discord.com/developers/docs/resources/channel#thread-member-object
+        self.default_auto_archive_duration = self.channelData.get("default_auto_archive_duration")
+        self.permissions = self.channelData.get("permissions")

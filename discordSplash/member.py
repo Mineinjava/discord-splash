@@ -43,12 +43,12 @@ class Member():
         self.memberData = jsonData
 
         # Member data variables
-        self.user           = user.User(self.memberData.get("user?"))
-        self.nick           = self.memberData.get("nick?")
+        self.user           = user.User(self.memberData.get("user"))
+        self.nick           = self.memberData.get("nick")
         self.roles          = self.memberData.get("roles")
         self.joined_at      = datetime.fromisoformat(self.memberData.get("joined_at"))
-        self.premium_since  = datetime.fromisoformat(self.memberData.get("premium_since?"))
+        self.premium_since  = datetime.fromisoformat(self.memberData.get("premium_since"))
         self.deaf           = self.memberData.get("deaf")
         self.mute           = self.memberData.get("mute")
-        self.pending        = self.memberData.get("pending?")
-        self.permissions    = self.memberData.get("permissions?")
+        self.pending        = self.memberData.get("pending")
+        self.permissions    = self.memberData.get("permissions")
