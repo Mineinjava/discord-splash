@@ -70,6 +70,3 @@ class Member(Object):
         self.pending = self.memberData.get("pending")
         self.permissions = self.memberData.get("permissions")
 
-
-@dataclass(init=False, eq=False)
-class Role
