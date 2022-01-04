@@ -6,7 +6,7 @@ github_repo = sys.argv[2]
 headers = {"authorization": f"Bearer {github_token}", 'content-type': 'application/json'}
 
 
-py_files = ["__init__.py", "audit_log.py", "channel.py", "emoji.py", "guild.py", "invite.py", "main.py", "member.py", "opcodes.py", "template.py", "webhook.py"]
+py_files = ["__init__.py", "audit_log.py", "channel.py", "emoji.py", "guild.py", "invite.py", "main.py", "guild.py", "opcodes.py", "template.py", "webhook.py"]
 abs_py_files = []
 data = ""
 for file in py_files:

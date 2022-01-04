@@ -19,7 +19,7 @@ from enum import Enum
 from .abstractbaseclass import Object
 from .channel import Channel
 from .user import User
-from .member import Member
+from .guild import Member
 
 
 class InteractionType(Enum):
