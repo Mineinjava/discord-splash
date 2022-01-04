@@ -413,12 +413,22 @@ class Guild:
         :return: Updated Guild Object
         :rtype: discordSplash.guild.Guild
         """
-        json = {"name": name, "region": region, "verification_level": verification_level,
-                "default_message_notifications": default_message_notifications,
-                "explicit_content_filter": explicit_content_filter, "afk_channel_id": afk_channel_id,
-                "afk_timeout": afk_timeout, "icon": icon, "owner_id": owner_id, "splash": splash, "banner": banner,
-                "system_channel_id": system_channel_id, "rules_channel_id": rules_channel_id,
-                "public_updates_channel_id": public_updates_channel_id, "preferred_locale": preferred_locale}
+        json = {
+            "name": name,
+            "region": region,
+            "verification_level": verification_level,
+            "default_message_notifications": default_message_notifications,
+            "explicit_content_filter": explicit_content_filter,
+            "afk_channel_id": afk_channel_id,
+            "afk_timeout": afk_timeout,
+            "icon": icon,
+            "owner_id": owner_id,
+            "splash": splash,
+            "banner": banner,
+            "system_channel_id": system_channel_id,
+            "rules_channel_id": rules_channel_id,
+            "public_updates_channel_id": public_updates_channel_id,
+            "preferred_locale": preferred_locale}
         for x in json:
             if json[x] is None:
                 json.pop(x)
@@ -490,10 +500,16 @@ class Guild:
         :param int parent_id: id of the parent channel category
         :param bool nsfw: whether the channel is nsfw or not
         """
-        json = {"name": name, "type": type, "bitrate": bitrate,
-                "user_limit": user_limit,
-                "rate_limit_per_user": rate_limit_per_user, "permission_overwrites": permission_overwrites,
-                "position": position, "parent_id": parent_id, "nsfw": nsfw}
+        json = {
+            "name": name,
+            "type": type,
+            "bitrate": bitrate,
+            "user_limit": user_limit,
+            "rate_limit_per_user": rate_limit_per_user,
+            "permission_overwrites": permission_overwrites,
+            "position": position,
+            "parent_id": parent_id,
+            "nsfw": nsfw}
         g_id = self.json['id']
         async with aiohttp.ClientSession() as cs:
             async with cs.post(f'{URL}/guilds/{g_id}/channels', json=json, headers=HEADER) as r:
@@ -595,7 +611,12 @@ class Guild:
         :return: updated Member object
         :rtype: discordSplash.member.Member
         """
-        json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
+        json = {
+            "nick": nick,
+            "roles": roles,
+            "mute": mute,
+            "deaf": deaf,
+            "channel_id": channel_id}
         g_id = self.json['id']
         print(await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', guild_id=g_id, json=json), "patched guild member")
 
@@ -642,6 +663,7 @@ class Guild:
         json = {"nick": nick, "roles": roles}
         g_id = self.json['id']
         print(await ratelimit.patch(f'{URL}/guilds/{g_id}/members/{id_}', guild_id=g_id, json=json), "patched guild member")
+
 
 class GuildPreview:
     """

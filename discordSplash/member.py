@@ -242,7 +242,12 @@ class Member:
         :return: updated Member object
         :rtype: discordSplash.member.Member
         """
-        json = {"nick": nick, "roles": roles, "mute": mute, "deaf": deaf, "channel_id": channel_id}
+        json = {
+            "nick": nick,
+            "roles": roles,
+            "mute": mute,
+            "deaf": deaf,
+            "channel_id": channel_id}
         g_id = guild_id
         print("json:", self.json)
         id_ = self.json['user']['id']

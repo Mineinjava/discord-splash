@@ -16,7 +16,6 @@ sys.path.insert(0, os.path.abspath('..'))
 sys.path.append('../discordSplash')
 
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'discord-splash'
@@ -31,7 +30,7 @@ author = 'mineinjava'
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo'
-]
+              ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

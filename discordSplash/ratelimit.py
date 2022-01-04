@@ -48,14 +48,14 @@ async def ratelimit_sleeper(route: str, channel_id: int = None, guild_id: int = 
             else:
                 await asyncio.sleep(routes[route]['epoch'] - int(time.time()))
 
-        elif not guild_id in guild_ids:
+        elif guild_id not in guild_ids:
             pass
         else:
             if guild_ids[guild_id]['remaining'] == 0:
                 pass
             else:
                 await asyncio.sleep(guild_ids[guild_id]['epoch'] - int(time.time()))
-    elif not channel_id in channel_ids:
+    elif channel_id not in channel_ids:
         pass
     else:
         if channel_ids[channel_id]['remaining'] == 0:
@@ -88,7 +88,8 @@ async def ratelimit_cleanup(epoch, remaining, channel_id, guild_id, route):
         channel_ids[channel_id]['epoch'] = float(epoch)
 
 
-# all json formats above take into account the requests_remaining as "remaining" and epoch reset seconds as "epoch"
+# all json formats above take into account the requests_remaining as
+# "remaining" and epoch reset seconds as "epoch"
 
 
 async def get(route: str, channel_id: int = None, guild_id: int = None):

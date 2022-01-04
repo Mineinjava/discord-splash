@@ -48,7 +48,10 @@ class Presence:
 
         """
 
-    def __init__(self, text: str, presenceType: PresenceType = PresenceType.Game):
+    def __init__(
+            self,
+            text: str,
+            presenceType: PresenceType = PresenceType.Game):
         self.type_ = presenceType
         self.text_ = text
 
@@ -117,7 +120,11 @@ class ReactionResponse:
 
         """
 
-    def __init__(self, content: str, isEphemeral: bool = False, responseType: int = 4):
+    def __init__(
+            self,
+            content: str,
+            isEphemeral: bool = False,
+            responseType: int = 4):
         if responseType not in [1, 2, 3, 4, 5]:
             raise InvalidTypeException(
                 f"responseType {responseType} is invalid. See https://discord.com/developers/docs/interactions/slash-commands#interaction-response-interactionresponsetype for more info.")
@@ -293,7 +300,9 @@ class ReactionData:
             async with session.delete(
                     f'https://discord.com/api/v8/webhooks/{cfg.CLIENT_ID}/{self.jsonData["token"]}/@original'):
                 pass
-    #  TODO: make it possible to edit any message from an interaction - currently it is possible to delete or edit the original response, but not any of the other responses |
+    # TODO: make it possible to edit any message from an interaction -
+    # currently it is possible to delete or edit the original response, but
+    # not any of the other responses |
 
 
 class Run:
