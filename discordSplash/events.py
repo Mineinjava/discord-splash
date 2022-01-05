@@ -14,6 +14,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from typing import Mapping, Awaitable, Any, Callable
+import multidict
 
 from . import exception
 from .message import Message
@@ -35,29 +36,31 @@ async def InteractionCreateHandler(data: dict):
         await function()
 
 
-messageListenerDict = []
+eventdict = multidict.MultiDict()
 
 
-# MessageCreateHandler
-async def MessageCreateHandler(data: dict):
-    messageListener(data)
+async def MessageCreateHandler(data: dict, out_func):
     message = Message(data)
-    for ls in messageListenerDict:
-        print(messageListenerDict)
-        await ls(message)
+    await out_func(message)
 
 
-def messageListener(func):
-    """Decorator that adds a messageListener to an object."""
-    print("func", func)
-    if not isinstance(func, dict):
-        messageListenerDict.append(func)
+def eventListener(event_name):
+    """decorator that makes a coroutine listen for an event"""
 
-    def wrapper():
-        pass
+    def wrapper(func):
+        eventdict.add(event_name, func)
+        print(event_name, func)
+
+    return wrapper
 
 
-eventDict = {
+async def eventHandler(event_type, data, out_func):
+    func = i_eventDict.get(event_type)
+    if func is not None:
+        await func(data, out_func)
+
+
+i_eventDict = {
     "INTERACTION_CREATE": InteractionCreateHandler,
     "MESSAGE_CREATE": MessageCreateHandler
 }

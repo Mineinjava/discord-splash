@@ -20,7 +20,7 @@ import json
 from . import request
 from .presence import UpdatePresence, EmptyUpdatePresence
 from .enums import Opcodes
-from .events import eventDict
+from .events import i_eventDict, eventHandler, eventdict
 
 
 
@@ -119,11 +119,10 @@ class GatewayBot:
                     self.CLIENT_ID = data['d']['user']['id']
                     self._session_id = data['d']['session_id']
 
-                coro = eventDict.get(event_type)
-                print("type",data["t"])
-                print("coro", coro)
-                if coro is not None:
-                    await coro(data["d"])
+                funcs = eventdict.getall(event_type, [])
+                for coro in funcs:
+                    await eventHandler(event_type, data['d'], coro)
+
                 
                 """
                 elif event_type == "INTERACTION_CREATE":
