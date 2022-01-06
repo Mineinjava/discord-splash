@@ -1,5 +1,5 @@
 setuptools~=57.0.0
 websockets~=9.0
-aiohttp~=3.7.4
+aiohttp~=3.8.1
 asyncio~=3.4.3
 enum34~=1.1.10
