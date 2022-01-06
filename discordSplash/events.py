@@ -19,24 +19,15 @@ import multidict
 from . import exception
 from .message import Message
 
-slashCommandListenerDict: Mapping[str, Awaitable[Any]] = {}
+eventdict = multidict.MultiDict()
 
 
 # InteractionCreateHandler
-async def InteractionCreateHandler(data: dict):
+async def InteractionCreateHandler(data: dict, out_func):
     """
     Handles an Interaction_Create event
     """
     event_name = data['name']
-
-    function = slashCommandListenerDict.get(event_name)
-    if not function:
-        raise exception.SlashCommandNotFound(f"Could not find the slash command named {event_name}")
-    else:
-        await function()
-
-
-eventdict = multidict.MultiDict()
 
 
 async def MessageCreateHandler(data: dict, out_func):
