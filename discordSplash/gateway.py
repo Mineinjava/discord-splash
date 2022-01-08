@@ -17,7 +17,7 @@ import asyncio
 import websockets
 import json
 
-from . import request
+from .request import auth_header
 from .presence import UpdatePresence, EmptyUpdatePresence
 from .enums import Opcodes
 from .events import i_eventDict, eventHandler, eventdict
@@ -58,7 +58,7 @@ class GatewayBot:
         self._websocket = None
 
         self.TOKEN = token
-        request.auth_header['Authorization'] = f"Bot {token}"
+        auth_header['Authorization'] = f"Bot {token}"
 
         TOKEN = self.TOKEN
 
