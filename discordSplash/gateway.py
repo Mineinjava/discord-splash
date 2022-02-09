@@ -111,6 +111,10 @@ class GatewayBot:
         async for message in self._websocket:
             print("<", message)
             data = json.loads(message)
+            if data["op"] == Opcodes.RECONNECT:
+                await self._websocket.close()
+                await asyncio.sleep(5)
+                await self.connect(False, False)
             if data["op"] == Opcodes.DISPATCH:
                 self._sequence = int(data["s"])
                 event_type = data["t"]
