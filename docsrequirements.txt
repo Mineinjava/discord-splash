@@ -1,4 +1,4 @@
-setuptools~=65.6.3
+setuptools~=67.3.3
 websockets~=10.1
 aiohttp~=3.8.3
 asyncio~=3.4.3
